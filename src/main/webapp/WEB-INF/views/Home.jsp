@@ -4,11 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value='/template/style.css' />" />
 <title>Home</title>
-
 </head>
 <body>
-	<h1 class="test">Ok ngon Lành á</h1>
+		<div>
+			<h1 class="test">header trong webapp/common;</h1>
+			<h1>left menu trong webapp/common/leftmenu</h1>
+			<h1>layout trong webapp/decorators/layout</h1>
+		</div>
 </body>
 </html>
