@@ -20,10 +20,10 @@
                     <div class="tilte-primary d-flex align-items-start"> 
                         <i class="fas fa-id-card" style="font-size: 65px; margin-right: 40px;"></i>
                         <div class="d-flex flex-column align-items-start">
-                         <h1>Tài khoản khách hàng</h1>
-                        <span>Quản lý thông tin cá nhận và thông tin tiền tệ của khách hàng tại đây </span>   
+                            <h1>Tài khoản khách hàng</h1>
+                            <span>Quản lý thông tin cá nhận và thông tin tiền tệ của khách hàng tại đây </span>   
                         </div>
-                        
+
                     </div>
                     <form style="margin: 30px 0 0 0;">
                         <div class="cus__info-lable">
@@ -60,13 +60,13 @@
                                 <span class="focus-border"></span>
                             </div>
                         </div>
-<!--                        <div class="mb-3 cus__form-group">
-                            <label for="name" class="form-label cus__form-lable">CÔNG NỢ</label>
-                            <div class="input-group">
-                                <input class="input-effect input-primary" type="text">
-                                <span class="focus-border"></span>
-                            </div>
-                        </div>-->
+                        <!--                        <div class="mb-3 cus__form-group">
+                                                    <label for="name" class="form-label cus__form-lable">CÔNG NỢ</label>
+                                                    <div class="input-group">
+                                                        <input class="input-effect input-primary" type="text">
+                                                        <span class="focus-border"></span>
+                                                    </div>
+                                                </div>-->
                         <div class="d-flex justify-content-center" style="margin: 20px 0 50px 0; ">
                             <button type="button" class="btn btn-secondary">Xác nhận</button>
                         </div>
