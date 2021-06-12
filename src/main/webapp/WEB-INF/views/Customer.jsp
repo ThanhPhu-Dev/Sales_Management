@@ -24,12 +24,12 @@
                     <table id="example" class="ui celled table" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>Tên KH</th>
+                                <th>Số điện thoại</th>
+                                <th>Số tài khoản</th>
+                                <th>Số dư tài khoản</th>
+                                <th>Mã ưu đãi</th>
+                                <th>Công nợ</th>
                             </tr>
                         </thead>
                         <tbody>

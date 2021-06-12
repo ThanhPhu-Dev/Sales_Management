@@ -15,8 +15,8 @@
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6">
+                <div class=" col-2"></div>
+                <div class=" col-8">
                     <div class="tilte-primary d-flex align-items-start"> 
                         <i class="fas fa-id-card" style="font-size: 65px; margin-right: 40px;"></i>
                         <div class="d-flex flex-column align-items-start">
@@ -72,7 +72,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-3"></div>
+                <div class=" col-2"></div>
 
 
             </div>
