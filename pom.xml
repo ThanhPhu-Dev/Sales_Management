@@ -13,9 +13,6 @@
 		<jsp.api.version>2.3.1</jsp.api.version>
 		<jstl.version>1.2</jstl.version>
 		<sitemesh.version>2.4.2</sitemesh.version>
-		<mysql.version>8.0.23</mysql.version>
-		<springJDBC.version>5.2.9.RELEASE</springJDBC.version>
-		<lombok.version>1.18.10</lombok.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
