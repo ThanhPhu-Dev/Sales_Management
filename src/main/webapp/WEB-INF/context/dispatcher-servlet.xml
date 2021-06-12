@@ -22,7 +22,6 @@
 
    <context:component-scan
       base-package="SalesManagement.controller" />
-
    <mvc:annotation-driven />
 
    <bean
@@ -33,6 +32,6 @@
       <property name="suffix" value=".jsp" />
 
    </bean>
-   
+
    <mvc:resources location="/template/" mapping="/template/**"></mvc:resources>
 </beans>
