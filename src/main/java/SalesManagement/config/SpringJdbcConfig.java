@@ -1,6 +1,6 @@
 package SalesManagement.config;
 
-import SalesManagement.dao.CustomerDAO;
+import SalesManagement.dao.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,9 +35,49 @@ public class SpringJdbcConfig {
 
     @Bean
     public CustomerDAO customerDAO(){
-        CustomerDAO empDao = new CustomerDAO();
-        empDao.setTemplate(jdbcTemplate());
-        return empDao;
+        CustomerDAO Dao = new CustomerDAO();
+        Dao.setTemplate(jdbcTemplate());
+        return Dao;
     }
 
+    @Bean
+    public ProductDAO productDAO(){
+        ProductDAO Dao = new ProductDAO();
+        Dao.setTemplate(jdbcTemplate());
+        return Dao;
+    }
+
+    @Bean
+    public BillDAO billDAO(){
+        BillDAO Dao = new BillDAO();
+        Dao.setTemplate(jdbcTemplate());
+        return Dao;
+    }
+    @Bean
+    public DetailBillDAO detailBillDAO(){
+        DetailBillDAO Dao = new DetailBillDAO();
+        Dao.setTemplate(jdbcTemplate());
+        return Dao;
+    }
+
+    @Bean
+    public PromotionsCustomerDAO promotionsCustomerDAO(){
+        PromotionsCustomerDAO Dao = new PromotionsCustomerDAO();
+        Dao.setTemplate(jdbcTemplate());
+        return Dao;
+    }
+
+    @Bean
+    public PromotionsProductDAO promotionsProductDAO(){
+        PromotionsProductDAO Dao = new PromotionsProductDAO();
+        Dao.setTemplate(jdbcTemplate());
+        return Dao;
+    }
+
+    @Bean
+    public ReceiptDAO receiptDAO(){
+        ReceiptDAO Dao = new ReceiptDAO();
+        Dao.setTemplate(jdbcTemplate());
+        return Dao;
+    }
 }

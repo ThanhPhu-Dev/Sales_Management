@@ -18,11 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
 	@Autowired
-	CustomerDAO customerDAO;
+	CustomerDAO customdfgerDAO;
 
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	   public String homePage() {
-		Customer cus = customerDAO.findCustomerById(1);
 		return "Home";
 	   }
 }
