@@ -72,22 +72,45 @@
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script >
-//            const axios = require('axios');
-            const btnSearch = document.querySelector('#btnSearch');
+        <!--        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                <script >
+        //            const axios = require('axios');
+                    const btnSearch = document.querySelector('#btnSearch');
+                    const ipSearch = document.querySelector('#name');
+        
+                    btnSearch.addEventListener('click', async e => {
+                        e.preventDefault();
+                        axios.post('/SalesManagement/customer', {
+                            name: ipSearch.value,
+                        }).then(function (response) {
+                            console.log("ok");
+                        }).catch(function (error) {
+                            console.log("bad");
+                        });
+                    })
+                </script>-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+        <script>
             const ipSearch = document.querySelector('#name');
-
             btnSearch.addEventListener('click', async e => {
-                e.preventDefault();
-                axios.post('/SalesManagement/customer', {
-                    name: ipSearch.value,
-                }).then(function (response) {
-                    console.log(response);
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                addNew(ipSearch.value);
             })
+
+            function addNew(data) {
+                $.ajax({
+                    url: '/SalesManagement/customer',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    success: function (result) {
+                        console.log("oke")
+                    },
+                    error: function (error) {
+                        console.log("bad")
+                    }
+                });
+            }
         </script>
     </body>
 

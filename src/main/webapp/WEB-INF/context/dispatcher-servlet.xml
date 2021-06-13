@@ -21,7 +21,7 @@
               http://www.springframework.org/schema/context/spring-context.xsd">
 
    <context:component-scan
-      base-package="SalesManagement.controller" />
+      base-package="SalesManagement.controller, SalesManagement.api" />
    <mvc:annotation-driven />
 
    <bean
