@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 
+<title>Thêm sản phẩm</title>
 <main id="content" role="main" class="main">
     <!-- Content -->
     <div class="content container-fluid">

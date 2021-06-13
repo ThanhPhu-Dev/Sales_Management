@@ -9,17 +9,20 @@
 
 <script type="text/javascript"
 src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"></script>
+
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
 <script type="text/javascript"
 src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
-
 
 <!-- JS Front -->
 <script type="text/javascript" src="<c:url value='/template/assets/js/theme.min.js' />"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
 <script>
-    $(document).ready(function () {
+    $(document).on('ready', function () {
+
         $('#example').DataTable({
             "language": {
                 "lengthMenu": "Số dòng  _MENU_ ",
@@ -32,33 +35,6 @@ src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
                 searchPlaceholder: "Tìm kiếm",
             }
         });
-    });
-</script>
-
-<script>
-    $(document).on('ready', function () {
-        // ONLY DEV
-        // =======================================================
-
-        if (window.localStorage.getItem('hs-builder-popover') === null) {
-            $('#builderPopover').popover('show')
-                    .on('shown.bs.popover', function () {
-                        $('.popover').last().addClass('popover-dark')
-                    });
-
-            $(document).on('click', '#closeBuilderPopover', function () {
-                window.localStorage.setItem('hs-builder-popover', true);
-                $('#builderPopover').popover('dispose');
-            });
-        } else {
-            $('#builderPopover').on('show.bs.popover', function () {
-                return false
-            });
-        }
-
-        // END ONLY DEV
-        // =======================================================
-
 
         // BUILDER TOGGLE INVOKER
         // =======================================================
@@ -93,14 +69,6 @@ src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
             }
         });
 
-
-        // INITIALIZATION OF UNFOLD
-        // =======================================================
-        $('.js-hs-unfold-invoker').each(function () {
-            var unfold = new HSUnfold($(this)).init();
-        });
-
-
         // INITIALIZATION OF FORM SEARCH
         // =======================================================
         $('.js-form-search').each(function () {
@@ -115,63 +83,11 @@ src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
         });
 
 
-        // INITIALIZATION OF DROPZONE FILE ATTACH MODULE
-        // =======================================================
-        $('.js-dropzone').each(function () {
-            var dropzone = $.HSCore.components.HSDropzone.init('#' + $(this).attr('id'));
-        });
-
         // INITIALIZATION OF FLATPICKR
         // =======================================================
         $('.js-flatpickr').each(function () {
             $.HSCore.components.HSFlatpickr.init($(this));
         });
-
-        // INITIALIZATION OF BUBBLE CHARTJS WITH DATALABELS PLUGIN
-        // =======================================================
-        $('.js-chart-datalabels').each(function () {
-            $.HSCore.components.HSChartJS.init($(this), {
-                plugins: [ChartDataLabels],
-                options: {
-                    plugins: {
-                        datalabels: {
-                            anchor: function (context) {
-                                var value = context.dataset.data[context.dataIndex];
-                                return value.r < 20 ? 'end' : 'center';
-                            },
-                            align: function (context) {
-                                var value = context.dataset.data[context.dataIndex];
-                                return value.r < 20 ? 'end' : 'center';
-                            },
-                            color: function (context) {
-                                var value = context.dataset.data[context.dataIndex];
-                                return value.r < 20 ? context.dataset.backgroundColor : context.dataset.color;
-                            },
-                            font: function (context) {
-                                var value = context.dataset.data[context.dataIndex],
-                                        fontSize = 25;
-
-                                if (value.r > 50) {
-                                    fontSize = 35;
-                                }
-
-                                if (value.r > 70) {
-                                    fontSize = 55;
-                                }
-
-                                return {
-                                    weight: 'lighter',
-                                    size: fontSize
-                                };
-                            },
-                            offset: 2,
-                            padding: 0
-                        }
-                    }
-                },
-            });
-        });
-
 
         // INITIALIZATION OF DATERANGEPICKER
         // =======================================================
@@ -277,7 +193,3 @@ src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
     });
 
 </script>
-
-</body>
-
-</html>
