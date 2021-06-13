@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <!--        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
                 <script >
         //            const axios = require('axios');
                     const btnSearch = document.querySelector('#btnSearch');
@@ -80,17 +80,18 @@
         
                     btnSearch.addEventListener('click', async e => {
                         e.preventDefault();
-                        axios.post('/SalesManagement/customer', {
+                        axios.post('/SalesManagement/api/customer', {
                             name: ipSearch.value,
+                            id: "123",
                         }).then(function (response) {
-                            console.log("ok");
+                            console.log(response);
                         }).catch(function (error) {
                             console.log("bad");
                         });
                     })
-                </script>-->
+                </script>
         <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-        <script>
+<!--        <script>
             const ipSearch = document.querySelector('#name');
             btnSearch.addEventListener('click', async e => {
                 addNew(ipSearch.value);
@@ -111,7 +112,7 @@
                     }
                 });
             }
-        </script>
+        </script>-->
     </body>
 
 </html>
