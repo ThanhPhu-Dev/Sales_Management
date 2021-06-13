@@ -33,16 +33,22 @@ public class CustomerController {
 
     @Autowired
     CustomerDAO customerDAO;
+    @Autowired
     PromotionsCustomerDAO proCustomerDAO;
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public ModelAndView customerPage() {
-        List<Customer> cusList = customerDAO.findAllCustomerBy();
+        List<Customer> cusList = customerDAO.findAllCustomerBy("");
         
         ModelAndView mav = new ModelAndView("Customer/Customer", "customers", cusList);
         return mav;
     }
-
+    @RequestMapping(value = "/customer/add", method = RequestMethod.GET)
+    public ModelAndView addCustomerPage() {
+        List<PromotionsCustomer> cusList = proCustomerDAO.findAllPromitionsCustomer();
+        ModelAndView mav = new ModelAndView("Customer/AddCustomer", "proCus", cusList);
+        return mav;
+    }
     @RequestMapping(value = "/customer/update/{Id}", method = RequestMethod.GET)
     public ModelAndView updateCustomerPage(@PathVariable int Id) {
         ModelAndView mav = new ModelAndView("UpdateCustomer", "id", Id);
