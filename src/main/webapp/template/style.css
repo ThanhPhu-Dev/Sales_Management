@@ -1,3 +1,32 @@
 .test {
-	color: green;
+    color: green;
+}
+
+.date-statis{
+    margin-right: 10px;
+}
+
+a.btn.btn-sm.btn-white.btn-checkout {
+    margin-left: 5px;
+}
+
+.navbar-nav-wrap.d-flex.justify-content-center {
+    font-size: 30px;
+    color: blue;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.menu-title {
+    font-size: 20px;
+    font-weight: bold
+}
+
+.navbar-vertical-footer-offset {
+    background-color: #f4f3ef;
+}
+
+.navbar-brand-wrapper.justify-content-start {
+    background-color: #f1ecd9d9;
 }

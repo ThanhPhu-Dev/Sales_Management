@@ -7,12 +7,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>them KH</title>
-    </head>
-    <body>
+<main id="content" role="main" class="main">
+    <!-- Content -->
+    <div class="content container-fluid">
         <div class="container">
             <div class="row">
                 <div class="col-3"></div>
@@ -77,5 +74,7 @@
 
             </div>
         </div>
-    </body>
-</html>
+    </div>
+    <!-- End Content -->
+
+</main>
