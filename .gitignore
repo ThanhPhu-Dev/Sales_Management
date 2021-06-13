@@ -1,2 +1,2 @@
 /target
-/ConnectDB.properties
+**/ConnectDB.properties
