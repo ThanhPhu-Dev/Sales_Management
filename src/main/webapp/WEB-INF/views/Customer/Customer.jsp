@@ -21,21 +21,10 @@
                                 <th>Số dư tài khoản</th>
                                 <th>Mã ưu đãi</th>
                                 <th>Công nợ</th>
+                                <th>Chức năng</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="customer" items="${customers}">
-                                <tr>
-                                    <td>${customer.getId()}</td>
-                                    <td>${customer.getName()}</td>
-                                    <td>${customer.getNumberCard()}</td>
-                                    <td>${customer.getAccountBalance()}</td>
-                                    <td>${customer.getPromotionsId()}</td>
-                                    <td>${customer.getDebtMax()}</td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                        <tfoot>
                             <tr>
                                 <th>Tên KH</th>
                                 <th>Số điện thoại</th>
@@ -44,12 +33,11 @@
                                 <th>Mã ưu đãi</th>
                                 <th>Công nợ</th>
                             </tr>
-                        </tfoot>
+                        </tbody>
                     </table>
                 </div>
                 <div class="col-1"></div>
             </div>
-
             <div class="d-flex justify-content-center" style="margin-top: 30px;">
                 <a href="/SalesManagement/customer/add" class="btn btn-secondary">
                     <i class="fas fa-plus-circle"></i> 

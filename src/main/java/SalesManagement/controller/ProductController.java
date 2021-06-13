@@ -6,10 +6,8 @@
 package SalesManagement.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -21,17 +19,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProductController {
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public ModelAndView productPage() {
-        ModelAndView mav = new ModelAndView("Product");
+        ModelAndView mav = new ModelAndView("Product/Product");
         return mav;
     }
     @RequestMapping(value = "/product/add", method = RequestMethod.GET)
     public ModelAndView addProductPage() {
-        ModelAndView mav = new ModelAndView("AddProduct");
+        ModelAndView mav = new ModelAndView("Product/AddProduct");
         return mav;
     }
     @RequestMapping(value = "/product/update", method = RequestMethod.GET)
     public ModelAndView updateProductPage() {
-        ModelAndView mav = new ModelAndView("UpdateProduct");
+        ModelAndView mav = new ModelAndView("Product/UpdateProduct");
         return mav;
     }
 }
