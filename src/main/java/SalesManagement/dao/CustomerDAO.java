@@ -20,8 +20,15 @@ public class CustomerDAO {
         return template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(Customer.class));
     }
 
-    public List<Customer> findAllCustomerBy() {
-        return template.query("select * from Customers", new RowMapper<Customer>() {
+    public List<Customer> findAllCustomerBy(String cusName) {
+        String sql;
+        if (cusName.isEmpty()) {
+            sql = "select * from Customers";
+        }
+        else{
+            sql = "select * from Customers where Name like '%" + cusName + "%'";
+        }
+        return template.query(sql, new RowMapper<Customer>() {
             public Customer mapRow(ResultSet rs, int row) throws SQLException {
                 Customer e = new Customer();
                 e.setId(rs.getInt(1));

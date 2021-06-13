@@ -20,7 +20,7 @@ public class CustomerApi {
 
         List<Customer> cusList;
         try {
-            cusList = customerDAO.findAllCustomerBy();
+            cusList = customerDAO.findAllCustomerBy(name);
         } catch (Exception e) {
             return null;
         }
