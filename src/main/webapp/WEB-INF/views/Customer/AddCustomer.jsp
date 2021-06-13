@@ -35,10 +35,17 @@
                         </div>
                         <div class="mb-3 cus__form-group">
                             <label for="name" class="form-label cus__form-lable">SỐ ĐIỆN THOẠI</label>
-                            <div class="input-group">
-                                <input class="input-effect input-primary" type="text" placeholder="Số điện thoại">
-                                <span class="focus-border"></span>
-                            </div>
+                            <select class="form-select" aria-label="Default select example" style="line-height: 28px;
+                                    font-size: 16px;
+                                    margin: 15px 0 0 0;">
+                                <c:forEach var="promition" items="proCus">
+                                    <option selected>${promotion.getName()}</option>
+                                </c:forEach>
+<!--                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>-->
+                            </select>
                         </div>
                         <div class="cus__info-lable">
                             Thông tin tiền tệ

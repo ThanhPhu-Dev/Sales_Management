@@ -6,7 +6,9 @@
 package SalesManagement.controller;
 
 import SalesManagement.dao.CustomerDAO;
+import SalesManagement.dao.PromotionsCustomerDAO;
 import SalesManagement.dto.Customer;
+import SalesManagement.dto.PromotionsCustomer;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,19 +32,14 @@ import org.springframework.web.servlet.ModelAndView;
 public class CustomerController {
 
     @Autowired
-    CustomerDAO customdfgerDAO;
+    CustomerDAO customerDAO;
+    PromotionsCustomerDAO proCustomerDAO;
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public ModelAndView customerPage() {
-        List<Customer> cusList = customdfgerDAO.findAllCustomerBy();
+        List<Customer> cusList = customerDAO.findAllCustomerBy();
         
         ModelAndView mav = new ModelAndView("Customer/Customer", "customers", cusList);
-        return mav;
-    }
-    
-    @RequestMapping(value = "/customer/add", method = RequestMethod.GET)
-    public ModelAndView addCustomerPage() {
-        ModelAndView mav = new ModelAndView("AddCustomer");
         return mav;
     }
 
@@ -50,5 +47,5 @@ public class CustomerController {
     public ModelAndView updateCustomerPage(@PathVariable int Id) {
         ModelAndView mav = new ModelAndView("UpdateCustomer", "id", Id);
         return mav;
-    }
+    }    
 }

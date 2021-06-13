@@ -12,7 +12,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"></sc
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <script type="text/javascript"
 src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
 <!-- JS Front -->
 <script type="text/javascript" src="<c:url value='/template/assets/js/theme.min.js' />"></script>
@@ -21,6 +21,8 @@ src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
 <script>
     $(document).ready(function () {
         $('#example').DataTable({
+            "searching": false,
+            "lengthChange": false,
             "language": {
                 "lengthMenu": "Số dòng  _MENU_ ",
                 "info": "Trang _PAGE_ / _PAGES_ ",
