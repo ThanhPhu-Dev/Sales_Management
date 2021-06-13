@@ -98,7 +98,7 @@
 
             function addNew(data) {
                 $.ajax({
-                    url: '/SalesManagement/customer',
+                    url: '/api/customer',
                     type: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(data),
