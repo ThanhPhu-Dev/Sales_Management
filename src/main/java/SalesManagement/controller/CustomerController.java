@@ -36,7 +36,7 @@ public class CustomerController {
     public ModelAndView customerPage() {
         List<Customer> cusList = customdfgerDAO.findAllCustomerBy();
         
-        ModelAndView mav = new ModelAndView("Customer", "customers", cusList);
+        ModelAndView mav = new ModelAndView("Customer/Customer", "customers", cusList);
         return mav;
     }
     

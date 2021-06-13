@@ -1,5 +1,5 @@
 .tilte-primary{
-margin: 20px 0 0 0;
+    margin: 20px 0 0 0;
     text-align: center;
 }
 .cus__info-lable{
@@ -19,32 +19,36 @@ margin: 20px 0 0 0;
     margin: 10px 0;
 }
 .input-primary {
-  font: 15px/24px "Lato", Arial, sans-serif;
-  color: #333;
-  width: 100%;
-  box-sizing: border-box;
-  letter-spacing: 1px;
+    font: 15px/24px "Lato", Arial, sans-serif;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    letter-spacing: 1px;
 }
 
 .input-effect{
-  border: 0;
-  padding: 7px 0;
-  border-bottom: 1px solid #ccc;
+    border: 0;
+    padding: 7px 0;
+    border-bottom: 1px solid #ccc;
 }
 
 .input-effect ~ .focus-border {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: #3399ff;
-  transition: 0.4s;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3399ff;
+    transition: 0.4s;
 }
 .input-effect:focus ~ .focus-border {
-  width: 100%;
-  transition: 0.4s;
+    width: 100%;
+    transition: 0.4s;
+}
+.icon-modal {
+    font-size: 40px;
+
 }
 :focus {
-  outline: none;
+    outline: none;
 }
