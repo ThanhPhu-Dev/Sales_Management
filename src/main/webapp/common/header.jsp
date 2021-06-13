@@ -70,16 +70,16 @@
                             <!-- Overview -->
                             <li class="nav-item">
                                 <a class="nav-link" href="/SalesManagement/trang-chu" title="Trang chủ">
-                                    <i class="tio-home nav-icon"></i>
-                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Trang chủ</span>
+                                    <i class="tio-home nav-icon left-menu-icon"></i>
+                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate left-menu-content">Trang chủ</span>
                                 </a> 
                                 <!-- End Overview -->     
-
-                                <!-- customer -->
+                            </li>
+                            <!-- customer -->
                             <li class="navbar-vertical-aside-has-menu">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="Cụm Rạp">
                                     <i class="fa fa-id-card nav-icon"></i>
-                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Khách hàng</span>
+                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate left-menu-content">Khách hàng</span>
                                 </a>
 
                                 <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
@@ -104,7 +104,7 @@
                             <li class="navbar-vertical-aside-has-menu">
                                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="Rạp">
                                     <i class="fa fa-shopping-bag nav-icon"></i>
-                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Sản phẩm</span>
+                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate left-menu-content">Sản phẩm</span>
                                 </a>
 
                                 <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
@@ -124,7 +124,13 @@
                                 </ul>
                             </li>
                             <!-- End product -->
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="/SalesManagement/trang-chu" title="Trang chủ">
+                                    <i class="fa fa-credit-card"></i>
+                                    <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate receipt left-menu-content">Hóa đơn</span>
+                                </a> 
+                                <!-- End Overview -->     
+                            </li>
                         </ul>
                     </div>
                     <!-- End Content -->

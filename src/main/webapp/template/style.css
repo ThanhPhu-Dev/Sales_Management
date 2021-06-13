@@ -30,3 +30,15 @@ a.btn.btn-sm.btn-white.btn-checkout {
 .navbar-brand-wrapper.justify-content-start {
     background-color: #f1ecd9d9;
 }
+
+span.navbar-vertical-aside-mini-mode-hidden-elements.text-truncate.receipt {
+    margin-left: 10px;
+}
+
+.left-menu-content{
+    font-size: 18px;
+}
+
+.left-menu-icon{
+    font-size: 18px;
+}
