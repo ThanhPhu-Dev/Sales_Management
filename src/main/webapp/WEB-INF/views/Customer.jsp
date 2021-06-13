@@ -22,6 +22,10 @@
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-8">
+                    <form class="d-flex " id="form-search">
+                        <input class="form-control me-2" id="name" name="name" type="search" placeholder="Tên khách hàng" style="width: 300px">
+                        <button id="btnSearch" class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+                    </form>     
                     <table id="example" class="ui celled table" style="width:100%">
                         <thead>
                             <tr>
@@ -67,9 +71,23 @@
                 </button>
             </div>
         </div>
-        
-        <script>
-            
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script >
+//            const axios = require('axios');
+            const btnSearch = document.querySelector('#btnSearch');
+            const ipSearch = document.querySelector('#name');
+
+            btnSearch.addEventListener('click', async e => {
+                e.preventDefault();
+                axios.post('/SalesManagement/customer', {
+                    name: ipSearch.value,
+                }).then(function (response) {
+                    console.log(response);
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            })
         </script>
     </body>
 
