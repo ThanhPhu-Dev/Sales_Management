@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import lombok.Data;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -16,7 +17,11 @@ public class PromotionsCustomerDAO {
 
     private JdbcTemplate template;
 
-    public List<PromotionsCustomer> findAllPromitionsCustomer() {
+    public PromotionsCustomer findPromotionById(int id) {
+        String sql = "select * from promotions_customers where Id=?";
+        return template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(PromotionsCustomer.class));
+        }
+    public List<PromotionsCustomer> findAllPromitionsCustomer () {
         return template.query("select * from promotions_customers", new RowMapper<PromotionsCustomer>() {
             public PromotionsCustomer mapRow(ResultSet rs, int row) throws SQLException {
                 PromotionsCustomer e = new PromotionsCustomer();
