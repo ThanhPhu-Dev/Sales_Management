@@ -27,9 +27,4 @@ public class BillAPI {
         return bills;
     }
 
-    @PostMapping("/detailbills")
-    public String getDetailBill(){
-
-        return "Ngon";
-    }
 }

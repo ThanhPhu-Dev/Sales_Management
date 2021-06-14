@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 
+<title>Hóa Đơn</title>
 <main id="content" role="main" class="main">
     <div class="content container-fluid">
         <!-- Page Header -->
@@ -35,45 +36,24 @@
             </div>
             <!-- End Header -->
 
-        <table class="table table-striped" id="datatablebill" style="width: 100%;">
-        <thead >
-        <tr id="list-header">
-            <th scope="col">STT</th>
-            <th scope="col">Tên Khách Hàng</th>
-            <th scope="col">Giảm Giá</th>
-            <th scope="col">Ưu Đãi</th>
-            <th scope="col">Ưu Đãi(%)</th>
-            <th scope="col">Tổng Tiền</th>
-            <th scope="col">Ngày Tạo</th>
-            <th scope="col">Chi tiết</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+            <table class="table table-striped" id="datatablebill" style="width: 100%;">
+            <thead class="text-center">
+                <tr id="list-header">
+                    <th scope="col">STT</th>
+                    <th scope="col">Mã Hóa Đơn</th>
+                    <th scope="col">Tên Khách Hàng</th>
+                    <th scope="col">Giảm Giá</th>
+                    <th scope="col">Ưu Đãi</th>
+                    <th scope="col">Ưu Đãi(%)</th>
+                    <th scope="col">Tổng Tiền</th>
+                    <th scope="col">Ngày Tạo</th>
+                    <th scope="col">Chi tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
         </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="detailbill" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Chi tiết hóa đơn</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">In</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
     </div>
 </main>
 

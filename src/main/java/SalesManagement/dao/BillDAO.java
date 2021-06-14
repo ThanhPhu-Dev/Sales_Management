@@ -33,12 +33,20 @@ public class BillDAO {
                 b.setCustomerId(rs.getInt("CustomerId"));
                 b.setTotal(rs.getInt("Total"));
                 b.setDiscount(rs.getFloat("Discount"));
-                b.setPromotionCustomerId(rs.getInt("PromotionCustomer"));
+                b.setPromotionCustomerId(rs.getInt("PromotionCustomerId"));
                 b.setDateCreate(rs.getDate("DateCreate"));
                 b.setCustomer(customerDao.findCustomerById(b.getCustomerId()));
                 b.setPromotion(promotionsCustomerDAO.findPromotionById(b.getPromotionCustomerId()));
                 return b;
             }
         });
+    }
+
+    public Bill findBillById(int id) {
+        String sql = "select * from bills where Id=?";
+        Bill bill=  template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(Bill.class));
+        bill.setCustomer(customerDao.findCustomerById(bill.getCustomerId()));
+        bill.setPromotion(promotionsCustomerDAO.findPromotionById(bill.getPromotionCustomerId()));
+        return bill;
     }
 }

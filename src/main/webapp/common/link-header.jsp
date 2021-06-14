@@ -22,9 +22,11 @@
 <link rel="stylesheet" type="text/css"
       href="https://cdn.datatables.net/1.10.25/css/dataTables.semanticui.css" />
 
+
 <!-- CSS Implementing Plugins -->
 <link type="text/css" rel="stylesheet" href="<c:url value='/template/assets/css/vendor.min.css' />">
 <link type="text/css" rel="stylesheet" href="<c:url value='/template/assets/vendor/icon-set/style.css' />">
+<link type="text/css" rel="stylesheet" href="<c:url value='/template/Bill/Css/detailsBill.css' />">
 
 <!-- CSS Front Template -->
 <link type="text/css" rel="stylesheet" href="<c:url value='/template/assets/css/theme.min.css?v=1.0' />">

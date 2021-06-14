@@ -75,7 +75,7 @@
                     </li>
                     <!-- End product -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/SalesManagement/bills" title="Trang chủ">
+                        <a class="nav-link" href="/SalesManagement/bills" title="Hóa Đơn">
                             <i class="fa fa-credit-card"></i>
                             <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate receipt left-menu-content">Hóa đơn</span>
                         </a>

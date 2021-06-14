@@ -1,0 +1,16 @@
+.list-cus-order {
+    list-style: none;
+    font-size: 13px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #28d2ca;
+    width: fit-content;
+    background: #19bde324;
+    box-shadow: 10px 10px 5px #dad9d9;
+    margin-bottom: 20px;
+}
+
+.list-cus-order li .name-cu{
+    width: 200px;
+    font-weight: 600;
+}

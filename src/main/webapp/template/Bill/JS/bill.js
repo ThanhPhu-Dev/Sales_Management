@@ -3,17 +3,18 @@ async function initTableData() {
     let url = `/SalesManagement/api/bills`;
     axios.post(url)
         .then(function (response) {
-            var i = 1;
-            var modified = response.data.map(e => {
+            let i = 1;
+            let modified = response.data.map(e => {
                 return {
                     STT: i++,
+                    Id: "HD"+e.id,
                     name: e.customer.name,
                     Discount: e.discount != null ? e.discount : '',
                     promotionName: e.promotion.name != null ? e.promotion.name : '',
                     promotionpercent: e.promotion.percentDiscount != null ? e.promotion.percentDiscount : '',
                     total: e.total,
                     createdAt: e.dateCreate,
-                    detail: "<i class=\"fas fa-info-circle\" data-toggle=\"modal\" data-target=\"#detailbill\"></i>",
+                    detail: "<a href='/SalesManagement/Detailbill?id="+e.id+"'><i class=\"fas fa-info-circle\"></i></a>",
                 }
             });
 
@@ -33,21 +34,37 @@ async function initTableData() {
                 "bInfo" : false,
                 initComplete : function() {
                     $("#datatablebill_filter").detach().appendTo('#new-search-area');
-                    // $("#datatablebill_length").detach().appendTo('#new-lengthbill-datable');
                 },
                 "dom": '<"top"i>rt<"bottom"flp><"clear">',
                 data: modified,
                 columns: [
                     {
+                        class: 'text-center',
                         data: 'STT',
                     },
+                    { data: 'Id' },
                     { data: 'name' },
-                    { data: 'Discount' },
+                    {
+                        class: 'text-center',
+                        data: 'Discount'
+                    },
                     { data: 'promotionName' },
-                    { data: 'promotionpercent' },
-                    { data: 'total' },
-                    { data: 'createdAt' },
-                    { data: 'detail' },
+                    {
+                        class: 'text-center',
+                        data: 'promotionpercent'
+                    },
+                    {
+                        class: 'text-right',
+                        data: 'total'
+                    },
+                    {
+                        class: 'text-center',
+                        data: 'createdAt'
+                    },
+                    {
+                        class: 'text-center',
+                        data: 'detail'
+                    },
                 ]
             });
         })
@@ -58,6 +75,4 @@ async function initTableData() {
 }
 $(document).ready(async function () {
     await initTableData();
-
-    // $('#element1_id').attr('placeholder','Some New Text 1');
 });
