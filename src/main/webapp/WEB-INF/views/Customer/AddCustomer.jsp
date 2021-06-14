@@ -7,7 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<title>Thêm khách hàng</title>
 <main id="content" role="main" class="main">
     <!-- Content -->
     <div class="content container-fluid">
@@ -37,7 +37,7 @@
                         <div class="mb-3 cus__form-group">
                             <label for="name" class="form-label cus__form-lable">ƯU ĐÃI</label>
                             <div class="input-group">
-                                <select name="promotion" class="form-select select-primary" >
+                                <select name="promotion" id="promotion" class="form-select select-primary" >
                                     <option selected value="-1">Không áp dụng</option>
                                     <c:forEach var="promotion" items="${proCus}">
                                         <option value="${promotion.getId()}">${promotion.getName()}</option>
@@ -95,16 +95,29 @@
     const ipSearch = document.querySelector('#name');
     const errorCard = document.querySelector('.error-card');
 
-    errorCard.innerHTML = "";
-    errorCard.style.display = "none";
+    const setDefault = {
+        setInput: function () {
+            const ipName = document.querySelector('#name');
+            const selectPromotion = document.querySelector('#promotion');
+            const ipCard = document.querySelector('#card');
+            ipName.value = '';
+            selectPromotion.value = '';
+            ipCard.value = '';
+        },
+        setError: function () {
+            errorCard.innerHTML = "";
+            errorCard.style.display = "none";
+        }
+    };
 
     formApply.addEventListener("submit", async e => {
-        console.log('1');
         e.preventDefault();
         let formData = new FormData(formApply);
         const name = formData.get("name");
         const card = formData.get("card");
         const promotion = formData.get("promotion");
+
+        setDefault.setError();
 
         await axios.post('/SalesManagement/api/addcustomer', {
             name: formData.get("name"),
@@ -116,6 +129,9 @@
                 errorCard.innerHTML = response.data.card;
                 errorCard.style.display = "block";
             } else {
+                setDefault.setError();
+                setDefault.setInput();
+
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -124,11 +140,9 @@
                     timer: 1000
                 })
             }
-        }).catch(function (error) {
-            console.log("bad");
+        }).catch(async function (error) {
+            await Swal.fire('CÓ lỗi xảy ra, vui lòng thử lại!');
         });
     }, true);
-
-
 
 </script>

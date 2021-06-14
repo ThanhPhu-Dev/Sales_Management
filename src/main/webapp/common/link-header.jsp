@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : link-header
     Created on : Jun 13, 2021, 9:14:35 PM
     Author     : USER
@@ -35,3 +35,9 @@
 <%--Bills--%>
 <link type="text/css" rel="stylesheet" href="<c:url value='/template/Bill/Css/bill.css' />">
 <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">-->
+
+<!--CSS FILES-->
+<link type="text/css" rel="stylesheet" href="<c:url value='/template/assets/css/checkout.css' />" />
+
+<!--message-->
+<link rel="stylesheet" href="sweetalert2.min.css">
