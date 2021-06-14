@@ -22,8 +22,8 @@
                         <a class="nav-link" href="/SalesManagement/trang-chu" title="Trang chủ">
                             <i class="tio-home nav-icon left-menu-icon"></i>
                             <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate left-menu-content">Trang chủ</span>
-                        </a> 
-                        <!-- End Overview -->     
+                        </a>
+                        <!-- End Overview -->
                     </li>
                     <!-- customer -->
                     <li class="navbar-vertical-aside-has-menu">
@@ -75,11 +75,11 @@
                     </li>
                     <!-- End product -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/SalesManagement/trang-chu" title="Trang chủ">
+                        <a class="nav-link" href="/SalesManagement/bills" title="Trang chủ">
                             <i class="fa fa-credit-card"></i>
                             <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate receipt left-menu-content">Hóa đơn</span>
-                        </a> 
-                        <!-- End Overview -->     
+                        </a>
+                        <!-- End Overview -->
                     </li>
                 </ul>
             </div>

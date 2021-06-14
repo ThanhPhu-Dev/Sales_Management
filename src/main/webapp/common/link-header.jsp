@@ -30,4 +30,6 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/template/assets/css/theme.min.css?v=1.0' />">
 
 <!--Bootstrap-->
+<%--Bills--%>
+<link type="text/css" rel="stylesheet" href="<c:url value='/template/Bill/Css/bill.css' />">
 <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">-->

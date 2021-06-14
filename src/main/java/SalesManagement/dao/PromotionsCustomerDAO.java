@@ -20,7 +20,8 @@ public class PromotionsCustomerDAO {
     public PromotionsCustomer findPromotionById(int id) {
         String sql = "select * from promotions_customers where Id=?";
         return template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(PromotionsCustomer.class));
-    public List<PromotionsCustomer> findAllPromitionsCustomer() {
+        }
+    public List<PromotionsCustomer> findAllPromitionsCustomer () {
         return template.query("select * from promotions_customers", new RowMapper<PromotionsCustomer>() {
             public PromotionsCustomer mapRow(ResultSet rs, int row) throws SQLException {
                 PromotionsCustomer e = new PromotionsCustomer();
