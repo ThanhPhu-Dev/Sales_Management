@@ -3,3 +3,4 @@
 *.properties
 src/main/resources/ConnectDB.properties
 
+.idea/libraries/
