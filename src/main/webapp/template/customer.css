@@ -1,3 +1,11 @@
+.select-primary{
+    line-height: 27px;
+    font-size: 16px;
+    margin: 15px 0 0 0;
+    width: 100%;
+    padding: 10px 12px;
+    border-color: #bdbdbd;
+}
 .tilte-primary{
     margin: 20px 0 0 0;
     text-align: center;
