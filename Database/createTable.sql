@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Jun 14, 2021 at 04:53 PM
+-- Generation Time: Jun 13, 2021 at 02:52 AM
 -- Server version: 5.7.28
 -- PHP Version: 7.3.12
 
@@ -34,20 +34,12 @@ CREATE TABLE IF NOT EXISTS `bills` (
   `Total` int(11) NOT NULL,
   `CustomerId` int(11) NOT NULL,
   `Discount` float NOT NULL,
-  `PromotionCustomerId` int(11) NOT NULL,
+  `PromotionCustomer` int(11) NOT NULL,
   `DateCreate` date NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `fk_bills_customer` (`CustomerId`),
-  KEY `fk_bills_promotionsCustomer` (`PromotionCustomerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `bills`
---
-
-INSERT INTO `bills` (`Id`, `Total`, `CustomerId`, `Discount`, `PromotionCustomerId`, `DateCreate`) VALUES
-(1, 200000, 1, 10, 1, '2021-06-13'),
-(2, 300000, 2, 0, 2, '2021-06-13');
+  KEY `fk_bills_promotionsCustomer` (`PromotionCustomer`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -61,19 +53,11 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `Name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `NumberCard` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `AccountBalance` int(11) NOT NULL,
-  `PromotionsId` int(11) DEFAULT NULL,
+  `PromotionsId` int(11) NOT NULL,
   `DebtMax` int(11) NOT NULL DEFAULT '2000000',
   PRIMARY KEY (`Id`),
   KEY `fk_customer_promotionsCustommer` (`PromotionsId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`Id`, `Name`, `NumberCard`, `AccountBalance`, `PromotionsId`, `DebtMax`) VALUES
-(1, 'asd', '056675', 200000, 1, 2000000),
-(2, 'asff', '056675', 200000, 2, 2000000);
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -87,21 +71,13 @@ CREATE TABLE IF NOT EXISTS `detail_bills` (
   `BillId` int(11) NOT NULL,
   `Quantity` int(11) NOT NULL,
   `ProductId` int(11) NOT NULL,
-  `LastPrice` int(11) NOT NULL,
-  `PromotionProductId` int(11) NOT NULL,
+  `Last Price` int(11) NOT NULL,
+  `PromotionProduct` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `fk_detailbill_bill` (`BillId`),
   KEY `fk_detailbill_product` (`ProductId`),
-  KEY `fk_detailbill_promotionsProduct` (`PromotionProductId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `detail_bills`
---
-
-INSERT INTO `detail_bills` (`Id`, `BillId`, `Quantity`, `ProductId`, `LastPrice`, `PromotionProductId`) VALUES
-(1, 1, 3, 1, 600000, 1),
-(2, 1, 4, 2, 1200000, 2);
+  KEY `fk_detailbill_promotionsProduct` (`PromotionProduct`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -119,15 +95,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `PromotionId` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `fk_product_promotionsProduct` (`PromotionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`Id`, `Name`, `Specification`, `HistoricalCost`, `TradeDiscount`, `PromotionId`) VALUES
-(1, 'Sản Phẩm Cao Cấp NGC', 100, 200000, 10, 1),
-(2, 'Sản Phẩm 102', 200, 300000, 12, 2);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -143,15 +111,7 @@ CREATE TABLE IF NOT EXISTS `promotions_customers` (
   `EndDate` date NOT NULL,
   `PercentDiscount` float NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `promotions_customers`
---
-
-INSERT INTO `promotions_customers` (`Id`, `Name`, `StartDate`, `EndDate`, `PercentDiscount`) VALUES
-(1, 'Khách hàng than mới', '2021-06-01', '2021-06-22', 10),
-(2, 'Khách Hàng Tri Ân', '2021-06-02', '2021-06-23', 20);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -167,15 +127,7 @@ CREATE TABLE IF NOT EXISTS `promotions_products` (
   `EndDate` date NOT NULL,
   `PercentDiscount` float NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `promotions_products`
---
-
-INSERT INTO `promotions_products` (`Id`, `Name`, `StartDate`, `EndDate`, `PercentDiscount`) VALUES
-(1, 'Sản Phẩm Sắp Hết Hạn', '2021-06-08', '2021-06-22', 12),
-(2, 'Sản phẩm mới', '2021-06-13', '2021-06-30', 10);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -202,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `receipts` (
 --
 ALTER TABLE `bills`
   ADD CONSTRAINT `fk_bills_customer` FOREIGN KEY (`CustomerId`) REFERENCES `customers` (`Id`),
-  ADD CONSTRAINT `fk_bills_promotionsCustomer` FOREIGN KEY (`PromotionCustomerId`) REFERENCES `promotions_customers` (`Id`);
+  ADD CONSTRAINT `fk_bills_promotionsCustomer` FOREIGN KEY (`PromotionCustomer`) REFERENCES `promotions_customers` (`Id`);
 
 --
 -- Constraints for table `customers`
@@ -216,7 +168,7 @@ ALTER TABLE `customers`
 ALTER TABLE `detail_bills`
   ADD CONSTRAINT `fk_detailbill_bill` FOREIGN KEY (`BillId`) REFERENCES `bills` (`Id`),
   ADD CONSTRAINT `fk_detailbill_product` FOREIGN KEY (`ProductId`) REFERENCES `products` (`Id`),
-  ADD CONSTRAINT `fk_detailbill_promotionsProduct` FOREIGN KEY (`PromotionProductId`) REFERENCES `promotions_products` (`Id`);
+  ADD CONSTRAINT `fk_detailbill_promotionsProduct` FOREIGN KEY (`PromotionProduct`) REFERENCES `promotions_products` (`Id`);
 
 --
 -- Constraints for table `products`
