@@ -3,6 +3,7 @@ package SalesManagement.dao;
 import SalesManagement.dto.Customer;
 import java.sql.*;
 import java.util.*;
+import javax.security.auth.login.AccountException;
 import lombok.Data;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,8 +25,7 @@ public class CustomerDAO {
         String sql;
         if (cusName.isEmpty()) {
             sql = "select * from Customers";
-        }
-        else{
+        } else {
             sql = "select * from Customers where Name like '%" + cusName + "%'";
         }
         return template.query(sql, new RowMapper<Customer>() {
@@ -40,5 +40,17 @@ public class CustomerDAO {
                 return e;
             }
         });
+    }
+
+    public int AddCustomer(Customer cus) {
+        String sql = String.format("insert into Customers (Name, NumberCard, AccountBalance, PromotionsId) values "
+                + "('%s', '%s', '%d', '%f')",
+                cus.getName(), cus.getNumberCard(), cus.getAccountBalance(), cus.getPromotionsId());
+        return template.update(sql);
+    }
+
+    public Customer findCustomerByNumCard(String card) {
+         String sql = "select * from Customers where PromotionId = ?";
+        return template.queryForObject(sql, new Object[]{card}, new BeanPropertyRowMapper<>(Customer.class));
     }
 }
