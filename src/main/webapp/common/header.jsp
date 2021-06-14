@@ -32,6 +32,7 @@
 
         <!-- CSS Front Template -->
         <link type="text/css" rel="stylesheet" href="<c:url value='/template/assets/css/theme.min.css?v=1.0' />">
+        <link type="text/css" rel="stylesheet" href="<c:url value='/template/Bill/Css/bill.css' />">
 
     </head>
 
@@ -125,7 +126,7 @@
                             </li>
                             <!-- End product -->
                             <li class="nav-item">
-                                <a class="nav-link" href="/SalesManagement/trang-chu" title="Trang chủ">
+                                <a class="nav-link" href="/SalesManagement/bills" title="Trang chủ">
                                     <i class="fa fa-credit-card"></i>
                                     <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate receipt left-menu-content">Hóa đơn</span>
                                 </a> 

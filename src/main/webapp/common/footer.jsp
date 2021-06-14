@@ -1,15 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp" %>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <!--datatable-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet"
+      type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js" defer></script>
+    <%--axios--%>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- JS Implementing Plugins -->
 <script type="text/javascript" src="<c:url value='/template/assets/js/vendor.min.js' />"></script>
 
+<%--BillJS--%>
+<script type="text/javascript" src="<c:url value='/template/Bill/JS/bill.js' />"></script>
+
 <script type="text/javascript"
 src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 <script type="text/javascript"
 src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
 

@@ -1,0 +1,32 @@
+#new-search-area {
+    width: 100%;
+    clear: both;
+    padding-top: 20px;
+}
+#new-search-area input {
+    width: 600px;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 1px solid #cecbcba6;
+    font-size: 13px;
+    padding-left: 20px;
+
+}
+
+.searchheader{
+    margin-bottom: 0;
+}
+.searchheader .input-group-prepend{
+    top: 12px;
+}
+
+#datatablebill_paginate{
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+#datatablebill_length{
+    margin-top: 10px;
+    margin-left: 10px;
+}
