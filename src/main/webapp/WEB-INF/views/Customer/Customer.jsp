@@ -17,7 +17,7 @@
         <div class="page-header" style="padding-bottom: 0">
             <div class="row d-flex align-items-center mb-3">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">Danh sách sản phẩm</h1>
+                    <h1 class="page-header-title">Danh sách khách hàng</h1>
                 </div>
 
                 <div class="d-flex justify-content-center" >
@@ -80,13 +80,13 @@
                             <td>
                                 <fmt:formatNumber type = "number" 
                                                   currencyCode="" value = "${customer.getAccountBalance()}" />
-                                VNĐ
+                                VND
                             </td>
                             <td>${customer.getPromotionsId()}</td>
                             <td>
                                 <fmt:formatNumber type = "number" 
                                                   currencyCode="" value = "${customer.getDebtMax()}" />
-                                VNĐ
+                                VND
                             </td>
                             <td>
                                 <div class="btn-group" role="group">
@@ -128,9 +128,9 @@
                                 <td>` + u.id + `</td>
                                 <td>` + u.name + `</td>
                                 <td>` + u.numberCard + `</td>
-                                <td>` + u.accountBalance + `</td>
+                                <td>` + u.accountBalance.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + `</td>
                                 <td>` + u.promotionsId + `</td>
-                                <td>` + u.debtMax + `</td>
+                                <td>` + u.debtMax.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + `</td>
                                 <td>
                                         <div class="btn-group" role="group">
                                             <a class="btn btn-sm btn-white" href="/SalesManagement/payment">
