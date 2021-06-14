@@ -19,6 +19,12 @@ src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"></sc
 <!-- JS Front -->
 <script type="text/javascript" src="<c:url value='/template/assets/js/theme.min.js' />"></script>
 
+<!--message-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
 <script>
     $(document).on('ready', function () {
 

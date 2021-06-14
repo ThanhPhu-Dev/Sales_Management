@@ -44,10 +44,10 @@ public class CustomerApi {
 
         try {
 //            check error card
-//            Customer cusOfCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
-//            if (cusOfCard != null) {
-//                arrError.put("card", "S? tài kho?n ?ã t?n t?i!");
-//            }
+            int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
+            if (checkNumCard > 0) {
+                arrError.put("card", "S? tài kho?n ?ã t?n t?i!");
+            }
             if (arrError.size() < 1) {
                 int rowUpdate = customerDAO.AddCustomer(cus);
             }

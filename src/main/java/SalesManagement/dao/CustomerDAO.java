@@ -44,13 +44,14 @@ public class CustomerDAO {
 
     public int AddCustomer(Customer cus) {
         String sql = String.format("insert into Customers (Name, NumberCard, AccountBalance, PromotionsId) values "
-                + "('%s', '%s', '%d', '%f')",
+                + "('%s', '%s', '%d', '%d')",
                 cus.getName(), cus.getNumberCard(), cus.getAccountBalance(), cus.getPromotionsId());
         return template.update(sql);
     }
 
-    public Customer findCustomerByNumCard(String card) {
-         String sql = "select * from Customers where PromotionId = ?";
-        return template.queryForObject(sql, new Object[]{card}, new BeanPropertyRowMapper<>(Customer.class));
+    public int findCustomerByNumCard(String card) {
+        String sql = "select count(*) from Customers where NumberCard = ?";
+        int rows = template.queryForObject(sql, new Object[]{card}, (Integer.class));
+        return rows;
     }
 }

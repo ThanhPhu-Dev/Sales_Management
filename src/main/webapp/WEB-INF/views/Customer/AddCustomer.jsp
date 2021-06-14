@@ -37,7 +37,7 @@
                         <div class="mb-3 cus__form-group">
                             <label for="name" class="form-label cus__form-lable">ƯU ĐÃI</label>
                             <div class="input-group">
-                                <select class="form-select select-primary" >
+                                <select name="promotion" class="form-select select-primary" >
                                     <option selected value="-1">Không áp dụng</option>
                                     <c:forEach var="promotion" items="${proCus}">
                                         <option value="${promotion.getId()}">${promotion.getName()}</option>
@@ -49,7 +49,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="cus__info-lable">
                             Thông tin thanh toán
                         </div>
@@ -84,26 +84,51 @@
 
 </main>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="sweetalert2.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+
 <script>
     const formApply = document.querySelector("#form-apply");
     const btnApply = document.querySelector('#btnApply');
     const ipSearch = document.querySelector('#name');
-console.log(btnApply);
+    const errorCard = document.querySelector('.error-card');
+
+    errorCard.innerHTML = "";
+    errorCard.style.display = "none";
+
     formApply.addEventListener("submit", async e => {
         console.log('1');
         e.preventDefault();
         let formData = new FormData(formApply);
         const name = formData.get("name");
         const card = formData.get("card");
-        
+        const promotion = formData.get("promotion");
+
         await axios.post('/SalesManagement/api/addcustomer', {
             name: formData.get("name"),
             card: formData.get("card"),
-            promotion: "1",
+            promotion: formData.get("promotion"),
         }).then(function (response) {
-            console.log(response);
+
+            if (response.data.card) {
+                errorCard.innerHTML = response.data.card;
+                errorCard.style.display = "block";
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Thêm khách hàng thành công',
+                    showConfirmButton: false,
+                    timer: 1000
+                })
+            }
         }).catch(function (error) {
             console.log("bad");
         });
     }, true);
+
+
+
 </script>
