@@ -10,7 +10,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import javax.sql.DataSource;
 import java.util.Map;
 import java.util.ResourceBundle;
-
+import  java.util.Properties;
 
 @Configuration
 public class SpringJdbcConfig {
@@ -23,6 +23,10 @@ public class SpringJdbcConfig {
 		dataSource.setUrl("jdbc:mysql://"+infodb.getString("IP")+":"+infodb.getString("Port")+"/"+infodb.getString("Database"));
 		dataSource.setUsername(infodb.getString("Username"));
 		dataSource.setPassword(infodb.getString("Password"));
+        Properties connectionProps = new Properties();
+        connectionProps.put("useUnicode", "true");
+        connectionProps.put("characterEncoding", "UTF-8");
+		dataSource.setConnectionProperties(connectionProps);
         return dataSource;
     }
 

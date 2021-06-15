@@ -65,7 +65,7 @@
                     <th scope="col">Tên Sản Phẩm</th>
                     <th scope="col">Quy Cách</th>
                     <th scope="col">Giá Gốc(VNĐ)</th>
-                    <th scope="col">Chiết Khấu</th>
+                    <th scope="col">Chiết Khấu(%)</th>
                     <th scope="col">Tên Ưu Đãi</th>
                     <th scope="col">Ưu Đãi(%)</th>
                     <th scope="col">Số Lượng</th>
@@ -80,14 +80,17 @@
                         <td>${dt.product.name}</td>
                         <td class="text-right">${dt.product.specification}</td>
                         <td class="text-right">${dt.product.historicalCost}</td>
-                        <td class="text-center">${dt.product.tradeDiscount} %</td>
+                        <td class="text-center">${dt.product.tradeDiscount}</td>
                         <td>${dt.promotion.name}</td>
-                        <td class="text-center">${dt.promotion.percentDiscount}%</td>
+                        <td class="text-center">${dt.promotion.percentDiscount}</td>
                         <td class="text-center">${dt.quantity}</td>
                         <td class="text-right">${dt.lastPrice}</td>
-
                     </tr>
                 </c:forEach>
+                <tr>
+                    <td colspan="7" class="text-right font-weight-bold">Tổng Hóa Đơn(VNĐ): </td>
+                    <td colspan="3" class="text-right">${bill.total} </td>
+                </tr>
                 <tr>
                     <td colspan="7" class="text-right font-weight-bold">Tổng tiền(VNĐ): </td>
                     <td colspan="3" class="text-right">${bill.total} </td>

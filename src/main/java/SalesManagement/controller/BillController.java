@@ -38,8 +38,7 @@ public class BillController {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = df.format(bill.getDateCreate());
         model.addAttribute("date", dateString);
-
-       /* float lastprice = 0;
+        float lastprice = 0;
         float total;
         Integer price;
         float lastprice1dt;
@@ -53,7 +52,7 @@ public class BillController {
         if(bill.getPromotionCustomer() != null){
             promotion=bill.getPromotionCustomer().getPercentDiscount();
         }
-        total = lastprice - (lastprice*(promotion/100) + lastprice*(bill.getDiscount()/100));*/
+        total = lastprice - (lastprice*(promotion/100) + lastprice*(bill.getDiscount()/100));
         return "Bill/DetailBill";
     }
 }
