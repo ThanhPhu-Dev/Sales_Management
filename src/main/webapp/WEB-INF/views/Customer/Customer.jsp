@@ -97,13 +97,13 @@
                             </td>
                             <td class="d-flex justify-content-center">
                                 <div class="btn-group" role="group">
-                                    <a class="btn btn-sm btn-white" href="/SalesManagement/payment">
+                                    <a class="btn btn-sm btn-white" href="/SalesManagement/payment?id=${customer.getId()}">
                                         <i class="fa fa-credit-card" aria-hidden="true"></i> Nạp tiền
                                     </a>
                                     <a class="btn btn-sm btn-white btn-checkout" href="/SalesManagement/checkout">
                                         <i class="fa fa-book" aria-hidden="true"></i> Thanh toán
                                     </a>
-                                    <a class="btn btn-sm btn-white btn-checkout" href="/SalesManagement/updateCustomer">
+                                    <a class="btn btn-sm btn-white btn-checkout" href="/SalesManagement/customer/update?id=${customer.getId()}">
                                         <i class="fa fa-book" aria-hidden="true"></i> Sửa thông tin
                                     </a>
                                 </div>
