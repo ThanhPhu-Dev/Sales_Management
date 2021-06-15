@@ -41,3 +41,6 @@
 
 <!--message-->
 <!--<link rel="stylesheet" href="sweetalert2.min.css">-->
+
+<!--AXIOS-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
