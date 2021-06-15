@@ -1,5 +1,6 @@
 let table;
 async function initTableData() {
+
     let url = `/SalesManagement/api/bills`;
     axios.post(url)
         .then(function (response) {
@@ -10,8 +11,8 @@ async function initTableData() {
                     Id: "HD"+e.id,
                     name: e.customer.name,
                     Discount: e.discount != null ? e.discount : '',
-                    promotionName: e.promotion.name != null ? e.promotion.name : '',
-                    promotionpercent: e.promotion.percentDiscount != null ? e.promotion.percentDiscount : '',
+                    promotionName: e.promotion != null ? e.promotion.name : '',
+                    promotionpercent: e.promotion != null ? e.promotion.percentDiscount : '',
                     total: e.total,
                     createdAt: e.dateCreate,
                     detail: "<a href='/SalesManagement/Detailbill?id="+e.id+"'><i class=\"fas fa-info-circle\"></i></a>",
@@ -19,7 +20,7 @@ async function initTableData() {
             });
 
             table = $('#datatablebill').DataTable({
-                "pageLength": 1,
+                "pageLength": 5,
                 "oLanguage": {
                     "sSearch": "",
                     "sLengthMenu": "Showing _MENU_ ",
@@ -28,6 +29,7 @@ async function initTableData() {
                         "sNext": "Tiếp theo"
                     }
                 },
+                "lengthMenu": [[5, 10, 15], [5, 10, 15]],
                 language: {
                     searchPlaceholder: "Tìm kiếm hóa đơn"
                 },
@@ -74,5 +76,7 @@ async function initTableData() {
 
 }
 $(document).ready(async function () {
-    await initTableData();
+    if(window.location.href === "http://localhost:8080/SalesManagement/bills") {
+        await initTableData();
+    }
 });

@@ -44,3 +44,5 @@
 
 <!--AXIOS-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<%--axios--%>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>

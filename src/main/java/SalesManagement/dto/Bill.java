@@ -13,6 +13,6 @@ public class Bill {
     private Integer PromotionCustomerId;
     private Date    DateCreate;
     private Customer Customer;
-    private PromotionsCustomer Promotion;
+    private PromotionsCustomer PromotionCustomer;
     //tạo getter - setter ngầm rồi. bên ngoài gọi getter-setter như bình thường
 }

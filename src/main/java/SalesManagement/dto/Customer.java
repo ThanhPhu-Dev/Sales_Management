@@ -10,5 +10,6 @@ public class Customer {
     private Integer AccountBalance;
     private Integer PromotionsId;
     private Integer DebtMax;
+    private PromotionsCustomer Promotion;
     //tạo getter - setter ngầm rồi. bên ngoài gọi getter-setter như bình thường
 }

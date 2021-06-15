@@ -2,6 +2,9 @@
 <%@include file="/common/taglib.jsp" %>
 
 <title>Hóa Đơn</title>
+<head>
+
+</head>
 <main id="content" role="main" class="main">
     <div class="content container-fluid">
         <!-- Page Header -->
@@ -55,7 +58,6 @@
             </table>
         </div>
     </div>
-    <%--BillJS--%>
-    <script type="text/javascript" src="<c:url value='/template/Bill/JS/bill.js' />"></script>
+
 </main>
 

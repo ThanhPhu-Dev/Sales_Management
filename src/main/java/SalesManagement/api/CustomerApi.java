@@ -46,7 +46,7 @@ public class CustomerApi {
 //            check error card
             int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
             if (checkNumCard > 0) {
-                arrError.put("card", "S? t�i kho?n ?� t?n t?i!");
+                arrError.put("card", "Số tài khoản đã tồn tại!");
             }
             if (arrError.size() < 1) {
                 int rowUpdate = customerDAO.AddCustomer(cus);
@@ -67,26 +67,26 @@ public class CustomerApi {
         String numcard = formData.get("card");
         Map<String, String> arrError = new HashMap<String, String>();
 
-        //l?y ra KH n�y t? db 
+        //l?y ra KH n�y t? db 
         Customer cusAtDB = customerDAO.findCustomerById(Integer.parseInt(id));
 
         Customer cus = new Customer();
+        cus.setId(Integer.parseInt(id));
         cus.setName(name);
         cus.setNumberCard(numcard);
         cus.setPromotionsId(Integer.parseInt(promotion));
 
         try {
 //            check error card
-            if (cusAtDB.getNumberCard() != cus.getNumberCard()) {
+            if (!cusAtDB.getNumberCard().equals(cus.getNumberCard())) {
                 int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
                 if (checkNumCard > 0) {
-                    arrError.put("card", "S? t�i kho?n ?� t?n t?i!");
+                    arrError.put("card", "Số tài khoản đã tồn tại!");
                 }
             }
             if (arrError.size() < 1) {
-                int rowUpdate = customerDAO.UpdateCustomer(cus); 
-           }
-
+                int rowUpdate = customerDAO.UpdateCustomer(cus);
+            }
         } catch (Exception e) {
             return null;
         }

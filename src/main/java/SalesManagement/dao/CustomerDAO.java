@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.*;
 import javax.security.auth.login.AccountException;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Repository;
 public class CustomerDAO {
 
     private JdbcTemplate template;
+    @Autowired
+    private PromotionsCustomerDAO promotionsCustomerDAO;
 
     public Customer findCustomerById(int id) {
         String sql = "select * from Customers where Id=?";
@@ -37,6 +40,7 @@ public class CustomerDAO {
                 e.setAccountBalance(rs.getInt(4));
                 e.setPromotionsId(rs.getInt(5));
                 e.setDebtMax(rs.getInt(6));
+                e.setPromotion(e.getPromotionsId() > 0 ? promotionsCustomerDAO.findPromotionById(e.getPromotionsId()) : null);
                 return e;
             }
         });
@@ -48,6 +52,7 @@ public class CustomerDAO {
                 cus.getName(), cus.getNumberCard(), cus.getAccountBalance(), cus.getPromotionsId());
         return template.update(sql);
     }
+
     public int UpdateCustomer(Customer cus) {
         String sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', PromotionsId = '%d' "
                 + "where Id = '%d' ",
