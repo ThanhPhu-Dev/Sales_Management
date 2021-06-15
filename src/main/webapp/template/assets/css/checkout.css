@@ -8,11 +8,56 @@ and open the template in the editor.
     Author     : dtrongphuc
 */
 
+.checkout-table__input {
+    width: 60px;
+}
+
 .cart-wrapper {
     position: sticky;
     top: 5rem;
+    z-index: 1;
 }
 
-.checkout-table__input {
-    width: 60px;
+.btn-cart {
+    --size: 60px;
+    width: var(--size);
+    height: var(--size);
+
+    position: sticky;
+    top: 5rem;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all ease 0.2s;
+}
+
+.btn-cart:hover {
+    background-color: #f8f8f8;
+}
+
+.cart-quantity {
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 11px;
+    text-align: center;
+    border: 1px solid #ffffff;
+}
+
+.cart-body {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 36px;
+    width: 360px;
+    transform: translate3d(0, 0 ,0);
+}
+
+.cart-body.active {
+    display: block;
 }
