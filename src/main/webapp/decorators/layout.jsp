@@ -10,6 +10,7 @@
         <title>
             <dec:title />
         </title>
+
         <jsp:include page="/common/link-header.jsp" />
         <dec:head />
     </head>

@@ -12,7 +12,8 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- JS Implementing Plugins -->
 <script type="text/javascript" src="<c:url value='/template/assets/js/vendor.min.js' />"></script>
-
+<%--BillJS--%>
+<script type="text/javascript" src="<c:url value='/template/Bill/JS/bill.js' />"></script>
 <script type="text/javascript"
 src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.js"></script>
 <script type="text/javascript"

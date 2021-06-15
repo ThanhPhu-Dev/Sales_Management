@@ -1,5 +1,6 @@
 let table;
 async function initTableData() {
+
     let url = `/SalesManagement/api/bills`;
     axios.post(url)
         .then(function (response) {
@@ -74,5 +75,7 @@ async function initTableData() {
 
 }
 $(document).ready(async function () {
-    await initTableData();
+    if(window.location.href === "http://localhost:8080/SalesManagement/bills") {
+        await initTableData();
+    }
 });
