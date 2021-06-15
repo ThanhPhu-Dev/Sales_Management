@@ -142,6 +142,9 @@
                                             <a class="btn btn-sm btn-white btn-checkout" href="/SalesManagement/checkout">
                                                 <i class="fa fa-book" aria-hidden="true"></i> Thanh toán
                                             </a>
+                                            <a class="btn btn-sm btn-white btn-checkout" href="/SalesManagement/updateCustomer">
+                                                <i class="fa fa-book" aria-hidden="true"></i> Sửa thông tin
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>`;

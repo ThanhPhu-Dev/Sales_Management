@@ -41,14 +41,25 @@
                             <label for="name" class="form-label cus__form-lable">ƯU ĐÃI</label>
                             <div class="input-group">
                                 <select name="promotion" id="promotion" class="form-select select-primary" >
-                                    <option selected value="-1">Không áp dụng</option>
-                                    <c:forEach var="promotion" items="${proCus}">
-                                        <option value="${promotion.getId()}">${promotion.getName()}</option>
+                                    <c:choose>
+                                        <c:when test="${cus.getPromotionsId( )== -1}">
+                                            <option 
+                                                selected value="-1">Không áp dụng</option>
+                                        </c:when>  
+                                        <c:otherwise>
+                                            <option value="-1">Không áp dụng</option>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <c:forEach var="promotion" items="${promotions}">
+                                        <c:choose>
+                                            <c:when test="${cus.getPromotionsId( )== promotion.getId()}">
+                                                <option selected value="${promotion.getId()}">${promotion.getName()}</option>
+                                            </c:when>  
+                                            <c:otherwise>
+                                                <option value="${promotion.getId()}">${promotion.getName()}</option>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
-                                    <!--                                <option selected>Open this select menu</option>
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>-->
                                 </select>
                             </div>
                         </div>
@@ -89,16 +100,18 @@
 </main>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="sweetalert2.all.min.js"></script>
+<!--<script src="sweetalert2.all.min.js"></script>
 <script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
+<link rel="stylesheet" href="sweetalert2.min.css">-->
 
 <script>
     const formApply = document.querySelector("#form-apply");
     const btnApply = document.querySelector('#btnApply');
     const ipSearch = document.querySelector('#name');
     const errorCard = document.querySelector('.error-card');
-
+    const url = window.location.href;
+    const id = url.split('=')[1];
+    
     const setDefault = {
         setInput: function () {
             const ipName = document.querySelector('#name');
@@ -117,13 +130,11 @@
     formApply.addEventListener("submit", async e => {
         e.preventDefault();
         let formData = new FormData(formApply);
-        const name = formData.get("name");
-        const card = formData.get("card");
-        const promotion = formData.get("promotion");
-
+        //xóa erro trên UI
         setDefault.setError();
 
-        await axios.post('/SalesManagement/api/addcustomer', {
+        await axios.post('/SalesManagement/api/updatecustomer', {
+            id: id,
             name: formData.get("name"),
             card: formData.get("card"),
             promotion: formData.get("promotion"),
@@ -134,12 +145,11 @@
                 errorCard.style.display = "block";
             } else {
                 setDefault.setError();
-                setDefault.setInput();
 
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Thêm khách hàng thành công',
+                    title: 'Cập nhật thành công',
                     showConfirmButton: false,
                     timer: 1000
                 })

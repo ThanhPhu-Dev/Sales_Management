@@ -71,22 +71,22 @@ public class CustomerApi {
         Customer cusAtDB = customerDAO.findCustomerById(Integer.parseInt(id));
 
         Customer cus = new Customer();
+        cus.setId(Integer.parseInt(id));
         cus.setName(name);
         cus.setNumberCard(numcard);
         cus.setPromotionsId(Integer.parseInt(promotion));
 
         try {
 //            check error card
-            if (cusAtDB.getNumberCard() != cus.getNumberCard()) {
+            if (!cusAtDB.getNumberCard().equals(cus.getNumberCard())) {
                 int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
                 if (checkNumCard > 0) {
                     arrError.put("card", "S? tài kho?n ?ã t?n t?i!");
                 }
             }
             if (arrError.size() < 1) {
-                int rowUpdate = customerDAO.UpdateCustomer(cus); 
-           }
-
+                int rowUpdate = customerDAO.UpdateCustomer(cus);
+            }
         } catch (Exception e) {
             return null;
         }
