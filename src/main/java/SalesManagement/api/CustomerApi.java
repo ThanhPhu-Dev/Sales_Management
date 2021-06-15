@@ -46,7 +46,7 @@ public class CustomerApi {
 //            check error card
             int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
             if (checkNumCard > 0) {
-                arrError.put("card", "Số tài khoản Đã tồn tại!");
+                arrError.put("card", "Số tài khoản đã tồn tại!");
             }
             if (arrError.size() < 1) {
                 int rowUpdate = customerDAO.AddCustomer(cus);
@@ -81,7 +81,7 @@ public class CustomerApi {
             if (!cusAtDB.getNumberCard().equals(cus.getNumberCard())) {
                 int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
                 if (checkNumCard > 0) {
-                    arrError.put("card", "S? t�i kho?n ?� t?n t?i!");
+                    arrError.put("card", "Số tài khoản đã tồn tại!");
                 }
             }
             if (arrError.size() < 1) {
