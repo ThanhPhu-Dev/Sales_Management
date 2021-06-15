@@ -213,8 +213,8 @@
                                         <td class="lead">100.000</td>
                                         <td class="text-center">
                                             <button type="button" class="btn btn-sm btn-white">
-                                                <i class="fas fa-check-square"></i>
-                                                Chọn
+                                                <i class="fas fa-trash-alt"></i>
+                                                Bỏ chọn
                                             </button>
                                         </td>
                                     </tr>
