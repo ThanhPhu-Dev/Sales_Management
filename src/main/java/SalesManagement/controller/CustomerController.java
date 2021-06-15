@@ -51,7 +51,9 @@ public class CustomerController {
     }
     @RequestMapping(value = "/customer/update/{Id}", method = RequestMethod.GET)
     public ModelAndView updateCustomerPage(@PathVariable int Id) {
-        ModelAndView mav = new ModelAndView("UpdateCustomer", "id", Id);
+        Customer cus = customerDAO.findCustomerById(Id);
+        List<PromotionsCustomer> proList = proCustomerDAO.findAllPromitionsCustomer();
+        ModelAndView mav = new ModelAndView("Customer/UpdateCustomer", "cus", cus);
         return mav;
     }    
 }

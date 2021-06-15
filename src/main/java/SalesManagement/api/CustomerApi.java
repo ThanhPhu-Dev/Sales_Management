@@ -57,4 +57,39 @@ public class CustomerApi {
         }
         return arrError;
     }
+
+    @PostMapping("api/updatecustomer")
+    public Map<String, String> updateCustomerPost(@RequestBody Map<String, String> formData) {
+
+        String id = formData.get("id");
+        String name = formData.get("name");
+        String promotion = formData.get("promotion");
+        String numcard = formData.get("card");
+        Map<String, String> arrError = new HashMap<String, String>();
+
+        //l?y ra KH này t? db 
+        Customer cusAtDB = customerDAO.findCustomerById(Integer.parseInt(id));
+
+        Customer cus = new Customer();
+        cus.setName(name);
+        cus.setNumberCard(numcard);
+        cus.setPromotionsId(Integer.parseInt(promotion));
+
+        try {
+//            check error card
+            if (cusAtDB.getNumberCard() != cus.getNumberCard()) {
+                int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
+                if (checkNumCard > 0) {
+                    arrError.put("card", "S? tài kho?n ?ã t?n t?i!");
+                }
+            }
+            if (arrError.size() < 1) {
+                int rowUpdate = customerDAO.UpdateCustomer(cus); 
+           }
+
+        } catch (Exception e) {
+            return null;
+        }
+        return arrError;
+    }
 }

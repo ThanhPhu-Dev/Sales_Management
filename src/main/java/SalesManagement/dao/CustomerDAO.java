@@ -48,6 +48,12 @@ public class CustomerDAO {
                 cus.getName(), cus.getNumberCard(), cus.getAccountBalance(), cus.getPromotionsId());
         return template.update(sql);
     }
+    public int UpdateCustomer(Customer cus) {
+        String sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', PromotionsId = '%d' "
+                + "where Id = '%d' ",
+                cus.getName(), cus.getNumberCard(), cus.getPromotionsId(), cus.getId());
+        return template.update(sql);
+    }
 
     public int findCustomerByNumCard(String card) {
         String sql = "select count(*) from Customers where NumberCard = ?";
