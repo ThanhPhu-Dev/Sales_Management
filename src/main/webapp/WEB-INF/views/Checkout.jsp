@@ -43,6 +43,9 @@
 
                                 <hr class="my-4">
                                 <div class="row justify-content-center">
+                                    <button id="clearCart" type="button" class="btn btn-danger mr-2">
+                                        Xoá tất cả
+                                    </button>
                                     <button id="checkoutFinishBtn" type="button" class="btn btn-primary">
                                         Thanh toán
                                     </button>
