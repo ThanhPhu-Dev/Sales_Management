@@ -39,6 +39,7 @@ src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
         $('#example').DataTable({
             "searching": false,
             "lengthChange": false,
+            "pageLength": 7,
             "language": {
                 "lengthMenu": "Số dòng  _MENU_ ",
                 "info": "Trang _PAGE_ / _PAGES_ ",

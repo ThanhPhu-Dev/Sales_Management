@@ -10,6 +10,6 @@ public class PromotionsCustomer {
     private String Name;
     private Date StartDate;
     private Date EndDate;
-    private  Float PercentDiscount;
+    private Float PercentDiscount;
     //tạo getter - setter ngầm rồi. bên ngoài gọi getter-setter như bình thường
 }

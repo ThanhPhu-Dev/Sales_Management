@@ -10,5 +10,9 @@ and open the template in the editor.
 
 .cart-wrapper {
     position: sticky;
-    top: 3.75rem;
+    top: 5rem;
+}
+
+.checkout-table__input {
+    width: 60px;
 }
