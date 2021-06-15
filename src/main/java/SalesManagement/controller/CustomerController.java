@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -48,6 +49,15 @@ public class CustomerController {
         ModelAndView mav = new ModelAndView("Customer/Customer", "customers", cusList);
         return mav;
     }
+    
+    @PostMapping("/customer")
+    public ModelAndView customerSearch() {
+        List<Customer> cusList = customerDAO.findAllCustomerBy("");
+        
+        ModelAndView mav = new ModelAndView("Customer/Customer", "customers", cusList);
+        return mav;
+    }
+    
     @RequestMapping(value = "/customer/add", method = RequestMethod.GET)
     public ModelAndView addCustomerPage() {
         List<PromotionsCustomer> cusList = proCustomerDAO.findAllPromitionsCustomer();

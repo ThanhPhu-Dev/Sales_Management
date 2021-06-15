@@ -161,4 +161,21 @@
             console.log("bad");
         });
     })
+    
+//    datatable
+//    $('#example').DataTable({
+//            "searching": false,
+//            "lengthChange": false,
+//            "pageLength": 5,
+//            "language": {
+//                "lengthMenu": "Số dòng  _MENU_ ",
+//                "info": "Trang _PAGE_ / _PAGES_ ",
+//                "search": "",
+//                "paginate": {
+//                    "previous": "Trước đó",
+//                    "next": "Tiếp theo",
+//                },
+//                searchPlaceholder: "Tìm kiếm",
+//            }
+//        });
 </script>
