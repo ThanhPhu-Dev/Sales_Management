@@ -47,16 +47,34 @@ public class CustomerDAO {
     }
 
     public int AddCustomer(Customer cus) {
-        String sql = String.format("insert into Customers (Name, NumberCard, AccountBalance, PromotionsId) values "
+        String sql;
+        //nếu mã ưu đãi = -1 thì khỏi insert nó
+        if(cus.getPromotionsId() > -1)
+        {
+            sql = String.format("insert into Customers (Name, NumberCard, AccountBalance, PromotionsId) values "
                 + "('%s', '%s', '%d', '%d')",
                 cus.getName(), cus.getNumberCard(), cus.getAccountBalance(), cus.getPromotionsId());
+        }
+        else{
+            sql = String.format("insert into Customers (Name, NumberCard, AccountBalance) values "
+                + "('%s', '%s', '%d')",
+                cus.getName(), cus.getNumberCard(), cus.getAccountBalance());
+        }
         return template.update(sql);
     }
 
     public int UpdateCustomer(Customer cus) {
-        String sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', PromotionsId = '%d' "
-                + "where Id = '%d' ",
+        String sql;
+        //nếu mã ưu đãi = -1 thì khỏi set nó
+        if(cus.getPromotionsId() > -1)
+        {
+            sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', PromotionsId = '%d' where Id = '%d' ",
                 cus.getName(), cus.getNumberCard(), cus.getPromotionsId(), cus.getId());
+        }
+        else{
+            sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', PromotionsId = NULL where Id = '%d' ", 
+                cus.getName(), cus.getNumberCard(), cus.getId());
+        }
         return template.update(sql);
     }
 

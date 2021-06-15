@@ -27,7 +27,9 @@ public class PromotionsCustomerDAO {
 
         }
     public List<PromotionsCustomer> findAllPromitionsCustomer () {
-        return template.query("select * from promotions_customers", new RowMapper<PromotionsCustomer>() {
+        //lấy ra ds khuyến mãi đang hoặc sắp diễn ra
+        return template.query("select * from promotions_customers WHERE now() between StartDate and EndDate OR StartDate >= now()",
+                new RowMapper<PromotionsCustomer>() {
             public PromotionsCustomer mapRow(ResultSet rs, int row) throws SQLException {
                 PromotionsCustomer e = new PromotionsCustomer();
                 e.setId(rs.getInt(1));
