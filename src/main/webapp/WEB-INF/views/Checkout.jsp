@@ -80,7 +80,10 @@
                                     <!-- Form Group -->
                                     <div class="form-group">
                                         <label for="emailDeliveryAddressLabel" class="input-label">Số tài khoản</label>
-                                        <input type="number" class="form-control" name="emailDeliveryAddress" id="emailDeliveryAddressLabel" value="123456789">
+                                        <input type="number" class="form-control"
+                                               name=""
+                                               value="123456789"
+                                               readonly>
                                     </div>
                                     <!-- End Form Group -->
                                 </div>
@@ -89,7 +92,9 @@
                                     <!-- Form Group -->
                                     <div class="form-group">
                                         <label for="phoneDeliveryLabel" class="input-label">Số dư tài khoản</label>
-                                        <input type="text" class="js-masked-input form-control" name="phoneDeliveryName" id="phoneDeliveryLabel" value="10.000.000">
+                                        <input type="text" class="js-masked-input form-control" readonly
+                                               name="accountBalance" value="10.000.000"
+                                               >
                                     </div>
                                     <!-- End Form Group -->
                                 </div>
@@ -101,22 +106,30 @@
                                     <!-- Form Group -->
                                     <div class="form-group">
                                         <label for="DeliveryZipCodeLabel">Ưu đãi</label>
-                                        <input type="text" class="js-masked-input form-control" name="DeliveryZipCode" id="DeliveryZipCodeLabel" value="10%">
+                                        <input type="text" class="js-masked-input form-control"
+                                               name=""
+                                               value="10%"
+                                               readonly>
                                     </div>
                                     <!-- End Form Group -->
                                 </div>
                                 <div class="col-sm-6">
-                                    <label class="input-label">khách hàng</label>
+                                    <label class="input-label">Khách hàng</label>
                                     <!-- Custom Radio -->
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" name="userAccountTypeRadio" id="userAccountTypeRadio1" checked>
+                                        <input type="radio" class="custom-control-input"
+                                               name="accountType"
+                                               checked
+                                               readonly>
                                         <label class="custom-control-label" for="userAccountTypeRadio1">Thường</label>
                                     </div>
                                     <!-- End Custom Radio -->
 
                                     <!-- Custom Radio -->
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" name="userAccountTypeRadio" id="userAccountTypeRadio2">
+                                        <input type="radio" class="custom-control-input"
+                                               name="accountType"
+                                               readonly>
                                         <label class="custom-control-label" for="userAccountTypeRadio2">Công nợ</label>
                                     </div>
                                     <!-- End Custom Radio -->
@@ -151,12 +164,12 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Tên sản phẩm</td>
-                                        <td>5</td>
-                                        <td>0</td>
-                                        <td>100.000</td>
-                                        <td>
+                                        <td class="lead">1</td>
+                                        <td class="lead">Tên sản phẩm</td>
+                                        <td class="lead">5</td>
+                                        <td class="lead">0</td>
+                                        <td class="lead">100.000</td>
+                                        <td class="text-center">
                                             <button type="button" class="btn btn-sm btn-white">
                                                 <i class="fas fa-check-square"></i>
                                                 Chọn
@@ -193,12 +206,12 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Tên sản phẩm</td>
-                                        <td>5</td>
-                                        <td>0</td>
-                                        <td>100.000</td>
-                                        <td>
+                                        <td class="lead">1</td>
+                                        <td class="lead">Tên sản phẩm</td>
+                                        <td class="lead">5</td>
+                                        <td class="lead">0</td>
+                                        <td class="lead">100.000</td>
+                                        <td class="text-center">
                                             <button type="button" class="btn btn-sm btn-white">
                                                 <i class="fas fa-trash-alt"></i>
                                                 Bỏ chọn
