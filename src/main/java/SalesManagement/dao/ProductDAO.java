@@ -29,10 +29,10 @@ public class ProductDAO {
             @Override
             public Product mapRow(ResultSet resultSet, int i) throws SQLException {
                 Product product = new Product();
-                product.setId(resultSet.getInt("Nd"));
+                product.setId(resultSet.getInt("Id"));
                 product.setName(resultSet.getString("Name"));
                 product.setSpecification(resultSet.getInt("Specification"));
-                product.setPromotionsId(resultSet.getInt("PromotionId "));
+                product.setPromotionsId(resultSet.getInt("PromotionId"));
                 product.setTradeDiscount(resultSet.getFloat("TradeDiscount"));
 
                 return product;
