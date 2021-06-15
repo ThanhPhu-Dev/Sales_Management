@@ -31,10 +31,10 @@ src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
 <script type="text/javascript" src="<c:url value='/template/assets/js/theme.min.js' />"></script>
 
 <!--message-->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!--<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="sweetalert2.all.min.js"></script>
 <script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">
+<link rel="stylesheet" href="sweetalert2.min.css">-->
 
 <script>
     $(document).on('ready', function () {

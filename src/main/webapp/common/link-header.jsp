@@ -40,4 +40,4 @@
 <link type="text/css" rel="stylesheet" href="<c:url value='/template/assets/css/checkout.css' />" />
 
 <!--message-->
-<link rel="stylesheet" href="sweetalert2.min.css">
+<!--<link rel="stylesheet" href="sweetalert2.min.css">-->
