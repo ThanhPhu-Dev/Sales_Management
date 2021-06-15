@@ -21,7 +21,22 @@ public class CustomerDAO {
 
     public Customer findCustomerById(int id) {
         String sql = "select * from Customers where Id=?";
-        return template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(Customer.class));
+
+        return template.queryForObject(sql, new Object[]{id}, new RowMapper<Customer>() {
+            @Override
+            public Customer mapRow(ResultSet resultSet, int i) throws SQLException {
+                Customer customer = new Customer();
+                customer.setId(resultSet.getInt("id"));
+                customer.setName(resultSet.getString("name"));
+                customer.setNumberCard(resultSet.getString("numbercard"));
+                customer.setAccountBalance(resultSet.getInt("accountbalance"));
+                customer.setPromotionsId(resultSet.getInt("PromotionsId"));
+                customer.setDebtMax(resultSet.getInt("DebtMax"));
+                customer.setPromotion(customer.getPromotionsId() > 0 ?
+                        promotionsCustomerDAO.findPromotionById(customer.getPromotionsId()) : null);
+                return customer;
+            }
+        });
     }
 
     public List<Customer> findAllCustomerBy(String cusName) {
