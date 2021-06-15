@@ -61,7 +61,7 @@
             <table id="example" class="ui celled table" style="width: 100%;">
                 <thead>
                     <tr>
-                        <th>Mã KH</th>
+                        <th>STT</th>
                         <th>Tên KH</th>
                         <th>Số tài khoản</th>
                         <th>Số dư tài khoản</th>
@@ -72,9 +72,9 @@
                 </thead>
                 <tbody id="tbody-cus">
 
-                    <c:forEach var="customer" items="${customers}">
+                    <c:forEach var="customer" items="${customers}" varStatus="loop">
                         <tr>
-                            <td>${customer.getId()}</td>
+                            <td>${loop.index + 1}</td>
                             <td>${customer.getName()}</td>
                             <td>${customer.getNumberCard()}</td>
                             <td>
@@ -82,13 +82,20 @@
                                                   currencyCode="" value = "${customer.getAccountBalance()}" />
                                 VND
                             </td>
-                            <td>${customer.getPromotionsId()}</td>
+                            <c:choose >
+                                <c:when test="${customer.promotion.getName() == null}">
+                                    <td>Chưa áp dụng</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>${customer.promotion.getName()}</td>
+                                </c:otherwise>
+                            </c:choose>
                             <td>
                                 <fmt:formatNumber type = "number" 
                                                   currencyCode="" value = "${customer.getDebtMax()}" />
                                 VND
                             </td>
-                            <td>
+                            <td class="d-flex justify-content-center">
                                 <div class="btn-group" role="group">
                                     <a class="btn btn-sm btn-white" href="/SalesManagement/payment">
                                         <i class="fa fa-credit-card" aria-hidden="true"></i> Nạp tiền
@@ -131,9 +138,9 @@
                                 <td>` + u.id + `</td>
                                 <td>` + u.name + `</td>
                                 <td>` + u.numberCard + `</td>
-                                <td>` + u.accountBalance.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + `</td>
+                                <td>` + u.accountBalance.toLocaleString('it-IT', {style: 'currency', currency: 'VND'}) + `</td>
                                 <td>` + u.promotionsId + `</td>
-                                <td>` + u.debtMax.toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + `</td>
+                                <td>` + u.debtMax.toLocaleString('it-IT', {style: 'currency', currency: 'VND'}) + `</td>
                                 <td>
                                         <div class="btn-group" role="group">
                                             <a class="btn btn-sm btn-white" href="/SalesManagement/payment">
