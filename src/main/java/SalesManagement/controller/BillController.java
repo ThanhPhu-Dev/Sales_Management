@@ -30,6 +30,8 @@ public class BillController {
 
     @GetMapping("/Detailbill")
     public String detailbill(@RequestParam String id, Model model) {
+        float lastprice = 0;
+        Integer price;
         Integer Id = Integer.parseInt(id);
         Bill bill = billDAO.findBillById(Id);
         List<DetailBill> dt = detailBillDAO.findAll(Id);
@@ -38,21 +40,13 @@ public class BillController {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String dateString = df.format(bill.getDateCreate());
         model.addAttribute("date", dateString);
-        float lastprice = 0;
-        float total;
-        Integer price;
-        float lastprice1dt;
-
         for (DetailBill deta : dt) {
             price = deta.getProduct().getHistoricalCost();
-            lastprice1dt = (price-(price*(deta.getProduct().getTradeDiscount()/100) + price*(deta.getPromotion().getPercentDiscount()/100)))*deta.getQuantity();
-            lastprice += lastprice1dt;
+            lastprice += (price-(price*(deta.getProduct().getTradeDiscount()/100) + price*(deta.getPromotion().getPercentDiscount()/100)))*deta.getQuantity();
         }
-        float promotion = 0;
-        if(bill.getPromotionCustomer() != null){
-            promotion=bill.getPromotionCustomer().getPercentDiscount();
-        }
-        total = lastprice - (lastprice*(promotion/100) + lastprice*(bill.getDiscount()/100));
+        model.addAttribute("sumbill", (int)lastprice);
+        model.addAttribute("discount",(int)(lastprice*(bill.getDiscount()/100)));
+        model.addAttribute("promotion",(int)(lastprice*(bill.getPromotionCustomer().getPercentDiscount()/100)));
         return "Bill/DetailBill";
     }
 }

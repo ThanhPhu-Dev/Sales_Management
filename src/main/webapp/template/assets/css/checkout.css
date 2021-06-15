@@ -12,3 +12,7 @@ and open the template in the editor.
     position: sticky;
     top: 5rem;
 }
+
+.checkout-table__input {
+    width: 60px;
+}
