@@ -43,9 +43,12 @@ public class CustomerApi {
         cus.setPromotionsId(Integer.parseInt(promotion));
 
         try {
-//            check error card
+//            Kiem tra số tài khoản có chữ hoặc đã tòn tại thì báo lỗi
             int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
-            if (checkNumCard > 0) {
+            boolean checkIsNum = cus.getNumberCard().matches("^[0-9]*$");
+            if (!checkIsNum) {
+                arrError.put("card", "Số tài khoản phải là số!");
+            } else if (checkNumCard > 0) {
                 arrError.put("card", "Số tài khoản đã tồn tại!");
             }
             if (arrError.size() < 1) {
@@ -60,7 +63,6 @@ public class CustomerApi {
 
     @PostMapping("api/updatecustomer")
     public Map<String, String> updateCustomerPost(@RequestBody Map<String, String> formData) {
-
         String id = formData.get("id");
         String name = formData.get("name");
         String promotion = formData.get("promotion");
@@ -80,7 +82,10 @@ public class CustomerApi {
 //            check error card
             if (!cusAtDB.getNumberCard().equals(cus.getNumberCard())) {
                 int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
-                if (checkNumCard > 0) {
+                boolean checkIsNum = cus.getNumberCard().matches("^[0-9]*$");
+                if (!checkIsNum) {
+                    arrError.put("card", "Số tài khoản Phải là số!");
+                } else if (checkNumCard > 0) {
                     arrError.put("card", "Số tài khoản đã tồn tại!");
                 }
             }
