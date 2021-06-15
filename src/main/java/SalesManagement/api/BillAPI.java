@@ -1,12 +1,9 @@
 package SalesManagement.api;
 
 import SalesManagement.dao.BillDAO;
-import SalesManagement.dao.CustomerDAO;
 import SalesManagement.dto.Bill;
-import SalesManagement.dto.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,8 +15,6 @@ public class BillAPI {
 
     @Autowired
     private BillDAO billDao;
-
-
 
     @PostMapping("/bills")
     public List<Bill> getAllBill(){

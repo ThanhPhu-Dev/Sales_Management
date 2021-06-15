@@ -27,7 +27,7 @@
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Loại khách Hàng :</p>
-                    <p class="ct-cu">${bill.promotion.name}</p>
+                    <p class="ct-cu">${bill.promotionCustomer.name}</p>
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Số Tài Khoản :</p>
@@ -37,7 +37,7 @@
             <ul class="list-cus-order">
                 <li class="d-flex">
                     <p class="name-cu">Ưu Đãi Loại Khách Hàng(%) :</p>
-                    <p class="ct-cu">${bill.promotion.percentDiscount}%</p>
+                    <p class="ct-cu">${bill.promotionCustomer.percentDiscount}%</p>
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Giảm Giá(Tổng Hóa Đơn) :</p>
@@ -49,7 +49,7 @@
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Ngày Thanh Toán :</p>
-                    <p class="ct-cu">${bill.dateCreate}</p>
+                    <p class="ct-cu">${date}</p>
                 </li>
             </ul>
         </div>
@@ -64,12 +64,12 @@
                     <th scope="col">STT</th>
                     <th scope="col">Tên Sản Phẩm</th>
                     <th scope="col">Quy Cách</th>
-                    <th scope="col">Giá Gốc</th>
+                    <th scope="col">Giá Gốc(VNĐ)</th>
                     <th scope="col">Chiết Khấu</th>
                     <th scope="col">Tên Ưu Đãi</th>
                     <th scope="col">Ưu Đãi(%)</th>
                     <th scope="col">Số Lượng</th>
-                    <th scope="col">Giá Cuối</th>
+                    <th scope="col">Giá Cuối(VNĐ)</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -89,8 +89,8 @@
                     </tr>
                 </c:forEach>
                 <tr>
-                    <td colspan="7" class="text-right font-weight-bold">Tổng tiền: </td>
-                    <td colspan="3" class="text-right">2.000000</td>
+                    <td colspan="7" class="text-right font-weight-bold">Tổng tiền(VNĐ): </td>
+                    <td colspan="3" class="text-right">${bill.total} </td>
                 </tr>
                 </tbody>
             </table>

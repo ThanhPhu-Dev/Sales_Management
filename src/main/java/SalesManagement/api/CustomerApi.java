@@ -46,7 +46,7 @@ public class CustomerApi {
 //            check error card
             int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
             if (checkNumCard > 0) {
-                arrError.put("card", "S? t‡i kho?n ?„ t?n t?i!");
+                arrError.put("card", "S·ªë t√†i kho·∫£n ƒê√£ t·ªìn t·∫°i!");
             }
             if (arrError.size() < 1) {
                 int rowUpdate = customerDAO.AddCustomer(cus);
@@ -67,7 +67,7 @@ public class CustomerApi {
         String numcard = formData.get("card");
         Map<String, String> arrError = new HashMap<String, String>();
 
-        //l?y ra KH n‡y t? db 
+        //l?y ra KH nÔøΩy t? db 
         Customer cusAtDB = customerDAO.findCustomerById(Integer.parseInt(id));
 
         Customer cus = new Customer();
@@ -81,7 +81,7 @@ public class CustomerApi {
             if (!cusAtDB.getNumberCard().equals(cus.getNumberCard())) {
                 int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
                 if (checkNumCard > 0) {
-                    arrError.put("card", "S? t‡i kho?n ?„ t?n t?i!");
+                    arrError.put("card", "S? tÔøΩi kho?n ?ÔøΩ t?n t?i!");
                 }
             }
             if (arrError.size() < 1) {

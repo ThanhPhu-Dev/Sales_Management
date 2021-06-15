@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: Jun 14, 2021 at 04:53 PM
+-- Generation Time: Jun 15, 2021 at 05:16 AM
 -- Server version: 5.7.28
 -- PHP Version: 7.3.12
 
@@ -33,21 +33,25 @@ CREATE TABLE IF NOT EXISTS `bills` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Total` int(11) NOT NULL,
   `CustomerId` int(11) NOT NULL,
-  `Discount` float NOT NULL,
-  `PromotionCustomerId` int(11) NOT NULL,
+  `Discount` float NOT NULL DEFAULT '0',
+  `PromotionCustomerId` int(11) DEFAULT NULL,
   `DateCreate` date NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `fk_bills_customer` (`CustomerId`),
   KEY `fk_bills_promotionsCustomer` (`PromotionCustomerId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bills`
 --
 
 INSERT INTO `bills` (`Id`, `Total`, `CustomerId`, `Discount`, `PromotionCustomerId`, `DateCreate`) VALUES
-(1, 200000, 1, 10, 1, '2021-06-13'),
-(2, 300000, 2, 0, 2, '2021-06-13');
+(1, 1123200, 1, 10, 1, '2021-06-13'),
+(2, 2964000, 2, 0, NULL, '2021-06-13'),
+(3, 1123200, 3, 0, 1, '2021-06-09'),
+(4, 643500, 4, 5, 2, '2021-06-22'),
+(5, 1014000, 5, 0, NULL, '2021-06-20'),
+(6, 1123200, 6, 0, 2, '2021-06-18');
 
 -- --------------------------------------------------------
 
@@ -65,15 +69,19 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `DebtMax` int(11) NOT NULL DEFAULT '2000000',
   PRIMARY KEY (`Id`),
   KEY `fk_customer_promotionsCustommer` (`PromotionsId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
 INSERT INTO `customers` (`Id`, `Name`, `NumberCard`, `AccountBalance`, `PromotionsId`, `DebtMax`) VALUES
-(1, 'asd', '056675', 200000, 1, 2000000),
-(2, 'asff', '056675', 200000, 2, 2000000);
+(1, 'Nghĩa DX', '02315482', 500000, 1, 2000000),
+(2, 'Dương Trọng Phúc', '51324102', 700000, NULL, 2000000),
+(3, 'Nguyễn Đức', '5213571', 550000, 1, 2000000),
+(4, 'Minh Huy', '50216818', 800000, 2, 2000000),
+(5, 'Thành Phú', '50023482', 800000, NULL, 2000000),
+(6, 'Hùng Phan', '50516871', 1000000, 2, 2000000);
 
 -- --------------------------------------------------------
 
@@ -93,15 +101,25 @@ CREATE TABLE IF NOT EXISTS `detail_bills` (
   KEY `fk_detailbill_bill` (`BillId`),
   KEY `fk_detailbill_product` (`ProductId`),
   KEY `fk_detailbill_promotionsProduct` (`PromotionProductId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `detail_bills`
 --
 
 INSERT INTO `detail_bills` (`Id`, `BillId`, `Quantity`, `ProductId`, `LastPrice`, `PromotionProductId`) VALUES
-(1, 1, 3, 1, 600000, 1),
-(2, 1, 4, 2, 1200000, 2);
+(1, 1, 3, 1, 468000, 1),
+(2, 1, 4, 2, 936000, 2),
+(3, 3, 2, 2, 468000, 2),
+(4, 3, 5, 1, 1872000, 1),
+(5, 4, 3, 2, 702000, 2),
+(6, 4, 1, 1, 156000, 1),
+(7, 2, 7, 1, 1092000, 1),
+(8, 2, 8, 2, 1872000, 2),
+(9, 5, 1, 2, 234000, 2),
+(10, 5, 5, 1, 780000, 1),
+(11, 6, 4, 2, 936000, 2),
+(12, 6, 3, 1, 468000, 1);
 
 -- --------------------------------------------------------
 
@@ -127,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 
 INSERT INTO `products` (`Id`, `Name`, `Specification`, `HistoricalCost`, `TradeDiscount`, `PromotionId`) VALUES
 (1, 'Sản Phẩm Cao Cấp NGC', 100, 200000, 10, 1),
-(2, 'Sản Phẩm 102', 200, 300000, 12, 2);
+(2, 'Sản Phẩm 102', 120, 300000, 12, 2);
 
 -- --------------------------------------------------------
 
@@ -150,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `promotions_customers` (
 --
 
 INSERT INTO `promotions_customers` (`Id`, `Name`, `StartDate`, `EndDate`, `PercentDiscount`) VALUES
-(1, 'Khách hàng than mới', '2021-06-01', '2021-06-22', 10),
+(1, 'Khách hàng mới', '2021-06-01', '2021-06-22', 10),
 (2, 'Khách Hàng Tri Ân', '2021-06-02', '2021-06-23', 20);
 
 -- --------------------------------------------------------
@@ -191,7 +209,15 @@ CREATE TABLE IF NOT EXISTS `receipts` (
   `DateCreate` date NOT NULL,
   PRIMARY KEY (`Id`),
   KEY `fk_receipt_customer` (`CustomerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `receipts`
+--
+
+INSERT INTO `receipts` (`Id`, `CustomerId`, `Price`, `DateCreate`) VALUES
+(1, 2, 200000, '2021-06-15'),
+(2, 1, 100000, '2021-06-14');
 
 --
 -- Constraints for dumped tables
