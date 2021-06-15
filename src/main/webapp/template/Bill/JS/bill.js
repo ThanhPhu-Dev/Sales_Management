@@ -20,7 +20,7 @@ async function initTableData() {
             });
 
             table = $('#datatablebill').DataTable({
-                "pageLength": 1,
+                "pageLength": 5,
                 "oLanguage": {
                     "sSearch": "",
                     "sLengthMenu": "Showing _MENU_ ",
@@ -29,6 +29,7 @@ async function initTableData() {
                         "sNext": "Tiếp theo"
                     }
                 },
+                "lengthMenu": [[5, 10, 15], [5, 10, 15]],
                 language: {
                     searchPlaceholder: "Tìm kiếm hóa đơn"
                 },
