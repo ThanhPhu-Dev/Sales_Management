@@ -1,14 +1,13 @@
 package SalesManagement.dao;
 
-import SalesManagement.dto.Customer;
 import SalesManagement.dto.Product;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-// JAVA UTIL
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -17,6 +16,8 @@ import java.util.*;
 @Repository
 public class ProductDAO {
     private JdbcTemplate template;
+    @Autowired
+    private PromotionsProductDAO promotionsProductDAO;
 
     public Product findProductById(int id) {
         String sql = "select * from products where Id=?";
@@ -32,9 +33,11 @@ public class ProductDAO {
                 product.setId(resultSet.getInt("Id"));
                 product.setName(resultSet.getString("Name"));
                 product.setSpecification(resultSet.getInt("Specification"));
+                product.setHistoricalCost(resultSet.getInt("HistoricalCost"));
                 product.setPromotionsId(resultSet.getInt("PromotionId"));
                 product.setTradeDiscount(resultSet.getFloat("TradeDiscount"));
-
+                product.setPromotions(product.getPromotionsId() > 0 ?
+                        promotionsProductDAO.findPromotionById(product.getPromotionsId()) : null);
                 return product;
             }
         });
