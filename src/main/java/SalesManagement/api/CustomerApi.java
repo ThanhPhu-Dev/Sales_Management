@@ -90,28 +90,50 @@ public class CustomerApi {
         String name = formData.get("name");
         String promotion = formData.get("promotion");
         String numcard = formData.get("card");
+        String phone = formData.get("phone");
+        String identity = formData.get("identity");
         Map<String, String> arrError = new HashMap<String, String>();
 
-        //l?y ra KH n�y t? db 
+        //lấy ra KH này trong db để so sánh thông tin 
         Customer cusAtDB = customerDAO.findCustomerById(Integer.parseInt(id));
 
         Customer cus = new Customer();
         cus.setId(Integer.parseInt(id));
         cus.setName(name);
+        cus.setPhone(phone);
+        cus.setIdentityCard(identity);
         cus.setNumberCard(numcard);
         cus.setPromotionsId(Integer.parseInt(promotion));
 
         try {
-//            check error card
+            //check numberCard
             if (!cusAtDB.getNumberCard().equals(cus.getNumberCard())) {
                 int checkNumCard = customerDAO.findCustomerByNumCard(cus.getNumberCard());
                 boolean checkIsNum = cus.getNumberCard().matches("^[0-9]*$");
                 if (!checkIsNum) {
-                    arrError.put("card", "Số tài khoản Phải là số!");
+                    arrError.put("cardError", "Số tài khoản Phải là số!");
                 } else if (checkNumCard > 0) {
-                    arrError.put("card", "Số tài khoản đã tồn tại!");
+                    arrError.put("cardError", "Số tài khoản đã tồn tại!");
                 }
             }
+
+            //check phone
+            boolean checkIsNumPhone = cus.getPhone().matches("^[0-9]*$");
+            if (!checkIsNumPhone) {
+                arrError.put("phoneError", "Số điện thoại phải là số!");
+            }
+
+            //check identity
+            if (!cusAtDB.getIdentityCard().equals(cus.getIdentityCard())) {
+                int checkIdentity = customerDAO.findCustomerByIdentity(cus.getIdentityCard());
+                boolean checkIsNumIdentity = cus.getIdentityCard().matches("^[0-9]*$");
+                if (!checkIsNumIdentity) {
+                    arrError.put("identityError", "Số cmnd phải là số!");
+                } else if (checkIdentity > 0) {
+                    arrError.put("identityError", "Số cmnd đã tồn tại!");
+                }
+            }
+
             if (arrError.size() < 1) {
                 int rowUpdate = customerDAO.UpdateCustomer(cus);
             }

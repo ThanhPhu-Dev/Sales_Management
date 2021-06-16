@@ -46,7 +46,11 @@ public class CustomerDAO {
         if (cusName.isEmpty()) {
             sql = "select * from Customers";
         } else {
-            sql = "select * from Customers where Name like '%" + cusName + "%'";
+            try {
+                sql = "select * from Customers where Phone like '%" + cusName + "%' OR IdentityCard like '%" + cusName + "%'";
+            } catch (Exception e) {
+                return null;
+            }
         }
         return template.query(sql, new RowMapper<Customer>() {
             public Customer mapRow(ResultSet rs, int row) throws SQLException {
@@ -70,14 +74,14 @@ public class CustomerDAO {
         //nếu mã ưu đãi = -1 thì khỏi insert nó
         if(cus.getPromotionsId() > -1)
         {
-            sql = String.format("insert into Customers (Name, NumberCard, AccountBalance, PromotionsId) values "
-                + "('%s', '%s', '%d', '%d')",
-                cus.getName(), cus.getNumberCard(), cus.getAccountBalance(), cus.getPromotionsId());
+            sql = String.format("insert into Customers (Name, NumberCard, Phone, IdentityCard, AccountBalance, PromotionsId) values "
+                + "('%s', '%s', '%s', '%s', '%d', '%d')",
+                cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getAccountBalance(), cus.getPromotionsId());
         }
         else{
-            sql = String.format("insert into Customers (Name, NumberCard, AccountBalance) values "
-                + "('%s', '%s', '%d')",
-                cus.getName(), cus.getNumberCard(), cus.getAccountBalance());
+            sql = String.format("insert into Customers (Name, NumberCard, Phone, IdentityCard, AccountBalance) values "
+                + "('%s', '%s', '%s', '%s', '%d')",
+                cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getAccountBalance());
         }
         return template.update(sql);
     }
