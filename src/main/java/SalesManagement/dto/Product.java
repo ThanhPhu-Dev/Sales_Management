@@ -16,9 +16,21 @@ public class Product {
     // Lưu ý rằng giá bán này còn có thể giảm dựa vào ưu đãi của khách hàng.
     public Float getProductSalePrice() {
         // Kiểm tra có ưu đãi và tính
-        Float sale = Promotions != null ?  HistoricalCost * (Promotions.getPercentDiscount()/100) : 0;
+        Float sale = this.promotionsToPrice();
         // Giá bán = giá gốc - (chiết khấu + ưu đãi)
         return HistoricalCost - (HistoricalCost * (TradeDiscount/100) + sale);
+    }
+
+    // Phương thức lấy số tiền được giảm
+    public Float promotionsToPrice() {
+        Float sale = Promotions != null ?  HistoricalCost * (Promotions.getPercentDiscount()/100) : 0;
+        return sale;
+    }
+
+    // Phương thức tính số tiền chiết khấu
+    public  Float discountPrice() {
+        Float discount = TradeDiscount != null ? HistoricalCost * (TradeDiscount/100) : 0;
+        return discount;
     }
 
     //tạo getter - setter ngầm rồi. bên ngoài gọi getter-setter như bình thường
