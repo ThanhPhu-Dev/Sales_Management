@@ -7,6 +7,8 @@ public class Customer {
     private Integer Id;
     private String Name;
     private String NumberCard;
+    private String Phone;
+    private String IdentityCard;
     private Integer AccountBalance;
     private Integer PromotionsId;
     private Integer DebtMax;
