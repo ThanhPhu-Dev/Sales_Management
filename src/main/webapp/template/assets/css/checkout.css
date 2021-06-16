@@ -61,3 +61,7 @@ and open the template in the editor.
 .cart-body.active {
     display: block;
 }
+
+#cart-notify.hidden {
+    visibility: collapse;
+}

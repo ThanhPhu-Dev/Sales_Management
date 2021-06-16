@@ -63,7 +63,7 @@
                              data-hidden="true" >
                             <span class="text-dark">
                                 <i class="fas fa-shopping-cart fa-2x"></i>
-                                <span class="cart-quantity">1</span>
+                                <span id="cart-notify" class="cart-quantity cart-quantity-text hidden"></span>
                             </span>
                         </div>
                         <%--CART BODY--%>
@@ -72,7 +72,7 @@
                             <div class="card">
                                 <!-- Header -->
                                 <div class="card-header">
-                                    <h4 class="card-header-title">Giỏ hàng (2)</h4>
+                                    <h4 class="card-header-title">Giỏ hàng (<span class="cart-quantity-text">0</span>)</h4>
                                 </div>
                                 <!-- End Header -->
 
@@ -80,21 +80,28 @@
                                 <div class="card-body">
                                     <div class="row align-items-center mb-3">
                                         <span class="col-5">Tạm tính:</span>
-                                        <h4 class="col-7 text-right text-dark mb-0">1.000.000 VNĐ</h4>
+                                        <h4 id="cart-origin" class="col-7 text-right text-dark mb-0">0 VNĐ</h4>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="row align-items-center">
+                                        <span class="col-5">Chiết khấu:</span>
+                                        <h4 id="cart-discount" class="col-7 text-right text-dark mb-0">0 VNĐ</h4>
                                     </div>
 
                                     <hr class="my-4">
 
                                     <div class="row align-items-center">
                                         <span class="col-5">Giảm giá:</span>
-                                        <h4 class="col-7 text-right text-dark mb-0">100.000 VNĐ</h4>
+                                        <h4 id="cart-sale" class="col-7 text-right text-dark mb-0">0 VNĐ</h4>
                                     </div>
 
                                     <hr class="my-4">
 
                                     <div class="row align-items-center">
                                         <span class="col-5 text-dark font-weight-bold">Tổng cộng:</span>
-                                        <h3 class="col-7 text-right text-dark mb-0">900.000 VNĐ</h3>
+                                        <h3 id="cart-total" class="col-7 text-right text-dark mb-0">0 VNĐ</h3>
                                     </div>
 
                                     <hr class="my-4">
@@ -349,4 +356,5 @@
     </div>
     <!-- End Content -->
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="<c:url value='/template/assets/js/checkout.js' />"></script>
