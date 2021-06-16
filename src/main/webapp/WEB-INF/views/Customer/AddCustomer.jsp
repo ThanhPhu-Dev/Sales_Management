@@ -54,7 +54,7 @@
                                                placeholder="Số điện thoại" required minlength="1" maxlength="11">
                                         <span class="focus-border"></span>
                                     </div>
-                                    <span class="error-phone" style="color: red; display: none">Số tài khoản đã tồn tại</span>
+                                    <span class="error-phone" style="color: red; display: none">Số điện thoại đã tồn tại</span>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,6 @@
 <script>
     const formApply = document.querySelector("#form-apply");
     const btnApply = document.querySelector('#btnApply');
-    const ipSearch = document.querySelector('#name');
     const errorCard = document.querySelector('.error-card');
     const errorPhone = document.querySelector('.error-phone');
     const errorIdentity = document.querySelector('.error-identity');
@@ -110,13 +109,22 @@
             const ipName = document.querySelector('#name');
             const selectPromotion = document.querySelector('#promotion');
             const ipCard = document.querySelector('#card');
+            const ipPhone = document.querySelector('#phone');
+            const ipIdentity = document.querySelector('#identity');
+
             ipName.value = '';
-            selectPromotion.value = '';
+            selectPromotion.value = '-1';
             ipCard.value = '';
+            ipPhone.value = '';
+            ipIdentity.value = '';
         },
         setRemoveError: function () {
             errorCard.innerHTML = "";
             errorCard.style.display = "none";
+            errorPhone.innerHTML = "";
+            errorPhone.style.display = "block";
+            errorIdentity.innerHTML = "";
+            errorIdentity.style.display = "block";
         },
         setError: function (cardError, phoneError, identityError) {
             if (cardError) {
@@ -141,7 +149,7 @@
         const card = formData.get("card");
         const promotion = formData.get("promotion");
 
-        setDefault.setError();
+        setDefault.setRemoveError();
 
         await axios.post('/SalesManagement/api/addcustomer', {
             name: formData.get("name"),
@@ -153,7 +161,7 @@
             const {cardError, phoneError, identityError} = response.data;
 
             //nếu tồn tại lỗi xuất UI thông báo
-            if (response.data) {
+            if (cardError || phoneError || identityError) {
                 setDefault.setError(cardError, phoneError, identityError);
             } else {
                 //xóa hết lỗi trc khi thông báo thành công 
