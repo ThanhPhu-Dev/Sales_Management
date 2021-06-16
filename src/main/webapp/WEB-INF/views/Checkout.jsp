@@ -223,14 +223,13 @@
 
                         <!-- Body -->
                         <div class="card-body">
-                            <table class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
+                            <table id="productsTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
                                 <tr>
                                     <th>Mã</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Quy cách (kg)</th>
                                     <th>Giá gốc</th>
-                                    <th>Chiết khấu (%)</th>
                                     <th>Ưu đãi (%)</th>
                                     <th>Giá bán</th>
                                     <th>Số lượng</th>
@@ -240,7 +239,7 @@
                                 <tbody>
                                 <c:if test="${not empty products}">
                                     <c:forEach var="product" items="${products}">
-                                        <tr>
+                                        <tr class="table-products__row" data-id="${product.getId()}">
                                             <td class="lead">${product.getId()}</td>
                                             <td class="lead">${product.getName()}</td>
                                             <td class="lead">${product.getSpecification()}</td>
@@ -249,7 +248,6 @@
                                                                   currencyCode=""
                                                                   value="${product.getHistoricalCost()}"/>
                                             </td>
-                                            <td class="lead">${product.getTradeDiscount()}</td>
                                             <td class="lead">
                                                 <c:choose>
                                                     <c:when test="${not empty product.getPromotions()}">
@@ -274,7 +272,8 @@
                                                 >
                                             </td>
                                             <td class="text-center">
-                                                <button type="button" class="btn btn-sm btn-white">
+                                                <button type="button" class="btn btn-sm btn-white btn-table-func"
+                                                        data-func="add">
                                                     <i class="fas fa-plus-square"></i>
                                                     Thêm
                                                 </button>
@@ -299,14 +298,13 @@
 
                         <!-- Body -->
                         <div class="card-body">
-                            <table class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
+                            <table id="productsSelectedTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
                                 <tr>
                                     <th>Mã</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Quy cách (kg)</th>
                                     <th>Giá gốc</th>
-                                    <th>Chiết khấu (%)</th>
                                     <th>Ưu đãi (%)</th>
                                     <th>Giá bán</th>
                                     <th>Số lượng</th>
@@ -314,28 +312,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="lead">1</td>
-                                    <td class="lead">Tên sản phẩm</td>
-                                    <td class="lead">5</td>
-                                    <td class="lead">100</td>
-                                    <td class="lead">100</td>
-                                    <td class="lead">0</td>
-                                    <td class="lead">100.000</td>
-                                    <td class="lead">
-                                        <input type="number" class="js-masked-input form-control checkout-table__input"
-                                               name=""
-                                               value="1"
-                                               min="1"
-                                        >
-                                    </td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-sm btn-white">
-                                            <i class="fas fa-trash-alt"></i>
-                                            Xoá
-                                        </button>
-                                    </td>
-                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -369,18 +346,4 @@
     </div>
     <!-- End Content -->
 </main>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        let button = document.querySelector('.btn-cart');
-        const cartBody = document.querySelector('.cart-body');
-        button.addEventListener('click', (e) => {
-            let isHidden = button.dataset.hidden === 'true';
-            console.log(isHidden);
-
-           !!isHidden ? cartBody.classList.add('active') : cartBody.classList.remove('active');
-
-            button.dataset.hidden = !isHidden;
-       })
-    });
-</script>
+<script src="<c:url value='/template/assets/js/checkout.js' />"></script>
