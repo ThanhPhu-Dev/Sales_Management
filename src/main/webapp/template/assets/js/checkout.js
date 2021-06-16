@@ -41,6 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+    });
+
+    // Quantity change
+    document.querySelectorAll('.checkout-table__input')?.forEach(input => {
+        input.addEventListener('change', (e) => {
+            let re = /^[1-9][0-9]+/;
+            let value = e.target.value;
+
+            if(!re.test(value)) {
+                e.preventDefault();
+                e.target.value = 1;
+            }
+        })
     })
 });
 
@@ -74,6 +87,7 @@ const handleRemoveButtonClicked = (row, button) => {
     const productsSelectedTable = document.querySelector('#productsSelectedTable');
     RemoveAndAdd(productsSelectedTable, productsTable, row);
 
+    row.querySelector('.checkout-table__input').value = 1;
     button.dataset.func = state.addDatasetName;
     button.innerHTML = state.addBtnContent;
 }

@@ -269,6 +269,7 @@
                                                        name=""
                                                        value="1"
                                                        min="1"
+                                                       pattern="[1-9][0-9]"
                                                 >
                                             </td>
                                             <td class="text-center">
