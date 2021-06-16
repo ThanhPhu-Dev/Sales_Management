@@ -225,21 +225,23 @@
                         <div class="card-body">
                             <table id="productsTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
-                                <tr>
-                                    <th>Mã</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Quy cách (kg)</th>
-                                    <th>Giá gốc</th>
-                                    <th>Ưu đãi (%)</th>
-                                    <th>Giá bán</th>
-                                    <th>Số lượng</th>
-                                    <th>Chức năng</th>
-                                </tr>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Quy cách (kg)</th>
+                                        <th>Giá gốc</th>
+                                        <th>Ưu đãi (%)</th>
+                                        <th>Giá bán</th>
+                                        <th>Số lượng</th>
+                                        <th>Chức năng</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 <c:if test="${not empty products}">
                                     <c:forEach var="product" items="${products}">
-                                        <tr class="table-products__row" data-id="${product.getId()}">
+                                        <tr class="table-products__row"
+                                            data-id="${product.getId()}"
+                                            >
                                             <td class="lead">${product.getId()}</td>
                                             <td class="lead">${product.getName()}</td>
                                             <td class="lead">${product.getSpecification()}</td>
@@ -269,6 +271,7 @@
                                                        name=""
                                                        value="1"
                                                        min="1"
+                                                       pattern="[1-9][0-9]"
                                                 >
                                             </td>
                                             <td class="text-center">

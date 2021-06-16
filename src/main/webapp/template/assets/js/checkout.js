@@ -41,6 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+    });
+
+    // Quantity change
+    document.querySelectorAll('.checkout-table__input')?.forEach(input => {
+        input.addEventListener('change', (e) => {
+            let re = /^[1-9][0-9]+/;
+            let value = e.target.value;
+
+            if(!re.test(value)) {
+                e.preventDefault();
+                e.target.value = 1;
+            }
+        })
     })
 });
 
@@ -56,6 +69,9 @@ const RemoveAndAdd = (tableSend, tableReceive, row) => {
     if (!hasAdded) {
         console.log('add row error');
     }
+
+    // sort table receive
+    sortTableById(tableReceive);
 }
 
 const handleAddButtonClicked = (row, button) => {
@@ -74,6 +90,21 @@ const handleRemoveButtonClicked = (row, button) => {
     const productsSelectedTable = document.querySelector('#productsSelectedTable');
     RemoveAndAdd(productsSelectedTable, productsTable, row);
 
+    row.querySelector('.checkout-table__input').value = 1;
     button.dataset.func = state.addDatasetName;
     button.innerHTML = state.addBtnContent;
+}
+
+const sortTableById = (table) => {
+    const rows = table.querySelectorAll('tbody > tr');
+    Array.from(rows)
+        .sort((firstRow, secondRow) => {
+            // Id là int
+            let firstId = +firstRow.dataset.id;
+            let secondId = +secondRow.dataset.id;
+
+            return firstId - secondId;
+        }).forEach(tr => {
+            table.querySelector('tbody').appendChild(tr);
+        });
 }
