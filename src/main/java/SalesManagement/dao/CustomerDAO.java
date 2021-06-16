@@ -28,6 +28,8 @@ public class CustomerDAO {
                 Customer customer = new Customer();
                 customer.setId(resultSet.getInt("id"));
                 customer.setName(resultSet.getString("name"));
+                customer.setPhone(resultSet.getString("Phone"));
+                customer.setIdentityCard(resultSet.getString("IdentityCard"));
                 customer.setNumberCard(resultSet.getString("numbercard"));
                 customer.setAccountBalance(resultSet.getInt("accountbalance"));
                 customer.setPromotionsId(resultSet.getInt("PromotionsId"));
@@ -49,12 +51,14 @@ public class CustomerDAO {
         return template.query(sql, new RowMapper<Customer>() {
             public Customer mapRow(ResultSet rs, int row) throws SQLException {
                 Customer e = new Customer();
-                e.setId(rs.getInt(1));
-                e.setName(rs.getString(2));
-                e.setNumberCard(rs.getString(3));
-                e.setAccountBalance(rs.getInt(4));
-                e.setPromotionsId(rs.getInt(5));
-                e.setDebtMax(rs.getInt(6));
+                e.setId(rs.getInt("id"));
+                e.setName(rs.getString("name"));
+                e.setPhone(rs.getString("phone"));
+                e.setIdentityCard(rs.getString("identityCard"));
+                e.setNumberCard(rs.getString("numbercard"));
+                e.setAccountBalance(rs.getInt("accountbalance"));
+                e.setPromotionsId(rs.getInt("PromotionsId"));
+                e.setDebtMax(rs.getInt("DebtMax"));
                 e.setPromotion(e.getPromotionsId() > 0 ? promotionsCustomerDAO.findPromotionById(e.getPromotionsId()) : null);
                 return e;
             }
@@ -95,6 +99,11 @@ public class CustomerDAO {
 
     public int findCustomerByNumCard(String card) {
         String sql = "select count(*) from Customers where NumberCard = ?";
+        int rows = template.queryForObject(sql, new Object[]{card}, (Integer.class));
+        return rows;
+    }
+    public int findCustomerByIdentity(String card) {
+        String sql = "select count(*) from Customers where IdentityCard = ?";
         int rows = template.queryForObject(sql, new Object[]{card}, (Integer.class));
         return rows;
     }
