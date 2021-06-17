@@ -7,55 +7,8 @@
     <div class="content container-fluid">
         <!-- Step Form -->
         <form>
-
             <!-- Content Step Form -->
             <div class="row">
-                <%--                <div class="col-lg-3 order-lg-2 mb-5 mb-lg-0">--%>
-                <%--                    <div class="cart-wrapper">--%>
-                <%--                        <!-- Card -->--%>
-                <%--                        <div class="card mb-3">--%>
-                <%--                            <!-- Header -->--%>
-                <%--                            <div class="card-header">--%>
-                <%--                                <h4 class="card-header-title">Giỏ hàng (2)</h4>--%>
-                <%--                            </div>--%>
-                <%--                            <!-- End Header -->--%>
-
-                <%--                            <!-- Body -->--%>
-                <%--                            <div class="card-body">--%>
-                <%--                                <div class="row align-items-center mb-3">--%>
-                <%--                                    <span class="col-5">Tạm tính:</span>--%>
-                <%--                                    <h4 class="col-7 text-right text-dark mb-0">1.000.000 VNĐ</h4>--%>
-                <%--                                </div>--%>
-
-                <%--                                <hr class="my-4">--%>
-
-                <%--                                <div class="row align-items-center">--%>
-                <%--                                    <span class="col-5">Giảm giá:</span>--%>
-                <%--                                    <h4 class="col-7 text-right text-dark mb-0">100.000 VNĐ</h4>--%>
-                <%--                                </div>--%>
-
-                <%--                                <hr class="my-4">--%>
-
-                <%--                                <div class="row align-items-center">--%>
-                <%--                                    <span class="col-5 text-dark font-weight-bold">Tổng cộng:</span>--%>
-                <%--                                    <h3 class="col-7 text-right text-dark mb-0">900.000 VNĐ</h3>--%>
-                <%--                                </div>--%>
-
-                <%--                                <hr class="my-4">--%>
-                <%--                                <div class="row justify-content-center">--%>
-                <%--                                    <button id="clearCart" type="button" class="btn btn-danger mr-2">--%>
-                <%--                                        Xoá tất cả--%>
-                <%--                                    </button>--%>
-                <%--                                    <button id="checkoutFinishBtn" type="button" class="btn btn-primary">--%>
-                <%--                                        Thanh toán--%>
-                <%--                                    </button>--%>
-                <%--                                </div>--%>
-                <%--                            </div>--%>
-                <%--                            <!-- Body -->--%>
-                <%--                        </div>--%>
-                <%--                        <!-- End Card -->--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
                 <div class="col-lg-1 order-lg-2">
                     <%--CART BUTTON--%>
                     <div class="cart-wrapper">
@@ -109,7 +62,7 @@
                                         <button id="btn-clear-cart" type="button" class="btn btn-danger mr-2">
                                             Xoá tất cả
                                         </button>
-                                        <button id="checkoutFinishBtn" type="button" class="btn btn-primary">
+                                        <button id="btn-checkout" type="button" class="btn btn-primary">
                                             Thanh toán
                                         </button>
                                     </div>
@@ -191,28 +144,39 @@
                                         <!-- End Form Group -->
                                     </div>
                                     <div class="col-sm-6">
-                                            <%--                                        <label class="input-label">Khách hàng</label>--%>
-                                            <%--                                        <!-- Custom Radio -->--%>
-                                            <%--                                        <div class="custom-control custom-radio">--%>
-                                            <%--                                            <input type="radio" class="custom-control-input"--%>
-                                            <%--                                                   name="accountType"--%>
-                                            <%--                                                   checked--%>
-                                            <%--                                                   readonly>--%>
-                                            <%--                                            <label class="custom-control-label"--%>
-                                            <%--                                                   for="userAccountTypeRadio1">Thường</label>--%>
-                                            <%--                                        </div>--%>
-                                            <%--                                        <!-- End Custom Radio -->--%>
-
-                                            <%--                                        <!-- Custom Radio -->--%>
-                                            <%--                                        <div class="custom-control custom-radio">--%>
-                                            <%--                                            <input type="radio" class="custom-control-input"--%>
-                                            <%--                                                   name="accountType"--%>
-                                            <%--                                                   readonly>--%>
-                                            <%--                                            <label class="custom-control-label" for="userAccountTypeRadio2">Công--%>
-                                            <%--                                                nợ</label>--%>
-                                            <%--                                        </div>--%>
-                                        <!-- End Custom Radio -->
+                                        <!-- Form Group -->
+                                        <div class="form-group">
+                                            <label for="customerPromotions">Ưu đãi thêm</label>
+                                            <input type="text" class="js-masked-input form-control"
+                                                   name="extraPromotions"
+                                                   id="extraPromotions"
+                                                   value="0">
+                                        </div>
+                                        <!-- End Form Group -->
                                     </div>
+<%--                                    <div class="col-sm-6">--%>
+<%--                                            &lt;%&ndash;                                        <label class="input-label">Khách hàng</label>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        <!-- Custom Radio -->&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        <div class="custom-control custom-radio">&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                            <input type="radio" class="custom-control-input"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   name="accountType"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   checked&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   readonly>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                            <label class="custom-control-label"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   for="userAccountTypeRadio1">Thường</label>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        </div>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        <!-- End Custom Radio -->&ndash;%&gt;--%>
+
+<%--                                            &lt;%&ndash;                                        <!-- Custom Radio -->&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        <div class="custom-control custom-radio">&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                            <input type="radio" class="custom-control-input"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   name="accountType"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   readonly>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                            <label class="custom-control-label" for="userAccountTypeRadio2">Công&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                nợ</label>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        </div>&ndash;%&gt;--%>
+<%--                                        <!-- End Custom Radio -->--%>
+<%--                                    </div>--%>
                                 </div>
                                 <!-- End Row -->
                             </div>

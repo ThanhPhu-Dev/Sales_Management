@@ -18,6 +18,8 @@ const pagination = {
 }
 
 let selectedProductIds = [];
+const urlParams = new URLSearchParams(window.location.search);
+const customerId = urlParams.get('id');
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Variables
@@ -41,8 +43,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         window.location.reload();
     })
 
+    document.querySelector('#btn-checkout').addEventListener('click', () => {
+        checkout();
+    })
+
     await getProductsAPI();
 });
+
+const checkout = async () => {
+    try {
+        let values = mapProductQuantity();
+        const json = JSON.stringify({
+            products: values,
+            customerId: +customerId,
+            extraPromotions: document.querySelector('#extraPromotions').value || 0,
+        })
+        const response = await axios.post('/SalesManagement/api/checkout', json, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        if (response.status === 200) {
+            console.log(response);
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 // get products pagination
 const getProductsAPI = async () => {
@@ -204,7 +232,7 @@ const sortTableById = (table) => {
     });
 }
 
-const handleCartChanged = () => {
+const mapProductQuantity = () => {
     const productsSelectedTable = document.querySelector(`#${state.productsSelectedTableId}`);
 
     // Map row thành array [{id: , quantity: },...]
@@ -217,10 +245,20 @@ const handleCartChanged = () => {
                 id, quantity
             }
         })
-    console.log(values);
+
+    return values;
+}
+
+const handleCartChanged = () => {
+    const values = mapProductQuantity();
+
     const callApi = async () => {
         try {
-            const json = JSON.stringify({products: values})
+            const json = JSON.stringify({
+                products: values,
+                customerId: +customerId,
+                extraPromotions: document.querySelector('#extraPromotions').value || 0,
+            });
             let response = await axios.post('/SalesManagement/api/cart', json, {
                 headers: {
                     'Content-Type': 'application/json',
