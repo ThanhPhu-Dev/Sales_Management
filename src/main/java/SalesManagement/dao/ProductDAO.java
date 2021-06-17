@@ -92,4 +92,20 @@ public class ProductDAO {
             }
         });
     }
+
+    // Đếm số sản phẩm còn lại
+    public Integer getRemainProductsCount(List<Integer> excludeIds) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate
+                = new NamedParameterJdbcTemplate(template.getDataSource());
+        String sql = "SELECT COUNT(*) FROM PRODUCTS";
+
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+
+        if(excludeIds.size() > 0) {
+            parameters.addValue("ids", excludeIds);
+            sql = "SELECT COUNT(*) FROM PRODUCTS WHERE ID NOT IN(:ids)";
+        }
+
+        return namedParameterJdbcTemplate.queryForObject(sql, parameters, Integer.class);
+    }
 }

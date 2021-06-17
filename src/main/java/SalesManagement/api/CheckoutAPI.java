@@ -77,4 +77,23 @@ public class CheckoutAPI {
         // Anotation @ResponseBody trả về dữ liệu JSON.
         return map;
     }
+
+    //Phương thức đếm số sản phẩm còn lại
+    @GetMapping("/api/products/remain")
+    public Map<String, Integer> getProducts(@RequestParam String excludeIds) {
+        String[] idsString = excludeIds.split(",");
+        List<Integer> ids = new ArrayList<>();
+        for (String s : idsString) {
+            if (!s.isEmpty()) {
+                ids.add(Integer.parseInt(s));
+            }
+        }
+
+        Integer remain = _productDAO.getRemainProductsCount( ids);
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("remain", remain);
+
+        // Anotation @ResponseBody trả về dữ liệu JSON.
+        return map;
+    }
 }

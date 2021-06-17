@@ -106,7 +106,7 @@
 
                                     <hr class="my-4">
                                     <div class="row justify-content-center">
-                                        <button id="clearCart" type="button" class="btn btn-danger mr-2">
+                                        <button id="btn-clear-cart" type="button" class="btn btn-danger mr-2">
                                             Xoá tất cả
                                         </button>
                                         <button id="checkoutFinishBtn" type="button" class="btn btn-primary">
@@ -141,7 +141,8 @@
                                     <label for="customerName" class="input-label">Tên khách hàng</label>
                                     <input type="text" class="form-control" name="customerName"
                                            id="customerName"
-                                           value="${customer.getName()}">
+                                           value="${customer.getName()}"
+                                           readonly>
                                 </div>
                                 <!-- End Form Group -->
 
@@ -244,57 +245,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <c:if test="${not empty products}">
-                                    <c:forEach var="product" items="${products}">
-                                        <tr class="table-products__row"
-                                            data-id="${product.getId()}"
-                                            >
-                                            <td class="lead">${product.getId()}</td>
-                                            <td class="lead">${product.getName()}</td>
-                                            <td class="lead">${product.getSpecification()}</td>
-                                            <td class="lead">
-                                                <fmt:formatNumber type="number"
-                                                                  currencyCode=""
-                                                                  value="${product.getHistoricalCost()}"/>
-                                            </td>
-                                            <td class="lead">
-                                                <c:choose>
-                                                    <c:when test="${not empty product.getPromotions()}">
-                                                        ${product.getPromotions().getPercentDiscount()}
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        0
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </td>
-                                            <td class="lead">
-                                                <fmt:formatNumber type="number"
-                                                                  currencyCode=""
-                                                                  value="${product.getProductSalePrice()}"/>
-                                            </td>
-                                            <td class="lead">
-                                                <input type="number"
-                                                       class="js-masked-input form-control checkout-table__input"
-                                                       name=""
-                                                       value="1"
-                                                       min="1"
-                                                       pattern="[1-9][0-9]"
-                                                >
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-sm btn-white btn-table-func"
-                                                        data-func="add">
-                                                    <i class="fas fa-plus-square"></i>
-                                                    Thêm
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </c:if>
                                 </tbody>
                             </table>
                         </div>
                         <!-- Body -->
+
+                        <%--PAGINATION--%>
+                        <nav aria-label="navigation" class="mr-2">
+                            <ul id="checkout-products-pagination" class="pagination justify-content-end">
+
+                            </ul>
+                        </nav>
+                        <%--END PAGINATION--%>
                     </div>
                     <!-- End Card -->
 
