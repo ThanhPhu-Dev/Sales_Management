@@ -9,7 +9,7 @@
             <div class="row align-items-center mb-3">
                 <div class="col-sm mb-2 mb-sm-0 d-flex justify-content-between align-items-center">
                     <h1 class="page-header-title">Chi Tiết Hóa Đơn</h1>
-                    <button class="btn btn-danger" style="font-size: 13px">In Phiếu</button>
+                  <a href="/SalesManagement/report?id=${bill.id}" target="_blank"><button class="btn btn-danger" style="font-size: 13px">In Phiếu</button></a>
                 </div>
             </div>
             <!-- End Row -->

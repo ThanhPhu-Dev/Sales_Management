@@ -88,21 +88,21 @@
 			<version>${sitemesh.version}</version>
 		</dependency>
 
-		<!--mysql-->
+		<!--mysql -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.version}</version>
 		</dependency>
 
-		<!--spring jdbc-->
+		<!--spring jdbc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
 			<version>${springJDBC.version}</version>
 		</dependency>
 
-		<!--lombok-->
+		<!--lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -138,6 +138,31 @@
 			<version>${jackson-asl.version}</version>
 		</dependency>
 		<!--end json -->
+
+
+		<!-- jasper report -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.1.0</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>olap4j</artifactId>
+					<groupId>org.olap4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		<dependency>
+		    <groupId>net.sf.jasperreports</groupId>
+		    <artifactId>jasperreports-fonts</artifactId>
+		    <version>6.0.0</version>
+		</dependency>
+
+
+		
+
+
 	</dependencies>
 
 	<build>
