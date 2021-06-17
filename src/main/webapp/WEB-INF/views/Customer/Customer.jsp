@@ -40,36 +40,26 @@
             <div class="card-header">
                 <div class="row justify-content-end align-items-center flex-grow-1">
                     <div class="col-md-4 mb-3 mb-md-0">
-                        <!--                        <form>
-                                                     Search 
-                                                    <div class="input-group input-group-merge input-group-flush">
-                                                        <div class="input-group-prepend">
-                                                            <div class="input-group-text">
-                                                                <i class="tio-search"></i>
-                                                            </div>
-                                                        </div>
-                                                        <input id="datatableSearch" type="search" class="form-control" placeholder="Tìm kiếm sản phẩm" aria-label="Search users">
-                                                    </div>
-                                                     End Search 
-                                                </form>-->
+                        <!--form tìm kiếm--> 
                         <form class="d-flex justify-content-end" id="form-search" method="GET" action="/SalesManagement/customer/search">
-                            <input class="form-control me-2" id="name" name="name" type="search" placeholder="Tên khách hàng" style="width: 300px">
+                            <input class="form-control me-2" id="name" name="name" type="search" placeholder="Nhập số diện thoại hoặc CMND" style="width: 300px">
                             <button id="btnSearch" class="btn btn-outline-success" type="submit">Tìm kiếm</button>
                         </form> 
+                        <!--end form tìm kiếm--> 
                     </div>
                 </div>
-                <!-- End Row -->
             </div>
             <!-- End Header -->
+            <!--table-->
             <table id="example" class="ui celled table" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>STT</th>
                         <th>Tên KH</th>
+                        <th>CMND</th>
+                        <th>Số điện thoại</th>
                         <th>Số tài khoản</th>
-                        <th>Số dư tài khoản</th>
                         <th>Mã ưu đãi</th>
-                        <th>Công nợ</th>
                         <th>Chức năng</th>
                     </tr>
                 </thead>
@@ -79,12 +69,11 @@
                         <tr>
                             <td>${loop.index + 1}</td>
                             <td>${customer.getName()}</td>
+                            <td>${customer.getIdentityCard()}</td>
+                            <td>${customer.getPhone()}</td>
                             <td>${customer.getNumberCard()}</td>
-                            <td>
-                                <fmt:formatNumber type = "number" 
-                                                  currencyCode="" value = "${customer.getAccountBalance()}" />
-                                VND
-                            </td>
+                            
+                            <!--ưu đãi khách hàng-->
                             <c:choose >
                                 <c:when test="${customer.promotion.getName() == null}">
                                     <td>Chưa áp dụng</td>
@@ -93,11 +82,8 @@
                                     <td>${customer.promotion.getName()}</td>
                                 </c:otherwise>
                             </c:choose>
-                            <td>
-                                <fmt:formatNumber type = "number" 
-                                                  currencyCode="" value = "${customer.getDebtMax()}" />
-                                VND
-                            </td>
+                            <!--end ưu đãi-->
+                            
                             <td class="d-flex justify-content-center">
                                 <div class="btn-group" role="group">
                                     <a class="btn btn-sm btn-white" href="/SalesManagement/payment?id=${customer.getId()}">
@@ -115,6 +101,7 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <!--end table-->
         </div>
     </div>
     <!-- End Card -->

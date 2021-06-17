@@ -34,6 +34,30 @@
                                 <span class="focus-border"></span>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3 cus__form-group">
+                                    <label for="name" class="form-label cus__form-lable">Chứng minh nhân dân</label>
+                                    <div class="input-group">
+                                        <input class="input-effect input-primary" name="identity" id="identity" type="text" 
+                                               placeholder="CMND hoặc số căn cước công dân" required minlength="1" maxlength="12">
+                                        <span class="focus-border"></span>
+                                    </div>
+                                    <span class="error-identity" style="color: red; display: none">Số tài khoản đã tồn tại</span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3 cus__form-group">
+                                    <label for="name" class="form-label cus__form-lable">Số điện thoại</label>
+                                    <div class="input-group">
+                                        <input class="input-effect input-primary" name="phone" id="phone" type="text" 
+                                               placeholder="Số điện thoại" required minlength="1" maxlength="11">
+                                        <span class="focus-border"></span>
+                                    </div>
+                                    <span class="error-phone" style="color: red; display: none">Số điện thoại đã tồn tại</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="mb-3 cus__form-group">
                             <label for="name" class="form-label cus__form-lable">ƯU ĐÃI</label>
                             <div class="input-group">
@@ -42,10 +66,6 @@
                                     <c:forEach var="promotion" items="${proCus}">
                                         <option value="${promotion.getId()}">${promotion.getName()}</option>
                                     </c:forEach>
-                                    <!--                                <option selected>Open this select menu</option>
-                                                                    <option value="1">One</option>
-                                                                    <option value="2">Two</option>
-                                                                    <option value="3">Three</option>-->
                                 </select>
                             </div>
                         </div>
@@ -62,51 +82,63 @@
                             </div>
                             <span class="error-card" style="color: red; display: none">Số tài khoản đã tồn tại</span>
                         </div>
-                        <!--                        <div class="mb-3 cus__form-group">
-                                                    <label for="name" class="form-label cus__form-lable">SỐ DƯ TÀI KHOẢN</label>
-                                                    <div class="input-group">
-                                                        <input class="input-effect input-primary" type="text" >
-                                                        <span class="focus-border"></span>
-                                                    </div>
-                                                </div>-->
                         <div class="d-flex justify-content-center" style="margin: 20px 0 50px 0; ">
                             <button type="submit" id="btnApply" class="btn btn-secondary">Xác nhận</button>
                         </div>
                     </form>
                 </div>
                 <div class=" col-2"></div>
-
-
             </div>
         </div>
     </div>
     <!-- End Content -->
-
 </main>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!--<script src="sweetalert2.all.min.js"></script>
-<script src="sweetalert2.min.js"></script>
-<link rel="stylesheet" href="sweetalert2.min.css">-->
 
 <script>
     const formApply = document.querySelector("#form-apply");
     const btnApply = document.querySelector('#btnApply');
-    const ipSearch = document.querySelector('#name');
     const errorCard = document.querySelector('.error-card');
+    const errorPhone = document.querySelector('.error-phone');
+    const errorIdentity = document.querySelector('.error-identity');
 
     const setDefault = {
         setInput: function () {
             const ipName = document.querySelector('#name');
             const selectPromotion = document.querySelector('#promotion');
             const ipCard = document.querySelector('#card');
+            const ipPhone = document.querySelector('#phone');
+            const ipIdentity = document.querySelector('#identity');
+
             ipName.value = '';
-            selectPromotion.value = '';
+            selectPromotion.value = '-1';
             ipCard.value = '';
+            ipPhone.value = '';
+            ipIdentity.value = '';
         },
-        setError: function () {
+        setRemoveError: function () {
             errorCard.innerHTML = "";
             errorCard.style.display = "none";
+            errorPhone.innerHTML = "";
+            errorPhone.style.display = "block";
+            errorIdentity.innerHTML = "";
+            errorIdentity.style.display = "block";
+        },
+        setError: function (cardError, phoneError, identityError) {
+            if (cardError) {
+                errorCard.innerHTML = cardError;
+                errorCard.style.display = "block";
+            }
+            if (phoneError) {
+                errorPhone.innerHTML = phoneError;
+                errorPhone.style.display = "block";
+            }
+            if (identityError) {
+                errorIdentity.innerHTML = identityError;
+                errorIdentity.style.display = "block";
+            }
         }
     };
 
@@ -117,19 +149,23 @@
         const card = formData.get("card");
         const promotion = formData.get("promotion");
 
-        setDefault.setError();
+        setDefault.setRemoveError();
 
         await axios.post('/SalesManagement/api/addcustomer', {
             name: formData.get("name"),
             card: formData.get("card"),
             promotion: formData.get("promotion"),
+            phone: formData.get("phone"),
+            identity: formData.get("identity"),
         }).then(function (response) {
+            const {cardError, phoneError, identityError} = response.data;
 
-            if (response.data.card) {
-                errorCard.innerHTML = response.data.card;
-                errorCard.style.display = "block";
+            //nếu tồn tại lỗi xuất UI thông báo
+            if (cardError || phoneError || identityError) {
+                setDefault.setError(cardError, phoneError, identityError);
             } else {
-                setDefault.setError();
+                //xóa hết lỗi trc khi thông báo thành công 
+                setDefault.setRemoveError();
                 setDefault.setInput();
 
                 Swal.fire({
@@ -138,7 +174,7 @@
                     title: 'Thêm khách hàng thành công',
                     showConfirmButton: false,
                     timer: 1000
-                })
+                });
             }
         }).catch(async function (error) {
             await Swal.fire('CÓ lỗi xảy ra, vui lòng thử lại!');

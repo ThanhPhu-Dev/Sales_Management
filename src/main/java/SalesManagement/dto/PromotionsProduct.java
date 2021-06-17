@@ -7,7 +7,7 @@ import java.util.Date;
 @Data
 public class PromotionsProduct {
     private Integer Id;
-    private  String Name;
+    private String Name;
     private Date StartDate;
     private Date EndDate;
     private Float PercentDiscount;

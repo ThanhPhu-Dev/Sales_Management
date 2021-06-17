@@ -7,57 +7,76 @@
     <div class="content container-fluid">
         <!-- Step Form -->
         <form>
-
             <!-- Content Step Form -->
             <div class="row">
-                <div class="col-lg-4 order-lg-2 mb-5 mb-lg-0">
+                <div class="col-lg-1 order-lg-2">
+                    <%--CART BUTTON--%>
                     <div class="cart-wrapper">
-                        <!-- Card -->
-                        <div class="card mb-3">
-                            <!-- Header -->
-                            <div class="card-header">
-                                <h4 class="card-header-title">Giỏ hàng (2)</h4>
-                            </div>
-                            <!-- End Header -->
-
-                            <!-- Body -->
-                            <div class="card-body">
-                                <div class="row align-items-center mb-3">
-                                    <span class="col-6">Tạm tính:</span>
-                                    <h4 class="col-6 text-right text-dark mb-0">1.000.000 VNĐ</h4>
-                                </div>
-
-                                <hr class="my-4">
-
-                                <div class="row align-items-center">
-                                    <span class="col-6">Giảm giá:</span>
-                                    <h4 class="col-6 text-right text-dark mb-0">100.000 VNĐ</h4>
-                                </div>
-
-                                <hr class="my-4">
-
-                                <div class="row align-items-center">
-                                    <span class="col-6 text-dark font-weight-bold">Tổng cộng:</span>
-                                    <h3 class="col-6 text-right text-dark mb-0">900.000 VNĐ</h3>
-                                </div>
-
-                                <hr class="my-4">
-                                <div class="row justify-content-center">
-                                    <button id="clearCart" type="button" class="btn btn-danger mr-2">
-                                        Xoá tất cả
-                                    </button>
-                                    <button id="checkoutFinishBtn" type="button" class="btn btn-primary">
-                                        Thanh toán
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- Body -->
+                        <div class="btn-cart rounded-circle shadow d-flex align-items-center justify-content-center"
+                             data-hidden="true" >
+                            <span class="text-dark">
+                                <i class="fas fa-shopping-cart fa-2x"></i>
+                                <span id="cart-notify" class="cart-quantity cart-quantity-text hidden"></span>
+                            </span>
                         </div>
-                        <!-- End Card -->
+                        <%--CART BODY--%>
+                        <div class="cart-body">
+                            <%--CARD--%>
+                            <div class="card">
+                                <!-- Header -->
+                                <div class="card-header">
+                                    <h4 class="card-header-title">Giỏ hàng (<span class="cart-quantity-text">0</span>)</h4>
+                                </div>
+                                <!-- End Header -->
+
+                                <!-- Body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center mb-3">
+                                        <span class="col-5">Tạm tính:</span>
+                                        <h4 id="cart-origin" class="col-7 text-right text-dark mb-0">0 VNĐ</h4>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="row align-items-center">
+                                        <span class="col-5">Chiết khấu:</span>
+                                        <h4 id="cart-discount" class="col-7 text-right text-dark mb-0">0 VNĐ</h4>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="row align-items-center">
+                                        <span class="col-5">Giảm giá:</span>
+                                        <h4 id="cart-sale" class="col-7 text-right text-dark mb-0">0 VNĐ</h4>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="row align-items-center">
+                                        <span class="col-5 text-dark font-weight-bold">Tổng cộng:</span>
+                                        <h3 id="cart-total" class="col-7 text-right text-dark mb-0">0 VNĐ</h3>
+                                    </div>
+
+                                    <hr class="my-4">
+                                    <div class="row justify-content-center">
+                                        <button id="btn-clear-cart" type="button" class="btn btn-danger mr-2">
+                                            Xoá tất cả
+                                        </button>
+                                        <button id="btn-checkout" type="button" class="btn btn-primary">
+                                            Thanh toán
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Body -->
+                            </div>
+                            <!-- End Card -->
+                        </div>
+                        <%--END CART BODY--%>
                     </div>
+                    <%--END CART BUTTON--%>
                 </div>
 
-                <div class="col-lg-8">
+                <div class="col-lg-11">
                     <%--CUSTOMER--%>
                     <!-- Card -->
                     <c:if test="${not empty customer}">
@@ -75,7 +94,8 @@
                                     <label for="customerName" class="input-label">Tên khách hàng</label>
                                     <input type="text" class="form-control" name="customerName"
                                            id="customerName"
-                                           value="${customer.getName()}">
+                                           value="${customer.getName()}"
+                                           readonly>
                                 </div>
                                 <!-- End Form Group -->
 
@@ -124,28 +144,39 @@
                                         <!-- End Form Group -->
                                     </div>
                                     <div class="col-sm-6">
-<%--                                        <label class="input-label">Khách hàng</label>--%>
-<%--                                        <!-- Custom Radio -->--%>
-<%--                                        <div class="custom-control custom-radio">--%>
-<%--                                            <input type="radio" class="custom-control-input"--%>
-<%--                                                   name="accountType"--%>
-<%--                                                   checked--%>
-<%--                                                   readonly>--%>
-<%--                                            <label class="custom-control-label"--%>
-<%--                                                   for="userAccountTypeRadio1">Thường</label>--%>
-<%--                                        </div>--%>
-<%--                                        <!-- End Custom Radio -->--%>
-
-<%--                                        <!-- Custom Radio -->--%>
-<%--                                        <div class="custom-control custom-radio">--%>
-<%--                                            <input type="radio" class="custom-control-input"--%>
-<%--                                                   name="accountType"--%>
-<%--                                                   readonly>--%>
-<%--                                            <label class="custom-control-label" for="userAccountTypeRadio2">Công--%>
-<%--                                                nợ</label>--%>
-<%--                                        </div>--%>
-                                        <!-- End Custom Radio -->
+                                        <!-- Form Group -->
+                                        <div class="form-group">
+                                            <label for="customerPromotions">Ưu đãi thêm</label>
+                                            <input type="text" class="js-masked-input form-control"
+                                                   name="extraPromotions"
+                                                   id="extraPromotions"
+                                                   value="0">
+                                        </div>
+                                        <!-- End Form Group -->
                                     </div>
+<%--                                    <div class="col-sm-6">--%>
+<%--                                            &lt;%&ndash;                                        <label class="input-label">Khách hàng</label>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        <!-- Custom Radio -->&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        <div class="custom-control custom-radio">&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                            <input type="radio" class="custom-control-input"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   name="accountType"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   checked&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   readonly>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                            <label class="custom-control-label"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   for="userAccountTypeRadio1">Thường</label>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        </div>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        <!-- End Custom Radio -->&ndash;%&gt;--%>
+
+<%--                                            &lt;%&ndash;                                        <!-- Custom Radio -->&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        <div class="custom-control custom-radio">&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                            <input type="radio" class="custom-control-input"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   name="accountType"&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                   readonly>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                            <label class="custom-control-label" for="userAccountTypeRadio2">Công&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                                nợ</label>&ndash;%&gt;--%>
+<%--                                            &lt;%&ndash;                                        </div>&ndash;%&gt;--%>
+<%--                                        <!-- End Custom Radio -->--%>
+<%--                                    </div>--%>
                                 </div>
                                 <!-- End Row -->
                             </div>
@@ -164,48 +195,32 @@
 
                         <!-- Body -->
                         <div class="card-body">
-                            <table class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
+                            <table id="productsTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
-                                <tr>
-                                    <th>Mã sản phẩm</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Chiết khấu (%)</th>
-                                    <th>Ưu đãi (%)</th>
-                                    <th>Giá bán</th>
-                                    <th>Số lượng</th>
-                                    <th>Chức năng</th>
-                                </tr>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Quy cách (kg)</th>
+                                        <th>Giá gốc</th>
+                                        <th>Ưu đãi (%)</th>
+                                        <th>Giá bán</th>
+                                        <th>Số lượng</th>
+                                        <th>Chức năng</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <c:if test="${not empty products}">
-                                    <c:forEach var="product" items="${products}">
-                                        <tr>
-                                            <td class="lead">${product.getId()}</td>
-                                            <td class="lead">${product.getName()}</td>
-                                            <td class="lead">${product.getSpecification()}</td>
-                                            <td class="lead"></td>
-                                            <td class="lead"></td>
-                                            <td class="lead">
-                                                <input type="number" class="js-masked-input form-control checkout-table__input"
-                                                       name=""
-                                                       value="1"
-                                                       min="1"
-                                                >
-                                            </td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-sm btn-white">
-                                                    <i class="fas fa-plus-square"></i>
-                                                    Thêm
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </c:if>
-
                                 </tbody>
                             </table>
                         </div>
                         <!-- Body -->
+
+                        <%--PAGINATION--%>
+                        <nav aria-label="navigation" class="mr-2">
+                            <ul id="checkout-products-pagination" class="pagination justify-content-end">
+
+                            </ul>
+                        </nav>
+                        <%--END PAGINATION--%>
                     </div>
                     <!-- End Card -->
 
@@ -219,12 +234,13 @@
 
                         <!-- Body -->
                         <div class="card-body">
-                            <table class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
+                            <table id="productsSelectedTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th>Mã sản phẩm</th>
+                                    <th>Mã</th>
                                     <th>Tên sản phẩm</th>
-                                    <th>Chiết khấu (%)</th>
+                                    <th>Quy cách (kg)</th>
+                                    <th>Giá gốc</th>
                                     <th>Ưu đãi (%)</th>
                                     <th>Giá bán</th>
                                     <th>Số lượng</th>
@@ -232,26 +248,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="lead">1</td>
-                                    <td class="lead">Tên sản phẩm</td>
-                                    <td class="lead">5</td>
-                                    <td class="lead">0</td>
-                                    <td class="lead">100.000</td>
-                                    <td class="lead">
-                                        <input type="number" class="js-masked-input form-control checkout-table__input"
-                                               name=""
-                                               value="1"
-                                        min="1"
-                                        >
-                                    </td>
-                                    <td class="text-center">
-                                        <button type="button" class="btn btn-sm btn-white">
-                                            <i class="fas fa-trash-alt"></i>
-                                            Xoá
-                                        </button>
-                                    </td>
-                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -285,3 +282,5 @@
     </div>
     <!-- End Content -->
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+<script src="<c:url value='/template/assets/js/checkout.js' />"></script>
