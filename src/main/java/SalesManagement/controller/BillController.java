@@ -91,10 +91,11 @@ public class BillController {
 		try {
 			JasperReport jasperReport = JasperCompileManager
 					.compileReport(new ClassPathResource("reports/ReportBill.jrxml").getInputStream());
+
 			Map<String, Object> parameters = getReportInfoCustomer(id);
 			dataSource = getDataSource(id);
 
-			DefaultJasperReportsContext context = DefaultJasperReportsContext.getInstance();
+
 			//set font size
 //			JRDesignStyle jrDesignStyle = new JRDesignStyle();
 //			jrDesignStyle.setDefault(true);
@@ -102,9 +103,8 @@ public class BillController {
 //			jrDesignStyle.setPdfFontName(fontPath);
 //			jrDesignStyle.setPdfEncoding("Identity-H");
 //			jrDesignStyle.setPdfEmbedded(true);
-			
+			DefaultJasperReportsContext context = DefaultJasperReportsContext.getInstance();
 			JRPropertiesUtil.getInstance(context).setProperty("net.sf.jasperreports.awt.igno‌​re.missing.font", "true");
-
 			ServletOutputStream servletOutputStream = response.getOutputStream();
 
 			try {

@@ -8,7 +8,7 @@
 <main id="content" role="main" class="main">
     <div class="content container-fluid">
         <!-- Page Header -->
-        <div class="page-header">
+        <div>
             <div class="row align-items-center mb-3">
                 <div class="col-sm mb-2 mb-sm-0">
                     <h1 class="page-header-title">Danh sách Hóa Đơn</h1>

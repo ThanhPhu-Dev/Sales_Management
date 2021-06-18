@@ -45,7 +45,9 @@
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Số Tiền Còn Dư :</p>
-                    <p class="ct-cu">${bill.customer.accountBalance} VNĐ</p>
+                    <c:set var = "cvt" value = "${bill.customer.accountBalance}" />
+                    <p class="ct-cu"><fmt:formatNumber type = "number"
+                                                       maxFractionDigits = "3" value = "${cvt}" /> VNĐ</p>
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Ngày Thanh Toán :</p>
