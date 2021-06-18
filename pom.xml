@@ -18,6 +18,7 @@
 		<lombok.version>1.18.10</lombok.version>
 		<jackson.version>2.6.3</jackson.version>
 		<jackson-asl.version>1.9.13</jackson-asl.version>
+		<jasperreports.version>6.17.0</jasperreports.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
@@ -140,11 +141,11 @@
 		<!--end json -->
 
 
-		<!-- jasper report -->
+<!--		 jasper report-->
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.16.0</version>
+			<version>${jasperreports.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>olap4j</artifactId>
@@ -155,9 +156,13 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports-fonts</artifactId>
-			<version>6.16.0</version>
+			<version>${jasperreports.version}</version>
 		</dependency>
 
+		<!--end jasper report -->
+
+
+	
 		<!--end jasper report -->
 
 		<!-- https://mvnrepository.com/artifact/org.json/json -->

@@ -12,6 +12,21 @@ public class Customer {
     private Integer AccountBalance;
     private Integer PromotionsId;
     private Integer DebtMax;
+
     private PromotionsCustomer Promotion;
     //tạo getter - setter ngầm rồi. bên ngoài gọi getter-setter như bình thường
+
+    // Kiểm tra khách hàng có phải công nợ
+    public boolean isDebtor() {
+        // balance < 0, X > 0
+        // balance + X < 0 => true
+        return this.DebtMax + this.AccountBalance < 0;
+    }
+
+    // Kiểm tra với số tiền khấu trừ ${price} khách hàng có trở thành công nợ
+    public boolean isDebtor(int price) {
+        // balance < 0, X > 0
+        // balance + X < 0 => true
+        return this.DebtMax + (this.AccountBalance - price) < 0;
+    }
 }
