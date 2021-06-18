@@ -166,4 +166,13 @@ public class CustomerApi {
         // Anotation @ResponseBody trả về dữ liệu JSON.
         return map;
     }
+
+    //Phương thức lấy thông tin 1 khách hàng
+    @GetMapping("/api/customer")
+    public Map<String, Customer> getCustomer(int id) {
+        Customer customer = _customerDAO.findCustomerById(id);
+        HashMap<String, Customer> map = new HashMap<>();
+        map.put("customer", customer);
+        return map;
+    }
 }

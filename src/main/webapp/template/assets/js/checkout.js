@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         cartBody = document.querySelector('.cart-body')
 
 
+
     cartButton.addEventListener('click', (e) => {
         let isHidden = cartButton.dataset.hidden === 'true';
 
@@ -64,7 +65,7 @@ const checkout = async () => {
             }
         })
         if (response.status === 200) {
-            console.log(response);
+            handleCheckoutResult(response.data?.success);
         }
 
     } catch (err) {
@@ -117,6 +118,55 @@ const getRemainProductsCountAPI = async () => {
     } catch (err) {
         console.log(err);
     }
+}
+
+const handleCartChanged = () => {
+    const values = mapProductQuantity();
+
+    const callApi = async () => {
+        try {
+            const json = JSON.stringify({
+                products: values,
+                customerId: +customerId,
+                extraPromotions: document.querySelector('#extraPromotions').value || 0,
+            });
+            let response = await axios.post('/SalesManagement/api/cart', json, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (response.data && response.status === 200) {
+                const res = response.data;
+                renderCartBody(res.origin, res.discount,
+                    res.productSale, res.customerSale, res.total);
+                if(res.isDeptor === 'true') {
+                    showToast('Cảnh báo',
+                        'Nếu mua hàng, khách hàng sẽ có công nợ vượt mức quy định');
+                }
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    callApi();
+}
+
+const handleCheckoutResult = (isSuccess) => {
+    if(isSuccess) {
+        document.querySelector('#checkout-form').classList.add('d-none');
+        document.querySelector('#checkoutStepSuccessMessage').classList.remove('d-none');
+    } else {
+
+    }
+}
+
+const showToast = (header, message) => {
+    document.querySelector('.toast-title').innerHTML = header;
+    document.querySelector('.toast-body').innerHTML = message;
+    $('#checkout-toast').toast('show');
 }
 
 const funcButtonClicked = (funcButton) => {
@@ -230,7 +280,8 @@ const handleRemoveButtonClicked = (row, button) => {
 }
 
 const sortTableById = (tableId) => {
-    const rows = document.querySelectorAll(`#${tableId} > tbody > tr`);
+    const table = document.querySelector(`#${tableId}`);
+    const rows = table.querySelectorAll(`tbody > tr`);
     Array.from(rows)
         .sort((firstRow, secondRow) => {
             // Id là int
@@ -258,36 +309,6 @@ const mapProductQuantity = () => {
         })
 
     return values;
-}
-
-const handleCartChanged = () => {
-    const values = mapProductQuantity();
-
-    const callApi = async () => {
-        try {
-            const json = JSON.stringify({
-                products: values,
-                customerId: +customerId,
-                extraPromotions: document.querySelector('#extraPromotions').value || 0,
-            });
-            let response = await axios.post('/SalesManagement/api/cart', json, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-
-            if (response.data && response.status === 200) {
-                const res = response.data;
-                renderCartBody(res.origin, res.discount,
-                    res.productSale, res.customerSale, res.total);
-
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    callApi();
 }
 
 function renderCartBody(origin, discount, productSale, customerSale, total) {
