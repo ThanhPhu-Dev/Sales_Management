@@ -42,7 +42,7 @@
                     <div class="col-md-4 mb-3 mb-md-0">
                         <!--form tìm kiếm--> 
                         <form class="d-flex justify-content-end" id="form-search" method="GET" action="/SalesManagement/customer/search">
-                            <input class="form-control me-2" id="name" name="name" type="search" placeholder="Nhập số diện thoại hoặc CMND" style="width: 300px">
+                            <input class="form-control me-2" id="numberSearch" name="numberSearch" type="search" placeholder="Nhập số diện thoại hoặc CMND" style="width: 300px">
                             <button id="btnSearch" class="btn btn-outline-success" type="submit">Tìm kiếm</button>
                         </form> 
                         <!--end form tìm kiếm--> 

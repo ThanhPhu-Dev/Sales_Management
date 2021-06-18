@@ -117,36 +117,36 @@ public class CustomerDAO {
 
     public int updateAccountBalance(int id, float newAccountBalance) {
         String sql = "UPDATE CUSTOMERS SET ACCOUNTBALANCE = ? WHERE ID = ?";
-        return template.update(sql, new Object[] {newAccountBalance, id});
-    
-    public List<Customer> getCustomersPagination(int offset, int limit) {
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate
-                = new NamedParameterJdbcTemplate(template.getDataSource());
-        String sql = "SELECT * FROM CUSTOMERS LIMIT :offset, :limit";
-
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("offset", offset);
-        parameters.addValue("limit", limit);
-
-        return namedParameterJdbcTemplate.query(sql,
-                parameters,
-                new RowMapper<Customer>() {
-            @Override
-            public Customer mapRow(ResultSet rs, int row) throws SQLException {
-                Customer e = new Customer();
-                e.setId(rs.getInt("id"));
-                e.setName(rs.getString("name"));
-                e.setPhone(rs.getString("phone"));
-                e.setIdentityCard(rs.getString("identityCard"));
-                e.setNumberCard(rs.getString("numbercard"));
-                e.setAccountBalance(rs.getInt("accountbalance"));
-                e.setPromotionsId(rs.getInt("PromotionsId"));
-                e.setDebtMax(rs.getInt("DebtMax"));
-                e.setPromotion(e.getPromotionsId() > 0 ? promotionsCustomerDAO.findPromotionById(e.getPromotionsId()) : null);
-                return e;
-            }
-        });
+        return template.update(sql, new Object[]{newAccountBalance, id});
     }
+        public List<Customer> getCustomersPagination(int offset, int limit) {
+            NamedParameterJdbcTemplate namedParameterJdbcTemplate
+                    = new NamedParameterJdbcTemplate(template.getDataSource());
+            String sql = "SELECT * FROM CUSTOMERS LIMIT :offset, :limit";
+
+            MapSqlParameterSource parameters = new MapSqlParameterSource();
+            parameters.addValue("offset", offset);
+            parameters.addValue("limit", limit);
+
+            return namedParameterJdbcTemplate.query(sql,
+                    parameters,
+                    new RowMapper<Customer>() {
+                        @Override
+                        public Customer mapRow(ResultSet rs, int row) throws SQLException {
+                            Customer e = new Customer();
+                            e.setId(rs.getInt("id"));
+                            e.setName(rs.getString("name"));
+                            e.setPhone(rs.getString("phone"));
+                            e.setIdentityCard(rs.getString("identityCard"));
+                            e.setNumberCard(rs.getString("numbercard"));
+                            e.setAccountBalance(rs.getInt("accountbalance"));
+                            e.setPromotionsId(rs.getInt("PromotionsId"));
+                            e.setDebtMax(rs.getInt("DebtMax"));
+                            e.setPromotion(e.getPromotionsId() > 0 ? promotionsCustomerDAO.findPromotionById(e.getPromotionsId()) : null);
+                            return e;
+                        }
+                    });
+        }
 
     // Đếm số sản phẩm còn lại
     public Integer getRemainCustomersCount() {

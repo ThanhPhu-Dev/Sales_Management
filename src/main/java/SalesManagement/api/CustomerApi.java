@@ -147,7 +147,8 @@ public class CustomerApi {
     //[GET] lấy danh sách khách hàng giới hạn là 5
     @GetMapping("/api/customers")
     public Map<String, List<Customer>> getProducts(@RequestParam(defaultValue = "0") int offset,
-                                                  @RequestParam(defaultValue = "10") int limit) {
+                                                  @RequestParam(defaultValue = "10") int limit,
+                                                  @RequestParam String searchValue) {
         List<Customer> customers = _customerDAO.getCustomersPagination(offset, limit);
         HashMap<String, List<Customer>> map = new HashMap<>();
         map.put("customers", customers);

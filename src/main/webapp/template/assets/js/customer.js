@@ -1,5 +1,7 @@
 const state = {
     customersTableId: 'customerTable',
+    formSearchId: 'form-search',
+    numberSearchId: 'form-numberSearch',
 }
 
 const pagination = {
@@ -11,11 +13,21 @@ const pagination = {
     pageNumberShow: 5,
 }
 
-let selectedProductIds = [];
+let searchValue = '';
 const urlParams = new URLSearchParams(window.location.search);
 const customerId = urlParams.get('id');
 
 document.addEventListener('DOMContentLoaded', async () => {
+    const formSearch = document.querySelector(`#${state.numberSearchId}`);
+    
+    //bắt event khi ấn tìm kiếm
+    formSearch.addEventListener('submit', e => {
+        e.preventDefault();
+        searchValue = document.querySelector(`#${state.numberSearchId}`);
+        
+//        await getCustomersAPI();
+    });
+    
     await getCustomersAPI();
 });
 
@@ -26,6 +38,7 @@ const getCustomersAPI = async () => {
             params: {
                 offset: pagination.offset,
                 limit: pagination.limit,
+                numberCard: searchValue,
             }
         }, {
             headers: {
