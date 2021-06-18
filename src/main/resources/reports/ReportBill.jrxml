@@ -2,30 +2,30 @@
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportBill" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8df455c-2010-4be3-b76a-a83683a55ae7">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
-	<parameter name="id" class="java.lang.Integer"/>
+	<parameter name="id" class="java.lang.String"/>
 	<parameter name="nameCustomer" class="java.lang.String"/>
 	<parameter name="namePromotionCustomer" class="java.lang.String"/>
 	<parameter name="numberCard" class="java.lang.String"/>
 	<parameter name="percentDiscountCustomer" class="java.lang.Float"/>
 	<parameter name="discount" class="java.lang.Float"/>
-	<parameter name="accountBalance" class="java.lang.Integer"/>
+	<parameter name="accountBalance" class="java.lang.String"/>
 	<parameter name="createAt" class="java.lang.String"/>
-	<parameter name="sumBill" class="java.lang.Integer"/>
-	<parameter name="promotionCustomerPrice" class="java.lang.Integer"/>
-	<parameter name="discountPrice" class="java.lang.Integer"/>
-	<parameter name="total" class="java.lang.Integer"/>
+	<parameter name="sumBill" class="java.lang.String"/>
+	<parameter name="promotionCustomerPrice" class="java.lang.String"/>
+	<parameter name="discountPrice" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
 	<field name="stt" class="java.lang.Integer"/>
 	<field name="nameProduct" class="java.lang.String"/>
-	<field name="specification" class="java.lang.Integer"/>
-	<field name="historicalCost" class="java.lang.Integer"/>
+	<field name="specification" class="java.lang.String"/>
+	<field name="historicalCost" class="java.lang.String"/>
 	<field name="tradeDiscount" class="java.lang.Float"/>
 	<field name="namePromotionProduct" class="java.lang.String"/>
 	<field name="percentDiscountProduct" class="java.lang.Float"/>
-	<field name="quantity" class="java.lang.Integer"/>
-	<field name="lastPrice" class="java.lang.Integer"/>
+	<field name="quantity" class="java.lang.String"/>
+	<field name="lastPrice" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -36,22 +36,332 @@
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
-					<font fontName="Arial" size="20" pdfEncoding=""/>
+					<font fontName="DejaVu Sans" size="20" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[PHẦN MỀM QUẢN LÝ BÁN HÀNG]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="104" splitType="Stretch"/>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="64b70bea-97ba-4b1a-a35a-0c6fbaa5e753"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Mã Hóa Đơn:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="20" uuid="3de67c98-7e1c-4db0-9d13-8360ebf74104"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Họ Tên:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="20" uuid="9599f943-e2b8-47a8-b164-a4d7e78fa828"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Loại Khách Hàng:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="20" uuid="6db0041d-57cb-4bf7-932b-f2ad2a1cb866"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Số Tài Khoản:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="0" width="120" height="19" uuid="4cf9eca6-7258-4106-9471-6e41f2658255"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Ưu Đãi Khách Hàng(%):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="19" width="120" height="20" uuid="1c2d6897-a906-4fb2-9ce6-68248c8b6751"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Giảm Giá(%):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="40" width="120" height="20" uuid="e150bab0-7fe5-477e-830e-a1f8cc596d5b"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Số Tiền Còn Dư:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="62" width="120" height="18" uuid="7e87fde3-63dc-4a39-b8e0-dabb4773450f"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Ngày Thanh Toán:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="0" width="160" height="19" uuid="6f8314cc-9f8b-4817-aff1-b54a23b211af"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="40" width="160" height="22" uuid="73f8dc76-263f-4495-a8c8-22803e4525bd"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namePromotionCustomer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="62" width="160" height="18" uuid="750a349b-266d-4f29-b7a0-ddcf8e51a700"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numberCard}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="140" height="19" uuid="12aea873-6981-4511-af6f-8dd42a745c78"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{percentDiscountCustomer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="20" width="140" height="20" uuid="8d9eea8b-ed8d-44e6-b463-572a206a2283"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{discount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="40" width="140" height="22" uuid="bb9704dd-fef8-4f9b-91fb-1349dde36115"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{accountBalance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="60" width="140" height="20" uuid="6b2c2fed-0486-4609-ad41-3829bc6f69b2"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{createAt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="20" width="160" height="20" uuid="e5ec57c9-0255-4700-826c-d7a15812d824"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nameCustomer}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="40" height="30" uuid="537d87cd-7131-4053-9ed2-467379ca54e9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[STT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="30" width="130" height="30" uuid="1b71b7e2-981b-4340-89fb-a2e94fa4a49c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Tên Sản Phẩm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="30" width="90" height="30" uuid="e5d2f1b0-91db-4815-87da-bea2dd79d0c0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Quy Cách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="30" width="90" height="30" uuid="1be7fdad-1459-4ab3-9975-40947d294975">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Giá Gốc(VND)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="30" width="80" height="30" uuid="df219410-838a-4fde-9d95-b2aa9cb57b25">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Chiết Khấu(%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="30" width="120" height="30" uuid="22649981-0d6f-45cf-8798-a37c2514ae52">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Tên Ưu Đãi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="630" y="30" width="80" height="30" uuid="626f8dd9-b14c-4c8e-a691-c68bf13a3c47">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Số Lượng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="540" y="30" width="90" height="30" uuid="fd32e07a-bf9c-4cba-9d17-3d367a22f581">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Ưu Đãi(%)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="710" y="30" width="90" height="30" uuid="7781ba95-a617-4e0d-a1fb-103674115434"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Giá Cuối(VNĐ)]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="43" splitType="Stretch"/>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="40" height="30" uuid="079a13b3-21bb-4293-a963-a1359d4143f6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{stt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="0" width="130" height="30" uuid="91911994-c35e-4c93-825d-53e6dedd273b"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nameProduct}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="90" height="30" uuid="cfff7312-bb1e-4dc6-ba07-a631667df759"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{specification}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="0" width="90" height="30" uuid="a22c9958-4c33-42ca-bf45-dd91c0e8dfa2"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{historicalCost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="80" height="30" uuid="980306ba-8403-40f7-89d5-169bdc91da6f"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tradeDiscount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="120" height="30" uuid="1b9c3fe7-a353-47c6-a025-c5698c09a03f"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{namePromotionProduct}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="550" y="0" width="90" height="30" uuid="57e5cd1a-38da-48dd-b76e-8b37df205bed"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percentDiscountProduct}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="640" y="0" width="80" height="30" uuid="05105733-8116-485b-ba55-37c40805965a"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="710" y="0" width="90" height="30" uuid="ee636627-07e5-4b17-82c1-90ad946eb41a"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{lastPrice}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<summary>
-		<band height="96" splitType="Stretch"/>
+		<band height="96" splitType="Stretch">
+			<staticText>
+				<reportElement x="480" y="0" width="120" height="20" uuid="f4aabdf7-e6b3-4138-a9e9-5276a35a8232"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Tổng Hóa Đơn(VNĐ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="20" width="120" height="20" uuid="ba1de817-6fd8-416c-b132-907a1a4c9c29"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Ưu Đãi Khách Hàng(VNĐ)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="40" width="120" height="20" uuid="9e501454-7689-490d-8380-1d94232b3b8f"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Giảm Giá(VNĐ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="60" width="120" height="22" uuid="94eebc81-fc2d-4b4a-85a6-456d7b65086d"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<text><![CDATA[Thành Tiền(VNĐ)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="680" y="0" width="120" height="20" uuid="d6c3c11f-0132-4d87-a6a7-7a8ff9fbbce9"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sumBill}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="680" y="20" width="120" height="20" uuid="eab4ecd5-e73d-40a0-ad81-dd185f3edd21"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{promotionCustomerPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="680" y="40" width="120" height="20" uuid="eb698464-32a0-4578-b7dd-852277d1affe"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{discountPrice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="680" y="60" width="120" height="22" uuid="4c103545-abe9-49ca-94d6-114cbe927e36"/>
+				<textElement>
+					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>
