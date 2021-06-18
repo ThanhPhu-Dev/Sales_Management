@@ -140,7 +140,7 @@
 		<!--end json -->
 
 
-		<!-- jasper report -->
+<!--		 jasper report-->
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
@@ -157,6 +157,8 @@
 			<artifactId>jasperreports-fonts</artifactId>
 			<version>6.16.0</version>
 		</dependency>
+
+
 	
 		<!--end jasper report -->
 
