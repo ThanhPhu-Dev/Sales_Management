@@ -157,6 +157,7 @@
 			<artifactId>jasperreports-fonts</artifactId>
 			<version>6.16.0</version>
 		</dependency>
+	
 		<!--end jasper report -->
 
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
