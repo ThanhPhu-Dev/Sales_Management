@@ -70,7 +70,7 @@
                                         <button id="btn-clear-cart" type="button" class="btn btn-danger mr-2">
                                             Xoá tất cả
                                         </button>
-                                        <button id="btn-checkout" type="button" class="btn btn-primary">
+                                        <button id="btn-checkout" type="button" class="btn btn-primary" disabled>
                                             Thanh toán
                                         </button>
                                     </div>
@@ -171,11 +171,11 @@
                                     <div class="col-sm-6">
                                         <!-- Form Group -->
                                         <div class="form-group">
-                                            <label for="customerPromotions">Ưu đãi</label>
+                                            <label for="customerPromotions">Ưu đãi (%)</label>
                                             <input type="text" class="js-masked-input form-control"
                                                    name="customerPromotions"
                                                    id="customerPromotions"
-                                                   value="${customer.getPromotion().getPercentDiscount()}%"
+                                                   value="${customer.getPromotion().getPercentDiscount()}"
                                                    readonly>
                                         </div>
                                         <!-- End Form Group -->
@@ -183,7 +183,7 @@
                                     <div class="col-sm-6">
                                         <!-- Form Group -->
                                         <div class="form-group">
-                                            <label for="customerPromotions">Ưu đãi thêm</label>
+                                            <label for="customerPromotions">Ưu đãi thêm (%)</label>
                                             <input type="text" class="js-masked-input form-control"
                                                    name="extraPromotions"
                                                    id="extraPromotions"
@@ -242,7 +242,23 @@
 
                         <!-- Body -->
                         <div class="card-body">
-                            <table id="productsTable"
+                            <%--SEARCH--%>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="input-group input-group-merge input-group-flush">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fas fa-search"></i>
+                                            </div>
+                                        </div>
+                                        <input id="product-search" type="search" class="form-control" placeholder="Tìm kiếm theo sản phẩm">
+                                        <button type="button" id="btn-search" class="btn btn-outline-primary ml-4">Tìm kiếm</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <%--END SEARCH--%>
+
+                                <table id="productsTable"
                                    class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
                                 <tr>
@@ -318,10 +334,14 @@
 
                 <div class="mb-4">
                     <h2>ĐÃ THANH TOÁN THÀNH CÔNG</h2>
-                    <p>TỔNG CỘNG: 10.000.000</p>
+                    <p>TỔNG CỘNG:
+                        <span class="checkout-success-total"></span>
+                    </p>
                 </div>
-
-                <a class="btn btn-primary" href="/SalesManagement/customer">
+                <a id="btn-to-detail" class="btn btn-secondary mx-2" href="/SalesManagement/Detailbill?id=">
+                    <i class="tio-shopping-basket-outlined mr-1"></i> Xem chi tiết
+                </a>
+                <a class="btn btn-primary mx-2" href="/SalesManagement/customer">
                     <i class="tio-shopping-basket-outlined mr-1"></i> Tiếp tục
                 </a>
             </div>
@@ -335,7 +355,7 @@
             <div class="toast-header">
                 <strong class="mr-auto toast-title">Thành công</strong>
                 <small class="text-muted">just now</small>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <button id="toast-close" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
