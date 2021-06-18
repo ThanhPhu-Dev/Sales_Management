@@ -1,5 +1,5 @@
 const state = {
-    funcBtnclasss: 'btn-table-func',
+    funcBtnClass: 'btn-table-func',
     addDatasetName: 'add',
     removeDatasetName: 'remove',
     addBtnContent: `<i class="fas fa-plus-square"></i> Thêm`,
@@ -89,6 +89,7 @@ const getProductsAPI = async () => {
         if (response.status === 200 && response.data) {
             renderProducts(response.data.products);
             await getRemainProductsCountAPI();
+            sortTableById(state.productsTableId);
         }
 
     } catch (err) {
@@ -171,8 +172,14 @@ const RemoveAndAdd = (tableSend, tableReceive, row) => {
     if (!hasAdded) {
         console.log('add row error');
     }
+
+    // sort table receive
+    // sortTableById(tableReceive);
+}
+
+const handleCartCountChanged = () => {
     // count product selected
-    let productCount = productsSelectedTable.querySelectorAll('tbody > tr')?.length || 0;
+    let productCount = selectedProductIds.length || 0;
     if (productCount > 0) {
         document.querySelectorAll('.cart-quantity-text').forEach(el => {
             if (el.classList.contains('hidden')) {
@@ -188,9 +195,6 @@ const RemoveAndAdd = (tableSend, tableReceive, row) => {
             el.innerHTML = productCount;
         })
     }
-
-    // sort table receive
-    sortTableById(tableReceive);
 }
 
 const handleAddButtonClicked = (row, button) => {
@@ -201,25 +205,32 @@ const handleAddButtonClicked = (row, button) => {
 
     //add id to array
     selectedProductIds.push(row.dataset.id);
+    handleCartCountChanged();
 
     button.dataset.func = state.removeDatasetName;
     button.innerHTML = state.removeBtnContent;
+
+    getProductsAPI();
 }
 
 const handleRemoveButtonClicked = (row, button) => {
     // Tables
     const productsTable = document.querySelector(`#${state.productsTableId}`),
         productsSelectedTable = document.querySelector(`#${state.productsSelectedTableId}`);
-    RemoveAndAdd(productsSelectedTable, productsTable, row);
-
+    // RemoveAndAdd(productsSelectedTable, productsTable, row);
+    productsSelectedTable.querySelector('tbody').removeChild(row);
     selectedProductIds = selectedProductIds.filter(id => id !== row.dataset.id);
+
+    handleCartCountChanged();
+
     row.querySelector('.checkout-table__input').value = 1;
     button.dataset.func = state.addDatasetName;
     button.innerHTML = state.addBtnContent;
+    getProductsAPI();
 }
 
-const sortTableById = (table) => {
-    const rows = table.querySelectorAll('tbody > tr');
+const sortTableById = (tableId) => {
+    const rows = document.querySelectorAll(`#${tableId} > tbody > tr`);
     Array.from(rows)
         .sort((firstRow, secondRow) => {
             // Id là int
@@ -267,7 +278,8 @@ const handleCartChanged = () => {
 
             if (response.data && response.status === 200) {
                 const res = response.data;
-                renderCartBody(res.origin, res.discount, res.sale, res.total);
+                renderCartBody(res.origin, res.discount,
+                    res.productSale, res.customerSale, res.total);
 
             }
         } catch (error) {
@@ -278,13 +290,15 @@ const handleCartChanged = () => {
     callApi();
 }
 
-function renderCartBody(origin, discount, sale, total) {
+function renderCartBody(origin, discount, productSale, customerSale, total) {
     const originElement = document.querySelector('#cart-origin');
     const discountElement = document.querySelector('#cart-discount');
-    const saleElement = document.querySelector('#cart-sale');
+    const productSaleElement = document.querySelector('#cart-product-sale');
+    const customerSaleElement = document.querySelector('#cart-customer-sale');
     const totalElement = document.querySelector('#cart-total');
 
-    [originElement, discountElement, saleElement, totalElement].map((element, i) => {
+    [originElement, discountElement, productSaleElement,
+        customerSaleElement, totalElement].map((element, i) => {
         element.innerHTML =
             `${[...arguments][i]}`.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + "VNĐ";
     })
@@ -337,8 +351,8 @@ const renderProducts = (products) => {
         <td class="lead">${product.name}</td>
         <td class="lead">${product.specification}</td>
         <td class="lead">${product.historicalCost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}</td>
-        <td class="lead">${(product.promotions && product.percentDiscount) || 0}</td>
-        <td class="lead">${product.productSalePrice}</td>
+        <td class="lead">${product?.promotions?.percentDiscount || 0}</td>
+        <td class="lead">${product.productSalePrice.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}</td>
         <td class="lead">
             <input type="number"
                    class="js-masked-input form-control checkout-table__input"
