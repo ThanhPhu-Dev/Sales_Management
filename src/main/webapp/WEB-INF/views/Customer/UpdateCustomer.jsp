@@ -46,8 +46,9 @@
                                                value="${cus.getIdentityCard()}"
                                                placeholder="CMND hoặc số căn cước công dân" required minlength="1" maxlength="12">
                                         <span class="focus-border"></span>
+                                        <span class="error-identity" style="color: red; display: none"></span>
+
                                     </div>
-                                    <span class="error-identity" style="color: red; display: none">Số tài khoản đã tồn tại</span>
                                 </div>
                             </div>
                             <div class="col">
@@ -58,8 +59,8 @@
                                                value="${cus.getPhone()}"
                                                placeholder="Số điện thoại" required minlength="1" maxlength="11">
                                         <span class="focus-border"></span>
+                                        <span class="error-phone" style="color: red; display: none"></span>
                                     </div>
-                                    <span class="error-phone" style="color: red; display: none">Số điện thoại đã tồn tại</span>
                                 </div>
                             </div>
                         </div>

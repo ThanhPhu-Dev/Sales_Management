@@ -37,8 +37,8 @@ public class CustomerDAO {
                 customer.setAccountBalance(resultSet.getInt("accountbalance"));
                 customer.setPromotionsId(resultSet.getInt("PromotionsId"));
                 customer.setDebtMax(resultSet.getInt("DebtMax"));
-                customer.setPromotion(customer.getPromotionsId() > 0 ?
-                        promotionsCustomerDAO.findPromotionById(customer.getPromotionsId()) : null);
+                customer.setPromotion(customer.getPromotionsId() > 0
+                        ? promotionsCustomerDAO.findPromotionById(customer.getPromotionsId()) : null);
                 return customer;
             }
         });
@@ -75,16 +75,14 @@ public class CustomerDAO {
     public int AddCustomer(Customer cus) {
         String sql;
         //nếu mã ưu đãi = -1 thì khỏi insert nó
-        if(cus.getPromotionsId() > -1)
-        {
+        if (cus.getPromotionsId() > -1) {
             sql = String.format("insert into Customers (Name, NumberCard, Phone, IdentityCard, AccountBalance, PromotionsId) values "
-                + "('%s', '%s', '%s', '%s', '%d', '%d')",
-                cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getAccountBalance(), cus.getPromotionsId());
-        }
-        else{
+                    + "('%s', '%s', '%s', '%s', '%d', '%d')",
+                    cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getAccountBalance(), cus.getPromotionsId());
+        } else {
             sql = String.format("insert into Customers (Name, NumberCard, Phone, IdentityCard, AccountBalance) values "
-                + "('%s', '%s', '%s', '%s', '%d')",
-                cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getAccountBalance());
+                    + "('%s', '%s', '%s', '%s', '%d')",
+                    cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getAccountBalance());
         }
         return template.update(sql);
     }
@@ -92,14 +90,12 @@ public class CustomerDAO {
     public int UpdateCustomer(Customer cus) {
         String sql;
         //nếu mã ưu đãi = -1 thì khỏi set nó
-        if(cus.getPromotionsId() > -1)
-        {
+        if (cus.getPromotionsId() > -1) {
             sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', Phone = '%s', IdentityCard = '%s',  PromotionsId = '%d' where Id = '%d' ",
-                cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getPromotionsId(), cus.getId());
-        }
-        else{
-            sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', PromotionsId = NULL where Id = '%d' ", 
-                cus.getName(), cus.getNumberCard(), cus.getId());
+                    cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getPromotionsId(), cus.getId());
+        } else {
+            sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', PromotionsId = NULL where Id = '%d' ",
+                    cus.getName(), cus.getNumberCard(), cus.getId());
         }
         return template.update(sql);
     }
@@ -109,6 +105,7 @@ public class CustomerDAO {
         int rows = template.queryForObject(sql, new Object[]{card}, (Integer.class));
         return rows;
     }
+
     public int findCustomerByIdentity(String card) {
         String sql = "select count(*) from Customers where IdentityCard = ?";
         int rows = template.queryForObject(sql, new Object[]{card}, (Integer.class));
@@ -119,42 +116,54 @@ public class CustomerDAO {
         String sql = "UPDATE CUSTOMERS SET ACCOUNTBALANCE = ? WHERE ID = ?";
         return template.update(sql, new Object[]{newAccountBalance, id});
     }
-        public List<Customer> getCustomersPagination(int offset, int limit) {
-            NamedParameterJdbcTemplate namedParameterJdbcTemplate
-                    = new NamedParameterJdbcTemplate(template.getDataSource());
-            String sql = "SELECT * FROM CUSTOMERS LIMIT :offset, :limit";
 
-            MapSqlParameterSource parameters = new MapSqlParameterSource();
-            parameters.addValue("offset", offset);
-            parameters.addValue("limit", limit);
+    public List<Customer> getCustomersPagination(int offset, int limit, String searchValue) {
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate
+                = new NamedParameterJdbcTemplate(template.getDataSource());
+        String sql = "SELECT * FROM CUSTOMERS LIMIT :offset, :limit";
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
 
-            return namedParameterJdbcTemplate.query(sql,
-                    parameters,
-                    new RowMapper<Customer>() {
-                        @Override
-                        public Customer mapRow(ResultSet rs, int row) throws SQLException {
-                            Customer e = new Customer();
-                            e.setId(rs.getInt("id"));
-                            e.setName(rs.getString("name"));
-                            e.setPhone(rs.getString("phone"));
-                            e.setIdentityCard(rs.getString("identityCard"));
-                            e.setNumberCard(rs.getString("numbercard"));
-                            e.setAccountBalance(rs.getInt("accountbalance"));
-                            e.setPromotionsId(rs.getInt("PromotionsId"));
-                            e.setDebtMax(rs.getInt("DebtMax"));
-                            e.setPromotion(e.getPromotionsId() > 0 ? promotionsCustomerDAO.findPromotionById(e.getPromotionsId()) : null);
-                            return e;
-                        }
-                    });
+        if (!searchValue.equals("")) {
+            sql = "SELECT * FROM CUSTOMERS WHERE Phone like :numPhone OR IdentityCard like :numCard LIMIT :offset, :limit";
+            parameters.addValue("numPhone", "%" + searchValue + "%");
+            parameters.addValue("numCard", "%" + searchValue + "%");
         }
 
+        parameters.addValue("offset", offset);
+        parameters.addValue("limit", limit);
+
+        return namedParameterJdbcTemplate.query(sql,
+                parameters,
+                new RowMapper<Customer>() {
+            @Override
+            public Customer mapRow(ResultSet rs, int row) throws SQLException {
+                Customer e = new Customer();
+                e.setId(rs.getInt("id"));
+                e.setName(rs.getString("name"));
+                e.setPhone(rs.getString("phone"));
+                e.setIdentityCard(rs.getString("identityCard"));
+                e.setNumberCard(rs.getString("numbercard"));
+                e.setAccountBalance(rs.getInt("accountbalance"));
+                e.setPromotionsId(rs.getInt("PromotionsId"));
+                e.setDebtMax(rs.getInt("DebtMax"));
+                e.setPromotion(e.getPromotionsId() > 0 ? promotionsCustomerDAO.findPromotionById(e.getPromotionsId()) : null);
+                return e;
+            }
+        });
+    }
+
     // Đếm số sản phẩm còn lại
-    public Integer getRemainCustomersCount() {
+    public Integer getRemainCustomersCount(String searchValue) {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate
                 = new NamedParameterJdbcTemplate(template.getDataSource());
         String sql = "SELECT COUNT(*) FROM CUSTOMERS";
-
         MapSqlParameterSource parameters = new MapSqlParameterSource();
+
+        if (!searchValue.equals("")) {
+            sql = "SELECT COUNT(*) FROM CUSTOMERS WHERE Phone like :numPhone OR IdentityCard like :numCard";
+            parameters.addValue("numPhone", "%" + searchValue + "%");
+            parameters.addValue("numCard", "%" + searchValue + "%");
+        }
 
         return namedParameterJdbcTemplate.queryForObject(sql, parameters, Integer.class);
     }

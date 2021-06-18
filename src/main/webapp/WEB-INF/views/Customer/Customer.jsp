@@ -136,3 +136,4 @@
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="<c:url value='/template/assets/js/customer.js' />"></script>
+<script src="<c:url value='/template/assets/js/test.js' />"></script>

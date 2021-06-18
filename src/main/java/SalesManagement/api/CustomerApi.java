@@ -149,18 +149,25 @@ public class CustomerApi {
     public Map<String, List<Customer>> getProducts(@RequestParam(defaultValue = "0") int offset,
                                                   @RequestParam(defaultValue = "10") int limit,
                                                   @RequestParam String searchValue) {
-        List<Customer> customers = _customerDAO.getCustomersPagination(offset, limit);
         HashMap<String, List<Customer>> map = new HashMap<>();
-        map.put("customers", customers);
+        
+        try {
+            List<Customer> customers = _customerDAO.getCustomersPagination(offset, limit, searchValue);
+            
+            map.put("customers", customers);
 
-        // Anotation @ResponseBody trả về dữ liệu JSON.
+            // Anotation @ResponseBody trả về dữ liệu JSON.
+            
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
         return map;
     }
 
     //Phương thức đếm số khách hàng còn lại
     @GetMapping("/api/customers/remain")
-    public Map<String, Integer> getProducts() {
-        Integer remain = _customerDAO.getRemainCustomersCount();
+    public Map<String, Integer> getProducts(@RequestParam String searchValue) {
+        Integer remain = _customerDAO.getRemainCustomersCount(searchValue);
         HashMap<String, Integer> map = new HashMap<>();
         map.put("remain", remain);
 
