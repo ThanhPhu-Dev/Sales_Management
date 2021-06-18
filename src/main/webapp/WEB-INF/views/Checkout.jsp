@@ -46,8 +46,15 @@
                                     <hr class="my-4">
 
                                     <div class="row align-items-center">
-                                        <span class="col-5">Giảm giá:</span>
-                                        <h4 id="cart-sale" class="col-7 text-right text-dark mb-0">0 VNĐ</h4>
+                                        <span class="col-5">Giảm giá sản phẩm:</span>
+                                        <h4 id="cart-product-sale" class="col-7 text-right text-dark mb-0">0 VNĐ</h4>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <div class="row align-items-center">
+                                        <span class="col-5">Giảm giá khách hàng:</span>
+                                        <h4 id="cart-customer-sale" class="col-7 text-right text-dark mb-0">0 VNĐ</h4>
                                     </div>
 
                                     <hr class="my-4">
@@ -98,6 +105,33 @@
                                            readonly>
                                 </div>
                                 <!-- End Form Group -->
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <!-- Form Group -->
+                                        <div class="form-group">
+                                            <label for="phoneNumber" class="input-label">Số điện thoại</label>
+                                            <input type="text" class="form-control"
+                                                   name="phoneNumber"
+                                                   id="phoneNumber"
+                                                   value="${customer.getPhone()}"
+                                                   readonly>
+                                        </div>
+                                        <!-- End Form Group -->
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <!-- Form Group -->
+                                        <div class="form-group">
+                                            <label for="cmnd" class="input-label">CMND/CCCD</label>
+                                            <input type="text" class="js-masked-input form-control"
+                                                   readonly id="cmnd"
+                                                   name="cmnd" value="${customer.getIdentityCard()}"
+                                            >
+                                        </div>
+                                        <!-- End Form Group -->
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -154,32 +188,36 @@
                                         </div>
                                         <!-- End Form Group -->
                                     </div>
-<%--                                    <div class="col-sm-6">--%>
-<%--                                            &lt;%&ndash;                                        <label class="input-label">Khách hàng</label>&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                        <!-- Custom Radio -->&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                        <div class="custom-control custom-radio">&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                            <input type="radio" class="custom-control-input"&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                                   name="accountType"&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                                   checked&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                                   readonly>&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                            <label class="custom-control-label"&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                                   for="userAccountTypeRadio1">Thường</label>&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                        </div>&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                        <!-- End Custom Radio -->&ndash;%&gt;--%>
-
-<%--                                            &lt;%&ndash;                                        <!-- Custom Radio -->&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                        <div class="custom-control custom-radio">&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                            <input type="radio" class="custom-control-input"&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                                   name="accountType"&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                                   readonly>&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                            <label class="custom-control-label" for="userAccountTypeRadio2">Công&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                                nợ</label>&ndash;%&gt;--%>
-<%--                                            &lt;%&ndash;                                        </div>&ndash;%&gt;--%>
-<%--                                        <!-- End Custom Radio -->--%>
-<%--                                    </div>--%>
                                 </div>
                                 <!-- End Row -->
-                            </div>
+                                <!-- ROW -->
+                                    <div class="form-group">
+                                        <label class="input-label">Khách hàng</label>
+                                        <!-- Custom Radio -->
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input"
+                                                   name="accountType"
+                                                   id="normalType"
+                                                   checked="${!customer.debtor}"
+                                                   readonly>
+                                            <label class="custom-control-label"
+                                                   for="normalType">Thường</label>
+                                        </div>
+                                        <!-- End Custom Radio -->
+
+                                        <!-- Custom Radio -->
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input"
+                                                   name="accountType"
+                                                   id="debtorType"
+                                                   checked="${customer.debtor}"
+                                                   readonly>
+                                            <label class="custom-control-label"
+                                                   for="debtorType">Công nợ</label>
+                                        </div>
+                                        <!-- End Custom Radio -->
+                                    </div>
+                                </div>
                             <!-- Body -->
                         </div>
                     </c:if>

@@ -111,4 +111,9 @@ public class CustomerDAO {
         int rows = template.queryForObject(sql, new Object[]{card}, (Integer.class));
         return rows;
     }
+
+    public int updateAccountBalance(int id, float newAccountBalance) {
+        String sql = "UPDATE CUSTOMERS SET ACCOUNTBALANCE = ? WHERE ID = ?";
+        return template.update(sql, new Object[] {newAccountBalance, id});
+    }
 }
