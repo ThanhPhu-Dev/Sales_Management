@@ -307,56 +307,56 @@
 	<summary>
 		<band height="96" splitType="Stretch">
 			<staticText>
-				<reportElement x="480" y="0" width="120" height="20" uuid="f4aabdf7-e6b3-4138-a9e9-5276a35a8232"/>
+				<reportElement x="560" y="0" width="120" height="20" uuid="f4aabdf7-e6b3-4138-a9e9-5276a35a8232"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[Tổng Hóa Đơn(VNĐ)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="20" width="120" height="20" uuid="ba1de817-6fd8-416c-b132-907a1a4c9c29"/>
+				<reportElement x="560" y="20" width="120" height="20" uuid="ba1de817-6fd8-416c-b132-907a1a4c9c29"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[Ưu Đãi Khách Hàng(VNĐ)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="40" width="120" height="20" uuid="9e501454-7689-490d-8380-1d94232b3b8f"/>
+				<reportElement x="560" y="40" width="120" height="20" uuid="9e501454-7689-490d-8380-1d94232b3b8f"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[Giảm Giá(VNĐ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="60" width="120" height="22" uuid="94eebc81-fc2d-4b4a-85a6-456d7b65086d"/>
+				<reportElement x="560" y="60" width="120" height="22" uuid="94eebc81-fc2d-4b4a-85a6-456d7b65086d"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
 				</textElement>
 				<text><![CDATA[Thành Tiền(VNĐ)]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="680" y="0" width="120" height="20" uuid="d6c3c11f-0132-4d87-a6a7-7a8ff9fbbce9"/>
+				<reportElement x="720" y="0" width="80" height="20" uuid="d6c3c11f-0132-4d87-a6a7-7a8ff9fbbce9"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{sumBill}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="680" y="20" width="120" height="20" uuid="eab4ecd5-e73d-40a0-ad81-dd185f3edd21"/>
+				<reportElement x="720" y="20" width="80" height="20" uuid="eab4ecd5-e73d-40a0-ad81-dd185f3edd21"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{promotionCustomerPrice}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="680" y="40" width="120" height="20" uuid="eb698464-32a0-4578-b7dd-852277d1affe"/>
+				<reportElement x="720" y="40" width="80" height="20" uuid="eb698464-32a0-4578-b7dd-852277d1affe"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{discountPrice}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="680" y="60" width="120" height="22" uuid="4c103545-abe9-49ca-94d6-114cbe927e36"/>
+				<reportElement x="720" y="60" width="80" height="22" uuid="4c103545-abe9-49ca-94d6-114cbe927e36"/>
 				<textElement>
 					<font fontName="DejaVu Sans" pdfEncoding="Identity-H"/>
 				</textElement>

@@ -6,14 +6,14 @@
     <!-- Content -->
     <div class="content container-fluid">
         <!-- Step Form -->
-        <form>
+        <form id="checkout-form">
             <!-- Content Step Form -->
             <div class="row">
                 <div class="col-lg-1 order-lg-2">
                     <%--CART BUTTON--%>
                     <div class="cart-wrapper">
                         <div class="btn-cart rounded-circle shadow d-flex align-items-center justify-content-center"
-                             data-hidden="true" >
+                             data-hidden="true">
                             <span class="text-dark">
                                 <i class="fas fa-shopping-cart fa-2x"></i>
                                 <span id="cart-notify" class="cart-quantity cart-quantity-text hidden"></span>
@@ -25,7 +25,8 @@
                             <div class="card">
                                 <!-- Header -->
                                 <div class="card-header">
-                                    <h4 class="card-header-title">Giỏ hàng (<span class="cart-quantity-text">0</span>)</h4>
+                                    <h4 class="card-header-title">Giỏ hàng (<span class="cart-quantity-text">0</span>)
+                                    </h4>
                                 </div>
                                 <!-- End Header -->
 
@@ -153,11 +154,13 @@
                                         <div class="form-group">
                                             <label for="accountBalance" class="input-label">Số dư tài
                                                 khoản</label>
-                                            <input type="text" class="js-masked-input form-control"
+                                            <input type="text" class="js-masked-input form-control${customer.debtor ?
+                                            ' border border-danger' : ''}"
                                                    readonly id="accountBalance"
                                                    name="accountBalance" value="<fmt:formatNumber type = "number"
                                                   currencyCode="" value = "${customer.getAccountBalance()}" /> VND"
                                             >
+                                            <p class="text-danger ${customer.debtor ? 'd-block' : 'd-none'}">* Công nợ của khách hàng đã vượt quá hạn mức!</p>
                                         </div>
                                         <!-- End Form Group -->
                                     </div>
@@ -191,33 +194,39 @@
                                 </div>
                                 <!-- End Row -->
                                 <!-- ROW -->
-                                    <div class="form-group">
-                                        <label class="input-label">Khách hàng</label>
-                                        <!-- Custom Radio -->
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input"
-                                                   name="accountType"
-                                                   id="normalType"
-                                                   checked="${!customer.debtor}"
-                                                   readonly>
-                                            <label class="custom-control-label"
-                                                   for="normalType">Thường</label>
-                                        </div>
-                                        <!-- End Custom Radio -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="input-label">Khách hàng</label>
+                                            <!-- Custom Radio -->
+                                            <div class="custom-control custom-radio">
+                                                <input style="pointer-events: none" type="radio" class="custom-control-input"
+                                                       name="accountType"
+                                                       id="normalType"
+                                                    ${!customer.debtor ? 'checked' : ''}
+                                                    ${customer.debtor ? 'disabled' : ''}
+                                                       readonly>
+                                                <label class="custom-control-label"
+                                                       for="normalType">Thường</label>
+                                            </div>
+                                            <!-- End Custom Radio -->
 
-                                        <!-- Custom Radio -->
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input"
-                                                   name="accountType"
-                                                   id="debtorType"
-                                                   checked="${customer.debtor}"
-                                                   readonly>
-                                            <label class="custom-control-label"
-                                                   for="debtorType">Công nợ</label>
+                                            <!-- Custom Radio -->
+                                            <div class="custom-control custom-radio">
+                                                <input style="pointer-events: none" type="radio" class="custom-control-input"
+                                                       name="accountType"
+                                                       id="debtorType"
+                                                    ${customer.debtor ? 'checked' : ''}
+                                                    ${!customer.debtor ? 'disabled' : ''}
+                                                       readonly>
+                                                <label class="custom-control-label"
+                                                       for="debtorType">Công nợ</label>
+                                            </div>
+                                            <!-- End Custom Radio -->
                                         </div>
-                                        <!-- End Custom Radio -->
                                     </div>
                                 </div>
+                            </div>
                             <!-- Body -->
                         </div>
                     </c:if>
@@ -233,18 +242,19 @@
 
                         <!-- Body -->
                         <div class="card-body">
-                            <table id="productsTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
+                            <table id="productsTable"
+                                   class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
-                                    <tr>
-                                        <th>Mã</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Quy cách (kg)</th>
-                                        <th>Giá gốc</th>
-                                        <th>Ưu đãi (%)</th>
-                                        <th>Giá bán</th>
-                                        <th>Số lượng</th>
-                                        <th>Chức năng</th>
-                                    </tr>
+                                <tr>
+                                    <th>Mã</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Quy cách (kg)</th>
+                                    <th>Giá gốc</th>
+                                    <th>Ưu đãi (%)</th>
+                                    <th>Giá bán</th>
+                                    <th>Số lượng</th>
+                                    <th>Chức năng</th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -272,7 +282,8 @@
 
                         <!-- Body -->
                         <div class="card-body">
-                            <table id="productsSelectedTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
+                            <table id="productsSelectedTable"
+                                   class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
                                 <tr>
                                     <th>Mã</th>
@@ -299,9 +310,8 @@
             <!-- End Step Form -->
         </form>
         <!-- End Step Form -->
-
         <!-- Message Body -->
-        <div id="checkoutStepSuccessMessage" style="display: none;">
+        <div id="checkoutStepSuccessMessage" class="d-none">
             <div class="text-center">
                 <img class="img-fluid mb-3" src="<c:url value='/template/assets/svg/illustrations/hi-five.svg' />"
                      alt="Image Description" style="max-width: 15rem;">
@@ -319,6 +329,21 @@
         <!-- End Message Body -->
     </div>
     <!-- End Content -->
+    <%--TOAST MESSAGE--%>
+    <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 101; right: 0; bottom: 0;">
+        <div id="checkout-toast" class="toast" role="alert hide" aria-live="assertive" aria-atomic="true" data-delay="2000">
+            <div class="toast-header">
+                <strong class="mr-auto toast-title">Thành công</strong>
+                <small class="text-muted">just now</small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+            </div>
+        </div>
+    </div>
+    <%--END TOAST MESSAGE--%>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 <script src="<c:url value='/template/assets/js/checkout.js' />"></script>

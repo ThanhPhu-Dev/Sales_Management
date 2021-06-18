@@ -42,6 +42,7 @@ public class CheckoutAPI {
         float discount = (float) 0;
         float customerSale = (float) 0;
         float totalOfProducts = (float) 0;
+        boolean isDeptor = false;
 
         // parse to json object
         JSONObject bodyJSON = new JSONObject(body);
@@ -71,13 +72,18 @@ public class CheckoutAPI {
 
         float totalOfBill = totalOfProducts - customerSale;
 
+        //Kiểm tra có sản phẩm trong giỏ hàng và khách hàng không phải là công nợ vượt mức
+        if(productsJSON.length() > 0 && !customer.isDebtor()) {
+            isDeptor = customer.isDebtor(Math.round(totalOfBill));
+        }
+
         HashMap<String, String> map = new HashMap<>();
         map.put("origin", Float.toString(originPrice));
         map.put("productSale", Float.toString(productSale));
         map.put("customerSale", Float.toString(customerSale));
         map.put("discount", Float.toString(discount));
         map.put("total", Float.toString(totalOfBill));
-        map.put("isDeptor", Boolean.toString(customer.isDebtor(Math.round(totalOfBill))));
+        map.put("isDeptor", Boolean.toString(isDeptor));
 
         // Anotation @ResponseBody trả về dữ liệu JSON.
         return map;
