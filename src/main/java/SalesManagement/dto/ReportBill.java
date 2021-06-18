@@ -6,11 +6,11 @@ import lombok.Data;
 public class ReportBill {
     private Integer stt;
     private String nameProduct;
-    private Integer specification;
-    private Integer historicalCost;
+    private String specification;
+    private String historicalCost;
     private Float tradeDiscount;
     private String namePromotionProduct;
     private Float percentDiscountProduct;
-    private Integer quantity;
-    private Integer lastPrice;
+    private String quantity;
+    private String lastPrice;
 }
