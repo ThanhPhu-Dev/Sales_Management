@@ -117,7 +117,8 @@ public class CustomerDAO {
 
     public int updateAccountBalance(int id, float newAccountBalance) {
         String sql = "UPDATE CUSTOMERS SET ACCOUNTBALANCE = ? WHERE ID = ?";
-        return template.update(sql, new Object[] {newAccountBalance, id});
+        return template.update(sql, new Object[]{newAccountBalance, id});
+    }
     
     public List<Customer> getCustomersPagination(int offset, int limit) {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate

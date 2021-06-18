@@ -13,7 +13,7 @@
                     <%--CART BUTTON--%>
                     <div class="cart-wrapper">
                         <div class="btn-cart rounded-circle shadow d-flex align-items-center justify-content-center"
-                             data-hidden="true" >
+                             data-hidden="true">
                             <span class="text-dark">
                                 <i class="fas fa-shopping-cart fa-2x"></i>
                                 <span id="cart-notify" class="cart-quantity cart-quantity-text hidden"></span>
@@ -25,7 +25,8 @@
                             <div class="card">
                                 <!-- Header -->
                                 <div class="card-header">
-                                    <h4 class="card-header-title">Giỏ hàng (<span class="cart-quantity-text">0</span>)</h4>
+                                    <h4 class="card-header-title">Giỏ hàng (<span class="cart-quantity-text">0</span>)
+                                    </h4>
                                 </div>
                                 <!-- End Header -->
 
@@ -191,33 +192,35 @@
                                 </div>
                                 <!-- End Row -->
                                 <!-- ROW -->
-                                    <div class="form-group">
-                                        <label class="input-label">Khách hàng</label>
-                                        <!-- Custom Radio -->
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input"
-                                                   name="accountType"
-                                                   id="normalType"
-                                                   checked="${!customer.debtor}"
-                                                   readonly>
-                                            <label class="custom-control-label"
-                                                   for="normalType">Thường</label>
-                                        </div>
-                                        <!-- End Custom Radio -->
-
-                                        <!-- Custom Radio -->
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input"
-                                                   name="accountType"
-                                                   id="debtorType"
-                                                   checked="${customer.debtor}"
-                                                   readonly>
-                                            <label class="custom-control-label"
-                                                   for="debtorType">Công nợ</label>
-                                        </div>
-                                        <!-- End Custom Radio -->
+                                <div class="form-group">
+                                    <label class="input-label">Khách hàng</label>
+                                    <!-- Custom Radio -->
+                                    <div class="custom-control custom-radio">
+                                        <input style="pointer-events: none" type="radio" class="custom-control-input"
+                                               name="accountType"
+                                               id="normalType"
+                                            ${!customer.debtor ? 'checked' : ''}
+                                            ${customer.debtor ? 'disabled' : ''}
+                                               readonly>
+                                        <label class="custom-control-label"
+                                               for="normalType">Thường</label>
                                     </div>
+                                    <!-- End Custom Radio -->
+
+                                    <!-- Custom Radio -->
+                                    <div class="custom-control custom-radio">
+                                        <input style="pointer-events: none" type="radio" class="custom-control-input"
+                                               name="accountType"
+                                               id="debtorType"
+                                            ${customer.debtor ? 'checked' : ''}
+                                            ${!customer.debtor ? 'disabled' : ''}
+                                               readonly>
+                                        <label class="custom-control-label"
+                                               for="debtorType">Công nợ</label>
+                                    </div>
+                                    <!-- End Custom Radio -->
                                 </div>
+                            </div>
                             <!-- Body -->
                         </div>
                     </c:if>
@@ -233,18 +236,19 @@
 
                         <!-- Body -->
                         <div class="card-body">
-                            <table id="productsTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
+                            <table id="productsTable"
+                                   class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
-                                    <tr>
-                                        <th>Mã</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Quy cách (kg)</th>
-                                        <th>Giá gốc</th>
-                                        <th>Ưu đãi (%)</th>
-                                        <th>Giá bán</th>
-                                        <th>Số lượng</th>
-                                        <th>Chức năng</th>
-                                    </tr>
+                                <tr>
+                                    <th>Mã</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Quy cách (kg)</th>
+                                    <th>Giá gốc</th>
+                                    <th>Ưu đãi (%)</th>
+                                    <th>Giá bán</th>
+                                    <th>Số lượng</th>
+                                    <th>Chức năng</th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -272,7 +276,8 @@
 
                         <!-- Body -->
                         <div class="card-body">
-                            <table id="productsSelectedTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
+                            <table id="productsSelectedTable"
+                                   class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
                                 <tr>
                                     <th>Mã</th>
