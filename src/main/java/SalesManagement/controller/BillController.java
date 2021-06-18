@@ -138,23 +138,23 @@ public class BillController {
 		HashMap<String, Object> rs = new HashMap<String, Object>();
 		Map<String, Object> data = datadetailbill(id);
 		Bill bill = (Bill) data.get("bill");
-		rs.put("id", Integer.parseInt((String) data.get("id")));
-		rs.put("nameCustomer", bill.getCustomer().getName());
+
 		if (bill.getPromotionCustomer() != null) {
 			rs.put("namePromotionCustomer", bill.getPromotionCustomer().getName());
 			rs.put("percentDiscountCustomer", bill.getPromotionCustomer().getPercentDiscount());
 		}
 
-
 		Locale localeVN = new Locale("vi", "VN");
 		NumberFormat vn = NumberFormat.getInstance(localeVN);
+		rs.put("id", "HD"+Integer.parseInt((String) data.get("id")));
+		rs.put("nameCustomer", bill.getCustomer().getName());
 		rs.put("numberCard", bill.getCustomer().getNumberCard());
 		rs.put("discount", bill.getDiscount());
 		rs.put("accountBalance", vn.format(bill.getCustomer().getAccountBalance()));
 		rs.put("createAt", (String) data.get("date"));
 		rs.put("sumBill", vn.format((Integer) data.get("sumbill")));
-		rs.put("promotionCustomerPrice", vn.format((Integer) data.get("promotion")));
-		rs.put("discountPrice", vn.format((Integer) data.get("discount")));
+		rs.put("promotionCustomerPrice", "-"+vn.format((Integer) data.get("promotion")));
+		rs.put("discountPrice", "-"+vn.format((Integer) data.get("discount")));
 		rs.put("total", vn.format(bill.getTotal()));
 		return rs;
 
