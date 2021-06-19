@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
         searchValue = document.querySelector(`#${state.numberSearchId}`).value;
         
+        //set lại cái cái số trang
+        pagination.offset = 0;
+        pagination.currentPage = 1;
+        
         await getCustomersAPI();
     });
     

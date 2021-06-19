@@ -8,7 +8,12 @@
 <%@include file="/common/taglib.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <title>Cập nhật khách hàng</title>
-
+<style>
+    .error-identity{
+        color: red;
+        display: block;
+    }
+</style>
 <main id="content" role="main" class="main">
     <!-- Content -->
     <div class="content container-fluid">
@@ -46,7 +51,7 @@
                                                value="${cus.getIdentityCard()}"
                                                placeholder="CMND hoặc số căn cước công dân" required minlength="1" maxlength="12">
                                         <span class="focus-border"></span>
-                                        <span class="error-identity" style="color: red; display: none"></span>
+                                        <span class="error-identity" ></span>
 
                                     </div>
                                 </div>
@@ -102,7 +107,7 @@
                                        minlength="1" maxlength="16" required>
                                 <span class="focus-border"></span>
                             </div>
-                            <span class="error-card" style="color: red; display: none">Số tài khoản đã tồn tại</span>
+                            <span class="error-card" style="color: red; display: none"></span>
                         </div>
                         <div class="d-flex justify-content-center" style="margin: 20px 0 50px 0; ">
                             <button type="submit" id="btnApply" class="btn btn-secondary">Xác nhận</button>
@@ -127,6 +132,9 @@
     const errorCard = document.querySelector('.error-card');
     const errorPhone = document.querySelector('.error-phone');
     const errorIdentity = document.querySelector('.error-identity');
+    const ipIdentity = document.querySelector('#identity');
+    const ipPhone = document.querySelector('#phone');
+    const ipCard = document.querySelector('#card');
     const url = window.location.href;
     const id = url.split('=')[1];
 
@@ -134,9 +142,6 @@
         setInput: function () {
             const ipName = document.querySelector('#name');
             const selectPromotion = document.querySelector('#promotion');
-            const ipCard = document.querySelector('#card');
-            const ipPhone = document.querySelector('#phone');
-            const ipIdentity = document.querySelector('#identity');
 
             ipName.value = '';
             selectPromotion.value = '-1';
@@ -147,23 +152,31 @@
         setRemoveError: function () {
             errorCard.innerHTML = "";
             errorCard.style.display = "none";
+            ipCard.style.borderBottom = "1px solid #ccc";
+            
             errorPhone.innerHTML = "";
             errorPhone.style.display = "block";
+            ipPhone.style.borderBottom = "1px solid #ccc";
+            
             errorIdentity.innerHTML = "";
             errorIdentity.style.display = "block";
+            ipIdentity.style.borderBottom = "1px solid #ccc";
         },
         setError: function (cardError, phoneError, identityError) {
             if (cardError) {
                 errorCard.innerHTML = cardError;
                 errorCard.style.display = "block";
+                ipCard.style.borderBottom = "1px solid red";
             }
             if (phoneError) {
                 errorPhone.innerHTML = phoneError;
                 errorPhone.style.display = "block";
+                ipPhone.style.borderBottom = "1px solid red";
             }
             if (identityError) {
                 errorIdentity.innerHTML = identityError;
                 errorIdentity.style.display = "block";
+                ipIdentity.style.borderBottom = "1px solid red";
             }
         }
     };

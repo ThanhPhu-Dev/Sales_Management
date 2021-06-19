@@ -43,64 +43,14 @@
                         <!--form tìm kiếm--> 
                         <form class="d-flex justify-content-end" id="form-search" method="GET" action="/SalesManagement/customer/search">
                             <input class="form-control me-2" id="numberSearch" name="numberSearch" type="search" placeholder="Nhập số diện thoại hoặc CMND" style="width: 300px">
-                            <button id="btnSearch" class="btn btn-outline-success" type="submit">Tìm kiếm</button>
+                            <!--<button id="btnSearch" class="btn btn-outline-success" type="submit">Tìm kiếm</button>-->
+                            <button id="btnSearch" type="submit" class="btn btn-outline-primary">Tìm kiếm</button>
                         </form> 
                         <!--end form tìm kiếm--> 
                     </div>
                 </div>
             </div>
             <!-- End Header -->
-            <!--table-->
-            <!--            <table id="example" class="ui celled table" style="width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Tên KH</th>
-                                    <th>CMND</th>
-                                    <th>Số điện thoại</th>
-                                    <th>Số tài khoản</th>
-                                    <th>Mã ưu đãi</th>
-                                    <th>Chức năng</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody-cus">
-            
-            <c:forEach var="customer" items="${customers}" varStatus="loop">
-                <tr>
-                    <td>${loop.index + 1}</td>
-                    <td>${customer.getName()}</td>
-                    <td>${customer.getIdentityCard()}</td>
-                    <td>${customer.getPhone()}</td>
-                    <td>${customer.getNumberCard()}</td>
-                    
-                    ưu đãi khách hàng
-                <c:choose >
-                    <c:when test="${customer.promotion.getName() == null}">
-                        <td>Chưa áp dụng</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>${customer.promotion.getName()}</td>
-                    </c:otherwise>
-                </c:choose>
-                end ưu đãi
-                
-                <td class="d-flex justify-content-center">
-                    <div class="btn-group" role="group">
-                        <a class="btn btn-sm btn-white" href="/SalesManagement/payment?id=${customer.getId()}">
-                            <i class="fa fa-credit-card" aria-hidden="true"></i> Nạp tiền
-                        </a>
-                        <a class="btn btn-sm btn-white btn-checkout" href="/SalesManagement/checkout?id=${customer.getId()}">
-                            <i class="fa fa-book" aria-hidden="true"></i> Thanh toán
-                        </a>
-                        <a class="btn btn-sm btn-white btn-checkout" href="/SalesManagement/customer/update?id=${customer.getId()}">
-                            <i class="fa fa-book" aria-hidden="true"></i> Sửa thông tin
-                        </a>
-                    </div>
-                </td>
-            </tr>
-            </c:forEach>
-        </tbody>
-    </table>-->
             <div class="card-body">
                 <table id="customerTable" class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                     <thead class="thead-light">
