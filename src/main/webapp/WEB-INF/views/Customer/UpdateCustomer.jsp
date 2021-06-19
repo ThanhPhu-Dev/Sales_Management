@@ -51,9 +51,8 @@
                                                value="${cus.getIdentityCard()}"
                                                placeholder="CMND hoặc số căn cước công dân" required minlength="1" maxlength="12">
                                         <span class="focus-border"></span>
-                                        <span class="error-identity" ></span>
-
                                     </div>
+                                    <span class="error-identity" ></span>
                                 </div>
                             </div>
                             <div class="col">
@@ -64,8 +63,8 @@
                                                value="${cus.getPhone()}"
                                                placeholder="Số điện thoại" required minlength="1" maxlength="11">
                                         <span class="focus-border"></span>
-                                        <span class="error-phone" style="color: red; display: none"></span>
                                     </div>
+                                    <span class="error-phone" style="color: red; display: none"></span>
                                 </div>
                             </div>
                         </div>
@@ -153,11 +152,11 @@
             errorCard.innerHTML = "";
             errorCard.style.display = "none";
             ipCard.style.borderBottom = "1px solid #ccc";
-            
+
             errorPhone.innerHTML = "";
             errorPhone.style.display = "block";
             ipPhone.style.borderBottom = "1px solid #ccc";
-            
+
             errorIdentity.innerHTML = "";
             errorIdentity.style.display = "block";
             ipIdentity.style.borderBottom = "1px solid #ccc";

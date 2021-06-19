@@ -42,8 +42,8 @@
                                         <input class="input-effect input-primary" name="identity" id="identity" type="text" 
                                                placeholder="CMND hoặc số căn cước công dân" required minlength="1" maxlength="12">
                                         <span class="focus-border"></span>
-                                        <span class="error-identity" style="color: red; display: none"></span>
                                     </div>
+                                    <span class="error-identity" style="color: red; display: none"></span>
                                 </div>
                             </div>
                             <div class="col">
@@ -104,13 +104,14 @@
     const errorPhone = document.querySelector('.error-phone');
     const errorIdentity = document.querySelector('.error-identity');
 
+    const ipCard = document.querySelector('#card');
+    const ipPhone = document.querySelector('#phone');
+    const ipIdentity = document.querySelector('#identity');
+
     const setDefault = {
         setInput: function () {
             const ipName = document.querySelector('#name');
             const selectPromotion = document.querySelector('#promotion');
-            const ipCard = document.querySelector('#card');
-            const ipPhone = document.querySelector('#phone');
-            const ipIdentity = document.querySelector('#identity');
 
             ipName.value = '';
             selectPromotion.value = '-1';
@@ -121,23 +122,31 @@
         setRemoveError: function () {
             errorCard.innerHTML = "";
             errorCard.style.display = "none";
+            ipCard.style.borderBottom = "1px solid #ccc";
+
             errorPhone.innerHTML = "";
             errorPhone.style.display = "block";
+            ipPhone.style.borderBottom = "1px solid #ccc";
+
             errorIdentity.innerHTML = "";
             errorIdentity.style.display = "block";
+            ipIdentity.style.borderBottom = "1px solid #ccc";
         },
         setError: function (cardError, phoneError, identityError) {
             if (cardError) {
                 errorCard.innerHTML = cardError;
                 errorCard.style.display = "block";
+                ipCard.style.borderBottom = "1px solid red";
             }
             if (phoneError) {
                 errorPhone.innerHTML = phoneError;
                 errorPhone.style.display = "block";
+                ipPhone.style.borderBottom = "1px solid red";
             }
             if (identityError) {
                 errorIdentity.innerHTML = identityError;
                 errorIdentity.style.display = "block";
+                ipIdentity.style.borderBottom = "1px solid red";
             }
         }
     };
