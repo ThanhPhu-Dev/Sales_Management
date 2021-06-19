@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     //search event
     document.querySelector('#btn-search').addEventListener('click', async() => {
+        pagination.offset = 0;
+        pagination.currentPage = 1;
         await getProductsAPI();
     })
 
