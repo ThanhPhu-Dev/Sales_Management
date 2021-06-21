@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         cartBody = document.querySelector('.cart-body')
 
 
+
     cartButton.addEventListener('click', (e) => {
         let isHidden = cartButton.dataset.hidden === 'true';
 
@@ -47,9 +48,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         checkout();
     })
 
+    // regex cho ưu đãi thêm
+    document.querySelector('#extraPromotions').addEventListener('change', (e) => {
+        let re = /^[0-1][0-9]*$/;
+        let value = e.target.value;
+        if(!re.test(value)) {
+            e.preventDefault();
+            e.target.value = 0;
+        }
+
+        // call api
+        handleCartChanged();
+    })
+
+    document.querySelector('#toast-close').addEventListener('click', () => {
+        $('#checkout-toast').toast('hide');
+    })
+
+    //search event
+    document.querySelector('#btn-search').addEventListener('click', async() => {
+        pagination.offset = 0;
+        pagination.currentPage = 1;
+        await getProductsAPI();
+    })
+
     await getProductsAPI();
 });
 
+// API
 const checkout = async () => {
     try {
         let values = mapProductQuantity();
@@ -64,7 +90,10 @@ const checkout = async () => {
             }
         })
         if (response.status === 200) {
-            console.log(response);
+            const res = response.data;
+            handleCheckoutResult(res?.success, res?.id);
+            document.querySelector('.checkout-success-total').innerHTML =
+                res?.total.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
         }
 
     } catch (err) {
@@ -79,7 +108,8 @@ const getProductsAPI = async () => {
             params: {
                 offset: pagination.offset,
                 limit: pagination.limit,
-                excludeIds: selectedProductIds.join(',')
+                excludeIds: selectedProductIds.join(','),
+                searchId: document.querySelector('#product-search').value || ''
             }
         }, {
             headers: {
@@ -101,7 +131,8 @@ const getRemainProductsCountAPI = async () => {
     try {
         const response = await axios.get("/SalesManagement/api/products/remain", {
             params: {
-                excludeIds: selectedProductIds.join(',')
+                excludeIds: selectedProductIds.join(','),
+                searchId: document.querySelector('#product-search').value || ''
             }
         }, {
             headers: {
@@ -117,6 +148,67 @@ const getRemainProductsCountAPI = async () => {
     } catch (err) {
         console.log(err);
     }
+}
+
+const handleCartChanged = () => {
+    const values = mapProductQuantity();
+
+    const callApi = async () => {
+        try {
+            const json = JSON.stringify({
+                products: values,
+                customerId: +customerId,
+                extraPromotions: document.querySelector('#extraPromotions').value || 0,
+            });
+            let response = await axios.post('/SalesManagement/api/cart', json, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            if (response.data && response.status === 200) {
+                const res = response.data;
+                renderCartBody(res.origin, res.discount,
+                    res.productSale, res.customerSale, res.total);
+                if(res.isDeptor === 'true') {
+                    showToast('Cảnh báo',
+                        'Nếu mua hàng, khách hàng sẽ có công nợ vượt mức quy định');
+                }
+
+                if(res.success === "false") {
+                    showToast('Cảnh báo',
+                        res.message);
+                    document.querySelector('#btn-checkout').disabled = true;
+                } else {
+                    document.querySelector('#btn-checkout').disabled = false;
+                }
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    callApi();
+}
+// END API
+
+const handleCheckoutResult = (isSuccess, billId) => {
+    if(isSuccess) {
+        let btn = document.querySelector('#btn-to-detail');
+        let href = btn.getAttribute('href');
+        btn.setAttribute('href', `${href}${billId}`);
+        document.querySelector('#checkout-form').classList.add('d-none');
+        document.querySelector('#checkoutStepSuccessMessage').classList.remove('d-none');
+    } else {
+
+    }
+}
+
+const showToast = (header, message) => {
+    document.querySelector('.toast-title').innerHTML = header;
+    document.querySelector('.toast-body').innerHTML = message;
+    $('#checkout-toast').toast('show');
 }
 
 const funcButtonClicked = (funcButton) => {
@@ -143,6 +235,11 @@ const quantityInputChanged = (e) => {
     if (!re.test(value)) {
         e.preventDefault();
         e.target.value = 1;
+    }
+
+    if(e.target.getAttribute('aria-location') === 'selected') {
+        // call api
+        handleCartChanged();
     }
 }
 
@@ -187,14 +284,21 @@ const handleCartCountChanged = () => {
             }
             el.innerHTML = productCount;
         })
+
+        document.querySelector('#btn-checkout').disabled = false;
     } else {
         document.querySelectorAll('.cart-quantity-text').forEach(el => {
             if (!el.classList.contains('hidden')) {
                 el.classList.add('hidden');
             }
             el.innerHTML = productCount;
-        })
+        });
+
+        document.querySelector('#btn-checkout').disabled = true;
     }
+
+    // call api
+    handleCartChanged();
 }
 
 const handleAddButtonClicked = (row, button) => {
@@ -202,7 +306,7 @@ const handleAddButtonClicked = (row, button) => {
     const productsTable = document.querySelector(`#${state.productsTableId}`),
         productsSelectedTable = document.querySelector(`#${state.productsSelectedTableId}`);
     RemoveAndAdd(productsTable, productsSelectedTable, row);
-
+    row.querySelector('td > .checkout-table__input').setAttribute('aria-location', 'selected')
     //add id to array
     selectedProductIds.push(row.dataset.id);
     handleCartCountChanged();
@@ -230,7 +334,8 @@ const handleRemoveButtonClicked = (row, button) => {
 }
 
 const sortTableById = (tableId) => {
-    const rows = document.querySelectorAll(`#${tableId} > tbody > tr`);
+    const table = document.querySelector(`#${tableId}`);
+    const rows = table.querySelectorAll(`tbody > tr`);
     Array.from(rows)
         .sort((firstRow, secondRow) => {
             // Id là int
@@ -260,36 +365,6 @@ const mapProductQuantity = () => {
     return values;
 }
 
-const handleCartChanged = () => {
-    const values = mapProductQuantity();
-
-    const callApi = async () => {
-        try {
-            const json = JSON.stringify({
-                products: values,
-                customerId: +customerId,
-                extraPromotions: document.querySelector('#extraPromotions').value || 0,
-            });
-            let response = await axios.post('/SalesManagement/api/cart', json, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-
-            if (response.data && response.status === 200) {
-                const res = response.data;
-                renderCartBody(res.origin, res.discount,
-                    res.productSale, res.customerSale, res.total);
-
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    callApi();
-}
-
 function renderCartBody(origin, discount, productSale, customerSale, total) {
     const originElement = document.querySelector('#cart-origin');
     const discountElement = document.querySelector('#cart-discount');
@@ -300,7 +375,7 @@ function renderCartBody(origin, discount, productSale, customerSale, total) {
     [originElement, discountElement, productSaleElement,
         customerSaleElement, totalElement].map((element, i) => {
         element.innerHTML =
-            `${[...arguments][i]}`.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + "VNĐ";
+            `${parseInt([...arguments][i])}`.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.") + " VNĐ";
     })
 
 }
@@ -360,6 +435,7 @@ const renderProducts = (products) => {
                    value="1"
                    min="1"
                    onchange="quantityInputChanged(event)"
+                   aria-location="origin"
             >
         </td>
         <td class="text-center">

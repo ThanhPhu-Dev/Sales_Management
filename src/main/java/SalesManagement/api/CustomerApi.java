@@ -147,23 +147,40 @@ public class CustomerApi {
     //[GET] lấy danh sách khách hàng giới hạn là 5
     @GetMapping("/api/customers")
     public Map<String, List<Customer>> getProducts(@RequestParam(defaultValue = "0") int offset,
-                                                  @RequestParam(defaultValue = "10") int limit) {
-        List<Customer> customers = _customerDAO.getCustomersPagination(offset, limit);
+                                                  @RequestParam(defaultValue = "10") int limit,
+                                                  @RequestParam String searchValue) {
         HashMap<String, List<Customer>> map = new HashMap<>();
-        map.put("customers", customers);
+        
+        try {
+            List<Customer> customers = _customerDAO.getCustomersPagination(offset, limit, searchValue);
+            
+            map.put("customers", customers);
 
-        // Anotation @ResponseBody trả về dữ liệu JSON.
+            // Anotation @ResponseBody trả về dữ liệu JSON.
+            
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
         return map;
     }
 
     //Phương thức đếm số khách hàng còn lại
     @GetMapping("/api/customers/remain")
-    public Map<String, Integer> getProducts() {
-        Integer remain = _customerDAO.getRemainCustomersCount();
+    public Map<String, Integer> getProducts(@RequestParam String searchValue) {
+        Integer remain = _customerDAO.getRemainCustomersCount(searchValue);
         HashMap<String, Integer> map = new HashMap<>();
         map.put("remain", remain);
 
         // Anotation @ResponseBody trả về dữ liệu JSON.
+        return map;
+    }
+
+    //Phương thức lấy thông tin 1 khách hàng
+    @GetMapping("/api/customer")
+    public Map<String, Customer> getCustomer(int id) {
+        Customer customer = _customerDAO.findCustomerById(id);
+        HashMap<String, Customer> map = new HashMap<>();
+        map.put("customer", customer);
         return map;
     }
 }
