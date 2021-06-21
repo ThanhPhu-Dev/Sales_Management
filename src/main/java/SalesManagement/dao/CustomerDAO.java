@@ -52,7 +52,7 @@ public class CustomerDAO {
             try {
                 sql = "select * from Customers where Phone like '%" + cusName + "%' OR IdentityCard like '%" + cusName + "%'";
             } catch (Exception e) {
-                return null;
+                return null; 
             }
         }
         return template.query(sql, new RowMapper<Customer>() {
@@ -74,7 +74,7 @@ public class CustomerDAO {
 
     public int AddCustomer(Customer cus) {
         String sql;
-        //nếu mã ưu đãi = -1 thì khỏi insert nó
+        //nếu mã ưu đãi = -1 thì kh�?i insert nó
         if (cus.getPromotionsId() > -1) {
             sql = String.format("insert into Customers (Name, NumberCard, Phone, IdentityCard, AccountBalance, PromotionsId) values "
                     + "('%s', '%s', '%s', '%s', '%d', '%d')",
@@ -89,7 +89,7 @@ public class CustomerDAO {
 
     public int UpdateCustomer(Customer cus) {
         String sql;
-        //nếu mã ưu đãi = -1 thì khỏi set nó
+        //nếu mã ưu đãi = -1 thì kh�?i set nó
         if (cus.getPromotionsId() > -1) {
             sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', Phone = '%s', IdentityCard = '%s',  PromotionsId = '%d' where Id = '%d' ",
                     cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getPromotionsId(), cus.getId());
@@ -152,7 +152,7 @@ public class CustomerDAO {
         });
     }
 
-    // Đếm số sản phẩm còn lại
+    // �?ếm số sản phẩm còn lại
     public Integer getRemainCustomersCount(String searchValue) {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate
                 = new NamedParameterJdbcTemplate(template.getDataSource());
