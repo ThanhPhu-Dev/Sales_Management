@@ -13,7 +13,11 @@ public class PromotionsProductDAO {
     private JdbcTemplate template;
 
     public PromotionsProduct findPromotionById(int id) {
-        String sql = "select * from promotions_products where Id=?";
-        return template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(PromotionsProduct.class));
+        try {
+            String sql = "select * from promotions_products where Id=?";
+            return template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(PromotionsProduct.class));
+        }catch (Exception e){
+            return null;
+        }
     }
 }

@@ -75,10 +75,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="dt" items="${detail}">
-                    <%! int i=1; %>
+                <c:forEach var="dt" items="${detail}" varStatus="theCount">
                     <tr>
-                        <td class="text-center"><%= i++%></td>
+                        <td class="text-center">${theCount.count}</td>
                         <td>${dt.product.name}</td>
                         <td class="text-right">${dt.product.specification}</td>
                         <c:set var = "cvt" value = "${dt.product.historicalCost}" />

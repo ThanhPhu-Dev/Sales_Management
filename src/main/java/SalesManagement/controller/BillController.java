@@ -142,6 +142,9 @@ public class BillController {
 		if (bill.getPromotionCustomer() != null) {
 			rs.put("namePromotionCustomer", bill.getPromotionCustomer().getName());
 			rs.put("percentDiscountCustomer", bill.getPromotionCustomer().getPercentDiscount());
+		}else{
+			rs.put("namePromotionCustomer", "");
+			rs.put("percentDiscountCustomer", 0.0f);
 		}
 
 		Locale localeVN = new Locale("vi", "VN");
@@ -176,8 +179,8 @@ public class BillController {
 			rp.setQuantity(vn.format(dt.getQuantity()));
 			rp.setSpecification(vn.format(dt.getProduct().getSpecification()));
 			rp.setTradeDiscount(dt.getProduct().getTradeDiscount());
-			rp.setNamePromotionProduct(dt.getPromotion().getName());
-			rp.setPercentDiscountProduct(dt.getProduct().getTradeDiscount());
+			rp.setNamePromotionProduct(dt.getPromotion() != null? dt.getPromotion().getName(): "");
+			rp.setPercentDiscountProduct(dt.getPromotion() != null? dt.getPromotion().getPercentDiscount(): 0.0f);
 			item.add(rp);
 		}
 		return new JRBeanCollectionDataSource(item);

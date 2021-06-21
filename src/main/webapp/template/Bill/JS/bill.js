@@ -19,6 +19,8 @@ async function initTableData() {
                 }
             });
 
+
+
             table = $('#datatablebill').DataTable({
                 "pageLength": 10,
                 "oLanguage": {
