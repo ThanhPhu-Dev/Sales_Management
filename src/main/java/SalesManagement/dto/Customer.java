@@ -29,4 +29,29 @@ public class Customer {
         // balance + X < 0 => true
         return this.DebtMax + (this.AccountBalance - price) < 0;
     }
+
+   
+     public Customer(Integer Id, String Name, String NumberCard, String Phone, String IdentityCard, Integer AccountBalance, Integer PromotionsId, Integer DebtMax) {
+        this.Id = Id;
+        this.Name = Name;
+        this.NumberCard = NumberCard;
+        this.Phone = Phone;
+        this.IdentityCard = IdentityCard;
+        this.AccountBalance = AccountBalance;
+        this.PromotionsId = PromotionsId;
+        this.DebtMax = DebtMax;
+    }
+
+    public Customer() {
+        this.Id = null;
+        this.Name = "";
+        this.NumberCard = "";
+        this.Phone = "";
+        this.IdentityCard = "";
+        this.AccountBalance = null;
+        this.PromotionsId = null;
+        this.DebtMax = null;
+        this.Promotion = null;
+    } 
+    
 }
