@@ -53,7 +53,7 @@ public class CustomerApi {
             int checkPhone = _customerDAO.findCustomerByPhone(cus.getPhone());
 
             //check name
-            boolean checkName = cus.getName().matches("^[^0-9!<>?=+@{}_$%#]+$");
+            boolean checkName = cus.getName().matches("^[^0-9!<>?=+@{}_$%#]+$./");
             if (!checkName) {
                 arrError.put("nameError", "Tên không bao gồm số hoặc kí tự đặc biệt!");
             }
