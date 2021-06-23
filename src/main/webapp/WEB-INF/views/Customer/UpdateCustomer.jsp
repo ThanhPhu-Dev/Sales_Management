@@ -38,7 +38,7 @@
                             <div class="input-group">
                                 <input class="input-effect input-primary" name="name" id="name" type="text" 
                                        value="${cus.getName()}"
-                                       placeholder="Nguyễn Văn A" required>
+                                       placeholder="Nguyễn Văn A" required minlength="5" maxlength="50">
                                 <span class="focus-border"></span>
                             </div>
                             <span class="error-name" style="color: red; display: none"></span>
@@ -50,7 +50,7 @@
                                     <div class="input-group">
                                         <input class="input-effect input-primary" name="identity" id="identity" type="text" 
                                                value="${cus.getIdentityCard()}"
-                                               placeholder="CMND hoặc số căn cước công dân" required minlength="1" maxlength="12">
+                                               placeholder="CMND hoặc số căn cước công dân" required minlength="9" maxlength="12">
                                         <span class="focus-border"></span>
                                     </div>
                                     <span class="error-identity" ></span>
@@ -62,7 +62,7 @@
                                     <div class="input-group">
                                         <input class="input-effect input-primary" name="phone" id="phone" type="text" 
                                                value="${cus.getPhone()}"
-                                               placeholder="Số điện thoại" required minlength="1" maxlength="11">
+                                               placeholder="Số điện thoại" required minlength="10" maxlength="10">
                                         <span class="focus-border"></span>
                                     </div>
                                     <span class="error-phone" style="color: red; display: none"></span>
@@ -104,7 +104,7 @@
                             <div class="input-group">
                                 <input class="input-effect input-primary" name="card" id="card" 
                                        type="text" placeholder="123456789" value="${cus.getNumberCard()}"
-                                       minlength="1" maxlength="16" required>
+                                       minlength="8" maxlength="20" required>
                                 <span class="focus-border"></span>
                             </div>
                             <span class="error-card" style="color: red; display: none"></span>

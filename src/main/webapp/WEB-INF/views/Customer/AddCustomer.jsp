@@ -31,7 +31,7 @@
                             <label for="name" class="form-label cus__form-lable">HỌ TÊN</label>
                             <div class="input-group">
                                 <input class="input-effect input-primary" name="name" id="name" type="text" 
-                                       placeholder="Nguyễn Văn A" required>
+                                       placeholder="Nguyễn Văn A" required minlength="5" maxlength="50">
                                 <span class="focus-border"></span>
                             </div>
                             <span class="error-name" style="color: red; display: none"></span>
@@ -42,7 +42,7 @@
                                     <label for="name" class="form-label cus__form-lable">Chứng minh nhân dân</label>
                                     <div class="input-group">
                                         <input class="input-effect input-primary" name="identity" id="identity" type="text" 
-                                               placeholder="CMND hoặc số căn cước công dân" required minlength="1" maxlength="12">
+                                               placeholder="CMND hoặc số căn cước công dân" required minlength="9" maxlength="12">
                                         <span class="focus-border"></span>
                                     </div>
                                     <span class="error-identity" style="color: red; display: none"></span>
@@ -53,7 +53,7 @@
                                     <label for="name" class="form-label cus__form-lable">Số điện thoại</label>
                                     <div class="input-group">
                                         <input class="input-effect input-primary" name="phone" id="phone" type="text" 
-                                               placeholder="Số điện thoại" required minlength="1" maxlength="11">
+                                               placeholder="Số điện thoại" required minlength="10" maxlength="10">
                                         <span class="focus-border"></span>
                                     </div>
                                     <span class="error-phone" style="color: red; display: none"></span>
@@ -79,7 +79,7 @@
                             <label for="name" class="form-label cus__form-lable">SỐ TÀI KHOẢN</label>
                             <div class="input-group">
                                 <input class="input-effect input-primary" name="card" id="card" type="text" placeholder="123456789"
-                                       minlength="1" maxlength="16" required>
+                                       minlength="8" maxlength="20" required>
                                 <span class="focus-border"></span>
                             </div>
                             <span class="error-card" style="color: red; display: none">Số tài khoản đã tồn tại</span>
