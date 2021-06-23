@@ -74,7 +74,7 @@ public class CustomerDAO {
 
     public int AddCustomer(Customer cus) {
         String sql;
-        //nếu mã ưu đãi = -1 thì kh�?i insert nó
+        //nếu mã ưu đãi = -1 thì kh�?i insert nó
         if (cus.getPromotionsId() > -1) {
             sql = String.format("insert into Customers (Name, NumberCard, Phone, IdentityCard, AccountBalance, PromotionsId) values "
                     + "('%s', '%s', '%s', '%s', '%d', '%d')",
@@ -89,7 +89,7 @@ public class CustomerDAO {
 
     public int UpdateCustomer(Customer cus) {
         String sql;
-        //nếu mã ưu đãi = -1 thì kh�?i set nó
+        //nếu mã ưu đãi = -1 thì kh�?i set nó
         if (cus.getPromotionsId() > -1) {
             sql = String.format("Update Customers set Name = '%s', NumberCard = '%s', Phone = '%s', IdentityCard = '%s',  PromotionsId = '%d' where Id = '%d' ",
                     cus.getName(), cus.getNumberCard(), cus.getPhone(), cus.getIdentityCard(), cus.getPromotionsId(), cus.getId());
@@ -109,6 +109,11 @@ public class CustomerDAO {
     public int findCustomerByIdentity(String card) {
         String sql = "select count(*) from Customers where IdentityCard = ?";
         int rows = template.queryForObject(sql, new Object[]{card}, (Integer.class));
+        return rows;
+    }
+    public int findCustomerByPhone(String phone) {
+        String sql = "select count(*) from Customers where Phone = ?";
+        int rows = template.queryForObject(sql, new Object[]{phone}, (Integer.class));
         return rows;
     }
 
@@ -152,7 +157,7 @@ public class CustomerDAO {
         });
     }
 
-    // �?ếm số sản phẩm còn lại
+    // �?ếm số sản phẩm còn lại
     public Integer getRemainCustomersCount(String searchValue) {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate
                 = new NamedParameterJdbcTemplate(template.getDataSource());

@@ -30,9 +30,11 @@
                         <div class="mb-3 cus__form-group">
                             <label for="name" class="form-label cus__form-lable">HỌ TÊN</label>
                             <div class="input-group">
-                                <input class="input-effect input-primary" name="name" id="name" type="text" placeholder="Nguyễn Văn A" required>
+                                <input class="input-effect input-primary" name="name" id="name" type="text" 
+                                       placeholder="Nguyễn Văn A" required>
                                 <span class="focus-border"></span>
                             </div>
+                            <span class="error-name" style="color: red; display: none"></span>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -103,10 +105,12 @@
     const errorCard = document.querySelector('.error-card');
     const errorPhone = document.querySelector('.error-phone');
     const errorIdentity = document.querySelector('.error-identity');
+    const errorName = document.querySelector('.error-name');
 
     const ipCard = document.querySelector('#card');
     const ipPhone = document.querySelector('#phone');
     const ipIdentity = document.querySelector('#identity');
+    const ipName = document.querySelector('#name');
 
     const setDefault = {
         setInput: function () {
@@ -118,6 +122,7 @@
             ipCard.value = '';
             ipPhone.value = '';
             ipIdentity.value = '';
+            ipName.value = '';
         },
         setRemoveError: function () {
             errorCard.innerHTML = "";
@@ -131,8 +136,12 @@
             errorIdentity.innerHTML = "";
             errorIdentity.style.display = "block";
             ipIdentity.style.borderBottom = "1px solid #ccc";
+            
+            errorName.innerHTML = "";
+            errorName.style.display = "block";
+            ipName.style.borderBottom = "1px solid #ccc";
         },
-        setError: function (cardError, phoneError, identityError) {
+        setError: function (cardError, phoneError, identityError, nameError) {
             if (cardError) {
                 errorCard.innerHTML = cardError;
                 errorCard.style.display = "block";
@@ -147,6 +156,11 @@
                 errorIdentity.innerHTML = identityError;
                 errorIdentity.style.display = "block";
                 ipIdentity.style.borderBottom = "1px solid red";
+            }
+            if (nameError) {
+                errorName.innerHTML = nameError;
+                errorName.style.display = "block";
+                ipName.style.borderBottom = "1px solid red";
             }
         }
     };
@@ -167,11 +181,11 @@
             phone: formData.get("phone"),
             identity: formData.get("identity"),
         }).then(function (response) {
-            const {cardError, phoneError, identityError} = response.data;
+            const {cardError, phoneError, identityError, nameError} = response.data;
 
             //nếu tồn tại lỗi xuất UI thông báo
-            if (cardError || phoneError || identityError) {
-                setDefault.setError(cardError, phoneError, identityError);
+            if (cardError || phoneError || identityError || nameError) {
+                setDefault.setError(cardError, phoneError, identityError, nameError);
             } else {
                 //xóa hết lỗi trc khi thông báo thành công 
                 setDefault.setRemoveError();
