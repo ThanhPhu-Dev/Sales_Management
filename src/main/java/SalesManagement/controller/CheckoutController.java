@@ -28,11 +28,9 @@ public class CheckoutController {
     ProductDAO _productDAO;
 
     @RequestMapping(value = "/checkout", method = RequestMethod.GET)
-    public String customerPage(@RequestParam("id") int id, Model model) {
+    public ModelAndView customerPage(@RequestParam("id") int id) {
         Customer cus = _customerDAO.findCustomerById(id);
-        List<Product> products = _productDAO.getProducts();
-        model.addAttribute("customer", cus);
-        model.addAttribute("products", products);
-        return "Checkout";
+        ModelAndView mav = new ModelAndView("Checkout", "customer", cus);
+        return mav;
     }
 }
