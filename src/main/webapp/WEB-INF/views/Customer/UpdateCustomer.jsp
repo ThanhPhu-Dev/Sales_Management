@@ -37,7 +37,7 @@
                             <label for="name" class="form-label cus__form-lable">HỌ TÊN</label>
                             <div class="input-group">
                                 <input class="input-effect input-primary" name="name" id="name" type="text" 
-                                       value="${cus.getName()}"
+                                       value="${cus.getName()}" 
                                        placeholder="Nguyễn Văn A" required minlength="5" maxlength="50">
                                 <span class="focus-border"></span>
                             </div>
