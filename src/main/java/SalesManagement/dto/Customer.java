@@ -31,7 +31,7 @@ public class Customer {
     }
 
    
-     public Customer(Integer Id, String Name, String NumberCard, String Phone, String IdentityCard, Integer AccountBalance, Integer PromotionsId, Integer DebtMax) {
+     public Customer(Integer Id, String Name, String NumberCard, String Phone, String IdentityCard, Integer AccountBalance, Integer PromotionsId, Integer DebtMax, PromotionsCustomer Promotion) {
         this.Id = Id;
         this.Name = Name;
         this.NumberCard = NumberCard;
@@ -40,17 +40,18 @@ public class Customer {
         this.AccountBalance = AccountBalance;
         this.PromotionsId = PromotionsId;
         this.DebtMax = DebtMax;
+        this.Promotion = Promotion;
     }
 
     public Customer() {
-        this.Id = null;
+        this.Id = 0;
         this.Name = "";
         this.NumberCard = "";
         this.Phone = "";
         this.IdentityCard = "";
-        this.AccountBalance = null;
-        this.PromotionsId = null;
-        this.DebtMax = null;
+        this.AccountBalance = 0;
+        this.PromotionsId = 0;
+        this.DebtMax = 0;
         this.Promotion = null;
     } 
     

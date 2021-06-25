@@ -34,4 +34,26 @@ public class Product {
     }
 
     //tạo getter - setter ngầm rồi. bên ngoài gọi getter-setter như bình thường
+
+    public Product(Integer Id, String Name, Integer Specification, Integer HistoricalCost, Float TradeDiscount, Integer PromotionsId, PromotionsProduct Promotions) {
+        this.Id = Id;
+        this.Name = Name;
+        this.Specification = Specification;
+        this.HistoricalCost = HistoricalCost;
+        this.TradeDiscount = TradeDiscount;
+        this.PromotionsId = PromotionsId;
+        this.Promotions = Promotions;
+    }
+
+    public Product() {
+        this.Id = 0;
+        this.Name = "";
+        this.Specification = 0;
+        this.HistoricalCost = 0;
+        this.TradeDiscount = null;
+        this.PromotionsId = 0;
+        this.Promotions=null;
+    }
+    
+    
 }
