@@ -1,15 +1,27 @@
 package SalesManagement.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 public class PromotionsProduct {
     private Integer Id;
     private String Name;
     private Date StartDate;
     private Date EndDate;
     private Float PercentDiscount;
-    //tạo getter - setter ngầm rồi. bên ngoài gọi getter-setter như bình thường
+
+    public int getStatus() {
+        LocalDate now = LocalDate.now();
+
+        if(now.isBefore(EndDate.toLocalDate())) {
+            return 1;
+        }
+        return 0;
+    }
 }

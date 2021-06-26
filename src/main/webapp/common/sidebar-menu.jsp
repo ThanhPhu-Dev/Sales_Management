@@ -59,14 +59,21 @@
 
                         <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                             <li class="nav-item">
-                                <a class="nav-link" href="/SalesManagement/product" title="Danh Sách Rạp">
+                                <a class="nav-link" href="/SalesManagement/product" title="Danh sách sản phẩm">
                                     <span class="tio-circle nav-indicator-icon"></span>
-                                    <span class="text-truncate">Danh Sách sản phẩm</span>
+                                    <span class="text-truncate">Danh sách sản phẩm</span>
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="/SalesManagement/product/add" title="Thêm Rạp">
+                                <a class="nav-link" href="/SalesManagement/promotionsProduct" title="Danh sách chương trình ưu đãi">
+                                    <span class="tio-circle nav-indicator-icon"></span>
+                                    <span class="text-truncate">Danh sách chương trình ưu đãi</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/SalesManagement/product/add" title="Thêm sản phẩm">
                                     <span class="tio-circle nav-indicator-icon"></span>
                                     <span class="text-truncate">Thêm sản phẩm</span>
                                 </a>
