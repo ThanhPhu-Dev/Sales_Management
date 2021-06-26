@@ -29,7 +29,6 @@ public class CustomerApi {
 //        }
 //        return cusList;
 //    }
-
     @PostMapping("api/addcustomer")
     public Map<String, String> addCustomerPost(@RequestBody Map<String, String> formData) {
         String name = formData.get("name");
@@ -51,6 +50,13 @@ public class CustomerApi {
             //Kiem tra số tài khoản có chữ hoặc đã tòn tại thì báo lỗi
             int checkNumCard = _customerDAO.findCustomerByNumCard(cus.getNumberCard());
             int checkIdentity = _customerDAO.findCustomerByIdentity(cus.getIdentityCard());
+            int checkPhone = _customerDAO.findCustomerByPhone(cus.getPhone());
+
+            //check name
+            boolean checkName = cus.getName().matches("^[^0-9!<>?=+@{}_$%#./]+$");
+            if (!checkName) {
+                arrError.put("nameError", "Tên không bao gồm số hoặc kí tự đặc biệt!");
+            }
 
             //check numberCard
             boolean checkIsNumCard = cus.getNumberCard().matches("^[0-9]*$");
@@ -64,6 +70,8 @@ public class CustomerApi {
             boolean checkIsNumPhone = cus.getPhone().matches("^[0-9]*$");
             if (!checkIsNumPhone) {
                 arrError.put("phoneError", "Số điện thoại phải là số!");
+            } else if (checkPhone > 0) {
+                arrError.put("phoneError", "Số điện thoại đã tồn tại!");
             }
 
             //check identity
@@ -107,6 +115,12 @@ public class CustomerApi {
         cus.setPromotionsId(Integer.parseInt(promotion));
 
         try {
+            //check name
+            boolean checkName = cus.getName().matches("^[^0-9!<>?=+@{}_$%#]+$");
+            if (!checkName) {
+                arrError.put("nameError", "Tên không bao gồm số hoặc kí tự đặc biệt!");
+            }
+
             //check numberCard
             if (!cusAtDB.getNumberCard().equals(cus.getNumberCard())) {
                 int checkNumCard = _customerDAO.findCustomerByNumCard(cus.getNumberCard());
@@ -117,11 +131,17 @@ public class CustomerApi {
                     arrError.put("cardError", "Số tài khoản đã tồn tại!");
                 }
             }
-
+            
+            boolean test = cusAtDB.getPhone().equals(cus.getPhone());
             //check phone
-            boolean checkIsNumPhone = cus.getPhone().matches("^[0-9]*$");
-            if (!checkIsNumPhone) {
-                arrError.put("phoneError", "Số điện thoại phải là số!");
+            if (!cusAtDB.getPhone().equals(cus.getPhone())) {
+                int checkPhone = _customerDAO.findCustomerByPhone(cus.getPhone());
+                boolean checkIsNumPhone = cus.getPhone().matches("^[0-9]*$");
+                if (!checkIsNumPhone) {
+                    arrError.put("phoneError", "Số điện thoại phải là số!");
+                } else if (checkPhone > 0) {
+                    arrError.put("phoneError", "Số điện thoại đã tồn tại!");
+                }
             }
 
             //check identity
@@ -143,21 +163,20 @@ public class CustomerApi {
         }
         return arrError;
     }
-    
+
     //[GET] lấy danh sách khách hàng giới hạn là 5
     @GetMapping("/api/customers")
     public Map<String, List<Customer>> getProducts(@RequestParam(defaultValue = "0") int offset,
-                                                  @RequestParam(defaultValue = "10") int limit,
-                                                  @RequestParam String searchValue) {
+            @RequestParam(defaultValue = "10") int limit,
+            @RequestParam String searchValue) {
         HashMap<String, List<Customer>> map = new HashMap<>();
-        
+
         try {
             List<Customer> customers = _customerDAO.getCustomersPagination(offset, limit, searchValue);
-            
+
             map.put("customers", customers);
 
             // Anotation @ResponseBody trả về dữ liệu JSON.
-            
         } catch (Exception e) {
             e.getStackTrace();
         }

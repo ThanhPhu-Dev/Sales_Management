@@ -232,7 +232,7 @@ public class ProductDAO {
 
     public List<Product> getProductsPaginationWithSearch(int offset, int limit, List<Integer> excludeIds, String searchId) {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate
-                = new NamedParameterJdbcTemplate(template.getDataSource());
+                = new NamedParameterJdbcTemplate(template);
         String sql = "SELECT * FROM PRODUCTS LIMIT :offset, :limit";
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();

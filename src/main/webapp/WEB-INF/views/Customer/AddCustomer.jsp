@@ -30,9 +30,11 @@
                         <div class="mb-3 cus__form-group">
                             <label for="name" class="form-label cus__form-lable">HỌ TÊN</label>
                             <div class="input-group">
-                                <input class="input-effect input-primary" name="name" id="name" type="text" placeholder="Nguyễn Văn A" required>
+                                <input class="input-effect input-primary" name="name" id="name" type="text" 
+                                       placeholder="Nguyễn Văn A" required minlength="5" maxlength="50">
                                 <span class="focus-border"></span>
                             </div>
+                            <span class="error-name" style="color: red; display: none"></span>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -40,7 +42,7 @@
                                     <label for="name" class="form-label cus__form-lable">Chứng minh nhân dân</label>
                                     <div class="input-group">
                                         <input class="input-effect input-primary" name="identity" id="identity" type="text" 
-                                               placeholder="CMND hoặc số căn cước công dân" required minlength="1" maxlength="12">
+                                               placeholder="CMND hoặc số căn cước công dân" required minlength="9" maxlength="12">
                                         <span class="focus-border"></span>
                                     </div>
                                     <span class="error-identity" style="color: red; display: none"></span>
@@ -51,7 +53,7 @@
                                     <label for="name" class="form-label cus__form-lable">Số điện thoại</label>
                                     <div class="input-group">
                                         <input class="input-effect input-primary" name="phone" id="phone" type="text" 
-                                               placeholder="Số điện thoại" required minlength="1" maxlength="11">
+                                               placeholder="Số điện thoại" required minlength="10" maxlength="10">
                                         <span class="focus-border"></span>
                                     </div>
                                     <span class="error-phone" style="color: red; display: none"></span>
@@ -77,7 +79,7 @@
                             <label for="name" class="form-label cus__form-lable">SỐ TÀI KHOẢN</label>
                             <div class="input-group">
                                 <input class="input-effect input-primary" name="card" id="card" type="text" placeholder="123456789"
-                                       minlength="1" maxlength="16" required>
+                                       minlength="8" maxlength="20" required>
                                 <span class="focus-border"></span>
                             </div>
                             <span class="error-card" style="color: red; display: none">Số tài khoản đã tồn tại</span>
@@ -103,10 +105,12 @@
     const errorCard = document.querySelector('.error-card');
     const errorPhone = document.querySelector('.error-phone');
     const errorIdentity = document.querySelector('.error-identity');
+    const errorName = document.querySelector('.error-name');
 
     const ipCard = document.querySelector('#card');
     const ipPhone = document.querySelector('#phone');
     const ipIdentity = document.querySelector('#identity');
+    const ipName = document.querySelector('#name');
 
     const setDefault = {
         setInput: function () {
@@ -118,6 +122,7 @@
             ipCard.value = '';
             ipPhone.value = '';
             ipIdentity.value = '';
+            ipName.value = '';
         },
         setRemoveError: function () {
             errorCard.innerHTML = "";
@@ -131,8 +136,12 @@
             errorIdentity.innerHTML = "";
             errorIdentity.style.display = "block";
             ipIdentity.style.borderBottom = "1px solid #ccc";
+            
+            errorName.innerHTML = "";
+            errorName.style.display = "block";
+            ipName.style.borderBottom = "1px solid #ccc";
         },
-        setError: function (cardError, phoneError, identityError) {
+        setError: function (cardError, phoneError, identityError, nameError) {
             if (cardError) {
                 errorCard.innerHTML = cardError;
                 errorCard.style.display = "block";
@@ -147,6 +156,11 @@
                 errorIdentity.innerHTML = identityError;
                 errorIdentity.style.display = "block";
                 ipIdentity.style.borderBottom = "1px solid red";
+            }
+            if (nameError) {
+                errorName.innerHTML = nameError;
+                errorName.style.display = "block";
+                ipName.style.borderBottom = "1px solid red";
             }
         }
     };
@@ -167,11 +181,11 @@
             phone: formData.get("phone"),
             identity: formData.get("identity"),
         }).then(function (response) {
-            const {cardError, phoneError, identityError} = response.data;
+            const {cardError, phoneError, identityError, nameError} = response.data;
 
             //nếu tồn tại lỗi xuất UI thông báo
-            if (cardError || phoneError || identityError) {
-                setDefault.setError(cardError, phoneError, identityError);
+            if (cardError || phoneError || identityError || nameError) {
+                setDefault.setError(cardError, phoneError, identityError, nameError);
             } else {
                 //xóa hết lỗi trc khi thông báo thành công 
                 setDefault.setRemoveError();
