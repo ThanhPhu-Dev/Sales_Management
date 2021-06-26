@@ -188,11 +188,12 @@
                 {
                     "data": "productSalePrice",
                     "render": function (data, type, row, meta) {
-                        if(row.promotions.status == 1){
-                            return data.toLocaleString("it-IT");
-                        } else {
-                            return "<span style='color: red;'>" + data.toLocaleString("it-IT") + "</span>";
+                        if(row.promotions) {
+                            if(row.promotions.status == 0){
+                                return "<span style='color: red;'>" + data.toLocaleString("it-IT") + "</span>";
+                            }
                         }
+                        return data.toLocaleString("it-IT");
                     }
                 },
                 {

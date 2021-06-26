@@ -155,11 +155,5 @@ public class ProductAPI {
         } else if(tradeDiscount > 100) {
             errors.put("tradeDiscount", "Chiết khấu phải nhỏ hơn 100");
         }
-
-        // Kiểm tra mã khuyến mãi của sản phẩm
-        if(promotionsId == null) {
-            errors.put("promotionsId", "Chiết khấu không được rỗng");
-        }
     }
-
 }
