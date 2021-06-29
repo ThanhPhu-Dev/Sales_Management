@@ -81,7 +81,7 @@
                                         <label for="historicalCost" class="input-label">Giá gốc</label>
 
                                         <div class="input-group input-group-merge">
-                                            <input type="number" class="form-control" name="historicalCost" id="historicalCost" placeholder="0" aria-label="0.0">
+                                            <input type="text" class="form-control" name="historicalCost" id="historicalCost" placeholder="0" aria-label="0.0">
                                             <div class="input-group-append">
                                                 <!-- Select -->
                                                 <div id="historicalCostSelect" class="select2-custom select2-custom-right">

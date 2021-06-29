@@ -194,17 +194,19 @@
                 $('#tradeDiscount').val(res.data.tradeDiscount);
 
                 const promotions = res.data.promotions;
-                if(promotions.status == 1) {
-                    $('#promotionsId').val(promotions.id).trigger('change');
-                } else {
-                    let html = ' <option data-option-template="<span class=text-danger>' + promotions.name +  ' (' + promotions.percentDiscount + '%) - ' + 'Đã hết hạn ưu đãi'
-                        + '</span>" value="' + promotions.id + '">'
-                        + promotions.name +  ' (' + promotions.percentDiscount + '%) - ' + 'Đã hết hạn ưu đãi'
-                        + '</option>';
+                if(promotions != null) {
+                    if(promotions.status == 1) {
+                        $('#promotionsId').val(promotions.id).trigger('change');
+                    } else {
+                        let html = ' <option data-option-template="<span class=text-danger>' + promotions.name +  ' (' + promotions.percentDiscount + '%) - ' + 'Đã hết hạn ưu đãi'
+                            + '</span>" value="' + promotions.id + '">'
+                            + promotions.name +  ' (' + promotions.percentDiscount + '%) - ' + 'Đã hết hạn ưu đãi'
+                            + '</option>';
 
-                    $('#promotionsId').append(html);
-                    $('#promotionsId').val(promotions.id).trigger('change');
-                    expiredPromotions = promotions.id;
+                        $('#promotionsId').append(html);
+                        $('#promotionsId').val(promotions.id).trigger('change');
+                        expiredPromotions = promotions.id;
+                    }
                 }
             }).catch((error) => {
                 Swal.fire({
