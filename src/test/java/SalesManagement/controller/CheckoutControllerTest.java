@@ -37,7 +37,7 @@ public class CheckoutControllerTest {
     public CheckoutControllerTest() {
     }
 
-    //get customer by id => success
+    //test get customer by id
     @Test
     public void getCustomerById_NonEmpty() {     
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null);
