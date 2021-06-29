@@ -181,7 +181,7 @@
                     }
                 }).join(' ');
 
-                $('#promotionsId').append(html);
+                $('#promotionsId').append('<option value="0"> Không áp dụng </option>' + html);
             });
 
         // Lấy thông tin sản phẩm
@@ -249,7 +249,7 @@
                 specification: specification,
                 historicalCost: parseInt($('#historicalCost').val().replace(/\D/g,''), 10),
                 tradeDiscount: tradeDiscount,
-                promotionsId: $('#promotionsId').val(),
+                promotionsId: $('#promotionsId').val() == 0 ? null : $('#promotionsId').val(),
             }).then((res) => {
                 Swal.fire({
                     title: 'Cập nhật sản phẩm thành công',
