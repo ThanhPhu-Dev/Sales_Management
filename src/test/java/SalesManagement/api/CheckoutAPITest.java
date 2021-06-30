@@ -1,9 +1,13 @@
 
 package SalesManagement.api;
 
+import SalesManagement.dao.BillDAO;
 import SalesManagement.dao.CustomerDAO;
+import SalesManagement.dao.DetailBillDAO;
 import SalesManagement.dao.ProductDAO;
+import SalesManagement.dto.Bill;
 import SalesManagement.dto.Customer;
+import SalesManagement.dto.DetailBill;
 import SalesManagement.dto.Product;
 import SalesManagement.dto.PromotionsCustomer;
 import SalesManagement.dto.PromotionsProduct;
@@ -36,6 +40,12 @@ public class CheckoutAPITest {
     
     @Mock
     CustomerDAO customerDAO;
+    
+    @Mock 
+    BillDAO billDAO;
+    
+    @Mock
+    DetailBillDAO detailBillDAO;
 
     @InjectMocks
     CheckoutAPI checkAPI;
@@ -45,6 +55,12 @@ public class CheckoutAPITest {
     
     @Autowired
     PromotionsCustomer promotionCustomer;
+    
+    @Autowired
+    Bill bill;
+    
+    @Autowired
+    DetailBill detailBill;
     
     public CheckoutAPITest() {
     }
@@ -935,5 +951,484 @@ public class CheckoutAPITest {
         long customerSale = (long)(cus.getPromotion().getPercentDiscount() / 100 * totalOfProducts + (((float)10 / 100 ) * totalOfProducts));
         long totalOfBill = totalOfProducts - customerSale;
         assertEquals("false", lstResult.get("isDeptor"));
+    } 
+    
+    // test checkout have promotion product, promotion customer, extra promotion
+    @Test
+    public void testCheckout_promoProduct_promoCustomer_extraPromo() throws ParseException
+    {
+        JSONObject jsonObj = new JSONObject();
+        JSONObject productObj = new JSONObject();
+        productObj.put("id", "1");
+        productObj.put("quantity", "1");
+        JSONArray productArr = new JSONArray();
+        productArr.put(productObj);
+        jsonObj.put("products", productArr);
+        jsonObj.put("customerId", 1);
+        jsonObj.put("extraPromotions", 10);
+        String json = jsonObj.toString();  
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
+        promotionCustomer = new PromotionsCustomer();
+        promotionCustomer.setId(1);
+        promotionCustomer.setName("khach hang moi");        
+        promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setPercentDiscount(Float.parseFloat("10"));     
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 100000000, promotionCustomer);          
+        Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
+               
+        promotionsProduct = new PromotionsProduct();
+        promotionsProduct.setId(1);
+        promotionsProduct.setName("san pham moi");        
+        promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setPercentDiscount((float) 10);  
+        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , 1, promotionsProduct);
+        Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
+        
+        bill = new Bill();
+        bill.setCustomerId(cus.getId());
+        bill.setDiscount(jsonObj.getFloat("extraPromotions"));
+        bill.setPromotionCustomerId(cus.getPromotionsId());
+        int billId = 1;
+        Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
+        
+        detailBill = new DetailBill();
+        detailBill.setBillId(billId);
+        detailBill.setQuantity(productObj.getInt("quantity"));
+        detailBill.setProductId(pro.getId());
+        detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
+        detailBill.setPromotionProductId(pro.getPromotionsId());
+           
+        long originPrice = (long) (pro.getHistoricalCost());
+        long productSale = (long) (pro.getHistoricalCost() * ((float)promotionsProduct.getPercentDiscount()/100));
+        long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
+        long totalOfProducts = originPrice - (productSale + discount);
+        long customerSale = (long)(cus.getPromotion().getPercentDiscount() / 100 * totalOfProducts + ((jsonObj.getFloat("extraPromotions") / 100 ) * totalOfProducts));
+        long totalOfBill = totalOfProducts - customerSale;
+        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
+        
+        Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
+        
+        Mockito.when(customerDAO.updateAccountBalance(cus.getId(), newAccountBalance)).thenReturn(1);
+        
+        Map<String, String> lstResult = checkAPI.postCheckout(json); 
+       
+        assertEquals("true", lstResult.get("success"));
+        assertEquals(Integer.toString(Math.round(totalOfBill)), lstResult.get("total"));
+    } 
+    
+    // test checkout have promotion customer, not have promotion product and extra promotion
+    @Test
+    public void testCheckout__promoCustomer() throws ParseException
+    {
+        JSONObject jsonObj = new JSONObject();
+        JSONObject productObj = new JSONObject();
+        productObj.put("id", "1");
+        productObj.put("quantity", "1");
+        JSONArray productArr = new JSONArray();
+        productArr.put(productObj);
+        jsonObj.put("products", productArr);
+        jsonObj.put("customerId", 1);
+        jsonObj.put("extraPromotions", 0);
+        String json = jsonObj.toString();  
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
+        promotionCustomer = new PromotionsCustomer();
+        promotionCustomer.setId(1);
+        promotionCustomer.setName("khach hang moi");        
+        promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setPercentDiscount(Float.parseFloat("10"));     
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 100000000, promotionCustomer);          
+        Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
+               
+        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 0 , null, null);
+        Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
+        
+        bill = new Bill();
+        bill.setCustomerId(cus.getId());
+        bill.setDiscount(jsonObj.getFloat("extraPromotions"));
+        bill.setPromotionCustomerId(cus.getPromotionsId());
+        int billId = 1;
+        Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
+        
+        detailBill = new DetailBill();
+        detailBill.setBillId(billId);
+        detailBill.setQuantity(productObj.getInt("quantity"));
+        detailBill.setProductId(pro.getId());
+        detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
+        detailBill.setPromotionProductId(null);
+           
+        long originPrice = (long) (pro.getHistoricalCost());
+        long productSale = 0;
+        long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
+        long totalOfProducts = originPrice - (productSale + discount);
+        long customerSale = (long)(cus.getPromotion().getPercentDiscount() / 100 * totalOfProducts + ((jsonObj.getFloat("extraPromotions") / 100 ) * totalOfProducts));
+        long totalOfBill = totalOfProducts - customerSale;
+        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
+        
+        Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
+        
+        Mockito.when(customerDAO.updateAccountBalance(cus.getId(), newAccountBalance)).thenReturn(1);
+        
+        Map<String, String> lstResult = checkAPI.postCheckout(json); 
+       
+        assertEquals("true", lstResult.get("success"));
+        assertEquals(Integer.toString(Math.round(totalOfBill)), lstResult.get("total"));
+    } 
+    
+    // test checkout have promotion customer, not have promotion product and have extra promotion
+    @Test
+    public void testCheckout__promoCustomer_extraPromotion() throws ParseException
+    {
+        JSONObject jsonObj = new JSONObject();
+        JSONObject productObj = new JSONObject();
+        productObj.put("id", "1");
+        productObj.put("quantity", "1");
+        JSONArray productArr = new JSONArray();
+        productArr.put(productObj);
+        jsonObj.put("products", productArr);
+        jsonObj.put("customerId", 1);
+        jsonObj.put("extraPromotions", 10);
+        String json = jsonObj.toString();  
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
+        promotionCustomer = new PromotionsCustomer();
+        promotionCustomer.setId(1);
+        promotionCustomer.setName("khach hang moi");        
+        promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setPercentDiscount(Float.parseFloat("10"));     
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 100000000, promotionCustomer);          
+        Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
+               
+        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 0 , null, null);
+        Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
+        
+        bill = new Bill();
+        bill.setCustomerId(cus.getId());
+        bill.setDiscount(jsonObj.getFloat("extraPromotions"));
+        bill.setPromotionCustomerId(cus.getPromotionsId());
+        int billId = 1;
+        Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
+        
+        detailBill = new DetailBill();
+        detailBill.setBillId(billId);
+        detailBill.setQuantity(productObj.getInt("quantity"));
+        detailBill.setProductId(pro.getId());
+        detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
+        detailBill.setPromotionProductId(null); 
+           
+        long originPrice = (long) (pro.getHistoricalCost());
+        long productSale = 0;
+        long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
+        long totalOfProducts = originPrice - (productSale + discount);
+        long customerSale = (long)(cus.getPromotion().getPercentDiscount() / 100 * totalOfProducts + ((jsonObj.getFloat("extraPromotions") / 100 ) * totalOfProducts));
+        long totalOfBill = totalOfProducts - customerSale;
+        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
+        
+        Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
+        
+        Mockito.when(customerDAO.updateAccountBalance(cus.getId(), newAccountBalance)).thenReturn(1);
+        
+        Map<String, String> lstResult = checkAPI.postCheckout(json); 
+       
+        assertEquals("true", lstResult.get("success"));
+        assertEquals(Integer.toString(Math.round(totalOfBill)), lstResult.get("total"));
+    } 
+    
+    // test checkout have promotion customer, have promotion product but not have extra promotion
+    @Test
+    public void testCheckout__promoCustomer_promotionProduct() throws ParseException
+    {
+        JSONObject jsonObj = new JSONObject();
+        JSONObject productObj = new JSONObject();
+        productObj.put("id", "1");
+        productObj.put("quantity", "1");
+        JSONArray productArr = new JSONArray();
+        productArr.put(productObj);
+        jsonObj.put("products", productArr);
+        jsonObj.put("customerId", 1);
+        jsonObj.put("extraPromotions", 0);
+        String json = jsonObj.toString();  
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
+        promotionCustomer = new PromotionsCustomer();
+        promotionCustomer.setId(1);
+        promotionCustomer.setName("khach hang moi");        
+        promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setPercentDiscount(Float.parseFloat("10"));     
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 100000000, promotionCustomer);          
+        Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
+           
+        promotionsProduct = new PromotionsProduct();
+        promotionsProduct.setId(1);
+        promotionsProduct.setName("san pham moi");        
+        promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setPercentDiscount((float) 10);  
+        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , 1, promotionsProduct);
+        Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
+        
+        bill = new Bill();
+        bill.setCustomerId(cus.getId());
+        bill.setDiscount(jsonObj.getFloat("extraPromotions"));
+        bill.setPromotionCustomerId(cus.getPromotionsId());
+        int billId = 1;
+        Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
+        
+        detailBill = new DetailBill();
+        detailBill.setBillId(billId);
+        detailBill.setQuantity(productObj.getInt("quantity"));
+        detailBill.setProductId(pro.getId());
+        detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
+        detailBill.setPromotionProductId(null);
+             
+        long originPrice = (long) (pro.getHistoricalCost());
+        long productSale = (long) (pro.getHistoricalCost() * ((float)promotionsProduct.getPercentDiscount()/100));
+        long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
+        long totalOfProducts = originPrice - (productSale + discount);
+        long customerSale = (long)(cus.getPromotion().getPercentDiscount() / 100 * totalOfProducts + ((jsonObj.getFloat("extraPromotions") / 100 ) * totalOfProducts));
+        long totalOfBill = totalOfProducts - customerSale;
+        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
+        
+        Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
+        
+        Mockito.when(customerDAO.updateAccountBalance(cus.getId(), newAccountBalance)).thenReturn(1);
+        
+        Map<String, String> lstResult = checkAPI.postCheckout(json); 
+       
+        assertEquals("true", lstResult.get("success"));
+        assertEquals(Integer.toString(Math.round(totalOfBill)), lstResult.get("total"));
+    } 
+    
+    // test checkout have promotion product, have extra promotion ,not have promotion customer, 
+    @Test
+    public void testCheckout_promotionProduct() throws ParseException
+    {
+        JSONObject jsonObj = new JSONObject();
+        JSONObject productObj = new JSONObject();
+        productObj.put("id", "1");
+        productObj.put("quantity", "1");
+        JSONArray productArr = new JSONArray();
+        productArr.put(productObj);
+        jsonObj.put("products", productArr);
+        jsonObj.put("customerId", 1);
+        jsonObj.put("extraPromotions", 10);
+        String json = jsonObj.toString();  
+        
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, -1, 100000000, null);          
+        Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
+           
+        promotionsProduct = new PromotionsProduct();
+        promotionsProduct.setId(1);
+        promotionsProduct.setName("san pham moi");        
+        promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setPercentDiscount((float) 10);  
+        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , 1, promotionsProduct);
+        Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
+        
+        bill = new Bill();
+        bill.setCustomerId(cus.getId());
+        bill.setDiscount(jsonObj.getFloat("extraPromotions"));
+        bill.setPromotionCustomerId(null);
+        int billId = 1;
+        Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
+        
+        detailBill = new DetailBill();
+        detailBill.setBillId(billId);
+        detailBill.setQuantity(productObj.getInt("quantity"));
+        detailBill.setProductId(pro.getId());
+        detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
+        detailBill.setPromotionProductId(pro.getPromotionsId());
+             
+        long originPrice = (long) (pro.getHistoricalCost());
+        long productSale = (long) (pro.getHistoricalCost() * ((float)promotionsProduct.getPercentDiscount()/100));
+        long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
+        long totalOfProducts = originPrice - (productSale + discount);
+        long customerSale = (long)((float)10 /100 * totalOfProducts);
+        long totalOfBill = totalOfProducts - customerSale;
+        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
+        
+        Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
+        
+        Mockito.when(customerDAO.updateAccountBalance(cus.getId(), newAccountBalance)).thenReturn(1);
+        
+        Map<String, String> lstResult = checkAPI.postCheckout(json); 
+       
+        assertEquals("true", lstResult.get("success"));
+        assertEquals(Integer.toString(Math.round(totalOfBill)), lstResult.get("total"));
+    } 
+    
+    // test checkout not have promotion product, have extra promotion ,not have customer product, 
+    @Test
+    public void testCheckout_extraPromotion() throws ParseException
+    {
+        JSONObject jsonObj = new JSONObject();
+        JSONObject productObj = new JSONObject();
+        productObj.put("id", "1");
+        productObj.put("quantity", "1");
+        JSONArray productArr = new JSONArray();
+        productArr.put(productObj);
+        jsonObj.put("products", productArr);
+        jsonObj.put("customerId", 1);
+        jsonObj.put("extraPromotions", 10);
+        String json = jsonObj.toString();  
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, -1, 100000000, null);          
+        Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
+           
+        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , -1, null);
+        Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
+        
+        bill = new Bill();
+        bill.setCustomerId(cus.getId());
+        bill.setDiscount(jsonObj.getFloat("extraPromotions"));
+        bill.setPromotionCustomerId(null);
+        int billId = 1;
+        Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
+        
+        detailBill = new DetailBill();
+        detailBill.setBillId(billId);
+        detailBill.setQuantity(productObj.getInt("quantity"));
+        detailBill.setProductId(pro.getId());
+        detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
+        detailBill.setPromotionProductId(null);
+             
+        long originPrice = (long) (pro.getHistoricalCost());
+        long productSale = 0;
+        long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
+        long totalOfProducts = originPrice - (productSale + discount);
+        long customerSale = (long)((float) 10 / 100  * totalOfProducts);
+        long totalOfBill = totalOfProducts - customerSale;
+        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
+        
+        Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
+        
+        Mockito.when(customerDAO.updateAccountBalance(cus.getId(), newAccountBalance)).thenReturn(1);
+        
+        Map<String, String> lstResult = checkAPI.postCheckout(json); 
+       
+        assertEquals("true", lstResult.get("success"));
+        assertEquals(Integer.toString(Math.round(totalOfBill)), lstResult.get("total"));
+    } 
+    
+    // test checkout have promotion product, not have extra promotion ,not have promotion customer, 
+    @Test
+    public void testCheckout_promotionProduct_notExtraAndCustomerPromotion() throws ParseException
+    {
+        JSONObject jsonObj = new JSONObject();
+        JSONObject productObj = new JSONObject();
+        productObj.put("id", "1");
+        productObj.put("quantity", "1");
+        JSONArray productArr = new JSONArray();
+        productArr.put(productObj);
+        jsonObj.put("products", productArr);
+        jsonObj.put("customerId", 1);
+        jsonObj.put("extraPromotions", 0);
+        String json = jsonObj.toString();  
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, -1, 100000000, null);          
+        Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
+           
+        promotionsProduct = new PromotionsProduct();
+        promotionsProduct.setId(1);
+        promotionsProduct.setName("san pham moi");        
+        promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setPercentDiscount((float) 10); 
+        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , 1, promotionsProduct);
+        Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
+        
+        bill = new Bill();
+        bill.setCustomerId(cus.getId());
+        bill.setDiscount((float) 0);
+        bill.setPromotionCustomerId(null);
+        int billId = 1;
+        Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
+        
+        detailBill = new DetailBill();
+        detailBill.setBillId(billId);
+        detailBill.setQuantity(1);
+        detailBill.setProductId(1);
+        detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
+        detailBill.setPromotionProductId(pro.getPromotionsId());
+             
+        long originPrice = (long) (pro.getHistoricalCost());
+        long productSale = (long) (pro.getHistoricalCost() * ((float)promotionsProduct.getPercentDiscount()/100));
+        long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
+        long totalOfProducts = originPrice - (productSale + discount);
+        long customerSale = 0;
+        long totalOfBill = totalOfProducts - customerSale;
+        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
+        
+        Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
+        
+        Mockito.when(customerDAO.updateAccountBalance(cus.getId(), newAccountBalance)).thenReturn(1);
+        
+        Map<String, String> lstResult = checkAPI.postCheckout(json); 
+       
+        assertEquals("true", lstResult.get("success"));
+        assertEquals(Integer.toString(Math.round(totalOfBill)), lstResult.get("total"));
+    } 
+    
+    // test checkout not have promotion product, not have extra promotion ,not have promotion customer, 
+    @Test
+    public void testCheckout_notHaveAllPromotion() throws ParseException
+    {
+        JSONObject jsonObj = new JSONObject();
+        JSONObject productObj = new JSONObject();
+        productObj.put("id", "1");
+        productObj.put("quantity", "1");
+        JSONArray productArr = new JSONArray();
+        productArr.put(productObj);
+        jsonObj.put("products", productArr);
+        jsonObj.put("customerId", 1);
+        jsonObj.put("extraPromotions", 0);
+        String json = jsonObj.toString();  
+        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, -1, 100000000, null);          
+        Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
+           
+        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , null, null);
+        Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
+        
+        bill = new Bill();
+        bill.setCustomerId(cus.getId());
+        bill.setDiscount((float) 0);
+        bill.setPromotionCustomerId(null);
+        int billId = 1;
+        Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
+        
+        detailBill = new DetailBill();
+        detailBill.setBillId(billId);
+        detailBill.setQuantity(1);
+        detailBill.setProductId(1);
+        detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
+        detailBill.setPromotionProductId(pro.getPromotionsId());
+             
+        long originPrice = (long) (pro.getHistoricalCost());
+        long productSale = 0;
+        long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
+        long totalOfProducts = originPrice - (productSale + discount);
+        long customerSale = 0;
+        long totalOfBill = totalOfProducts - customerSale;
+        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
+        
+        Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
+        
+        Mockito.when(customerDAO.updateAccountBalance(cus.getId(), newAccountBalance)).thenReturn(1);
+        
+        Map<String, String> lstResult = checkAPI.postCheckout(json); 
+       
+        assertEquals("true", lstResult.get("success"));
+        assertEquals(Integer.toString(Math.round(totalOfBill)), lstResult.get("total"));
     } 
 }
