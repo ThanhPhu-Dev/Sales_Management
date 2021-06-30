@@ -26,7 +26,7 @@
                         <div class="input-group input-group-merge input-group-flush searchheader">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <i class="tio-search"></i>
+                                    <i class="fas fa-search"></i>
                                 </div>
                             </div>
                             <div id="new-search-area"></div>
