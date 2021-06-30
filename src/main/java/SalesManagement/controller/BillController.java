@@ -138,12 +138,11 @@ public class BillController {
 		HashMap<String, Object> rs = new HashMap<String, Object>();
 		Map<String, Object> data = datadetailbill(id);
 		Bill bill = (Bill) data.get("bill");
-
 		if (bill.getPromotionCustomer() != null) {
 			rs.put("namePromotionCustomer", bill.getPromotionCustomer().getName());
 			rs.put("percentDiscountCustomer", bill.getPromotionCustomer().getPercentDiscount());
 		}else{
-			rs.put("namePromotionCustomer", "");
+			rs.put("namePromotionCustomer", "khách hàng thường");
 			rs.put("percentDiscountCustomer", 0.0f);
 		}
 

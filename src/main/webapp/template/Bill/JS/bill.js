@@ -11,8 +11,8 @@ async function initTableData() {
                     Id: "HD"+e.id,
                     name: e.customer.name,
                     Discount: e.discount != null ? e.discount : '',
-                    promotionName: e.promotion != null ? e.promotion.name : '',
-                    promotionpercent: e.promotion != null ? e.promotion.percentDiscount : '',
+                    promotionName:  e.promotionCustomer?.name,
+                    promotionpercent: e.promotionCustomer?.percentDiscount,
                     total: e.total,
                     createdAt: e.dateCreate,
                     detail: "<a href='/SalesManagement/Detailbill?id="+e.id+"'><i class=\"fas fa-info-circle\"></i></a>",
@@ -52,14 +52,18 @@ async function initTableData() {
                         class: 'text-center',
                         data: 'Discount'
                     },
-                    { data: 'promotionName' },
+                    {
+                        data: 'promotionName' ,
+                        defaultContent: 'Khách hàng thường'
+                    },
                     {
                         class: 'text-center',
-                        data: 'promotionpercent'
+                        data: 'promotionpercent',
+                        defaultContent: '0'
                     },
                     {
                         class: 'text-right',
-                        data: 'total'
+                        data: 'total',
                     },
                     {
                         class: 'text-center',

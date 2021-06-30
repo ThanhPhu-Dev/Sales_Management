@@ -9,7 +9,9 @@
             <div class="row align-items-center mb-3">
                 <div class="col-sm mb-2 mb-sm-0 d-flex justify-content-between align-items-center">
                     <h1 class="page-header-title">Chi Tiết Hóa Đơn</h1>
-                  <a href="/SalesManagement/report?id=${bill.id}" target="_blank"><button class="btn btn-danger" style="font-size: 13px">In Hóa Đơn</button></a>
+                    <a href="/SalesManagement/report?id=${bill.id}" target="_blank">
+                        <button class="btn btn-danger" style="font-size: 13px">In Hóa Đơn</button>
+                    </a>
                 </div>
             </div>
             <!-- End Row -->
@@ -23,11 +25,18 @@
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Họ Tên Khách Hàng :</p>
+
                     <p class="ct-cu">${bill.customer.name}</p>
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Loại khách Hàng :</p>
-                    <p class="ct-cu">${bill.promotionCustomer.name}</p>
+                    <c:if test="${not empty bill.promotionCustomer}">
+                        <p class="ct-cu">${bill.promotionCustomer.name}</p>
+                    </c:if >
+                    <c:if test="${empty bill.promotionCustomer}">
+                        <p class="ct-cu">Khách hàng thường</p>
+                    </c:if >
+
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Số Tài Khoản :</p>
@@ -37,7 +46,12 @@
             <ul class="list-cus-order">
                 <li class="d-flex">
                     <p class="name-cu">Ưu Đãi Loại Khách Hàng(%) :</p>
-                    <p class="ct-cu">${bill.promotionCustomer.percentDiscount}%</p>
+                    <c:if test="${not empty bill.promotionCustomer}">
+                        <p class="ct-cu">${bill.promotionCustomer.percentDiscount}</p>
+                    </c:if >
+                    <c:if test="${empty bill.promotionCustomer}">
+                        <p class="ct-cu">0.0%</p>
+                    </c:if >
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Giảm Giá(Tổng Hóa Đơn) :</p>
@@ -45,9 +59,9 @@
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Số Tiền Còn Dư :</p>
-                    <c:set var = "cvt" value = "${bill.customer.accountBalance}" />
-                    <p class="ct-cu"><fmt:formatNumber type = "number"
-                                                       maxFractionDigits = "3" value = "${cvt}" /> VNĐ</p>
+                    <c:set var="cvt" value="${bill.customer.accountBalance}"/>
+                    <p class="ct-cu"><fmt:formatNumber type="number"
+                                                       maxFractionDigits="3" value="${cvt}"/> VNĐ</p>
                 </li>
                 <li class="d-flex">
                     <p class="name-cu">Ngày Thanh Toán :</p>
@@ -61,7 +75,7 @@
             <!-- End Header -->
 
             <table class="table table-striped" style="width: 100%;">
-                <thead >
+                <thead>
                 <tr id="list-header" class="text-center">
                     <th scope="col">STT</th>
                     <th scope="col">Tên Sản Phẩm</th>
@@ -80,42 +94,44 @@
                         <td class="text-center">${theCount.count}</td>
                         <td>${dt.product.name}</td>
                         <td class="text-right">${dt.product.specification}</td>
-                        <c:set var = "cvt" value = "${dt.product.historicalCost}" />
-                        <td class="text-right"><fmt:formatNumber type = "number"
-                                                maxFractionDigits = "3" value = "${cvt}" /></td>
+                        <c:set var="cvt" value="${dt.product.historicalCost}"/>
+                        <td class="text-right"><fmt:formatNumber type="number"
+                                                                 maxFractionDigits="3" value="${cvt}"/></td>
                         <td class="text-center">${dt.product.tradeDiscount}</td>
                         <td>${dt.promotion.name}</td>
                         <td class="text-center">${dt.promotion.percentDiscount}</td>
                         <td class="text-center">${dt.quantity}</td>
-                        <c:set var = "cvt" value = "${dt.lastPrice}" />
-                        <td class="text-right"><fmt:formatNumber type = "number"
-                                                                 maxFractionDigits = "3" value = "${cvt}" /></td>
+                        <c:set var="cvt" value="${dt.lastPrice}"/>
+                        <td class="text-right"><fmt:formatNumber type="number"
+                                                                 maxFractionDigits="3" value="${cvt}"/></td>
                     </tr>
                 </c:forEach>
                 <tr>
-                    <td colspan="7" class="text-right font-weight-bold">Tổng Hóa Đơn(VNĐ): </td>
-                    <c:set var = "cvt" value = "${sumbill}" />
-                    <td colspan="3" class="text-right"><fmt:formatNumber type = "number"
-                                                       maxFractionDigits = "3" value = "${cvt}" /></td>
+                    <td colspan="7" class="text-right font-weight-bold">Tổng Hóa Đơn(VNĐ):</td>
+                    <c:set var="cvt" value="${sumbill}"/>
+                    <td colspan="3" class="text-right"><fmt:formatNumber type="number"
+                                                                         maxFractionDigits="3" value="${cvt}"/></td>
 
                 </tr>
                 <tr>
-                    <c:set var = "cvt" value = "${promotion}" />
-                    <td colspan="7" class="text-right font-weight-bold">Ưu Đãi Khách Hàng(VNĐ): </td>
-                    <td colspan="3" class="text-right text-danger">-<fmt:formatNumber type = "number"
-                                                                    maxFractionDigits = "3" value = "${cvt}" /> </td>
+                    <c:set var="cvt" value="${promotion}"/>
+                    <td colspan="7" class="text-right font-weight-bold">Ưu Đãi Khách Hàng(VNĐ):</td>
+                    <td colspan="3" class="text-right text-danger">-<fmt:formatNumber type="number"
+                                                                                      maxFractionDigits="3"
+                                                                                      value="${cvt}"/></td>
                 </tr>
                 <tr>
-                    <c:set var = "cvt" value = "${discount}" />
-                    <td colspan="7" class="text-right font-weight-bold">Giảm Giá(VNĐ): </td>
-                    <td colspan="3" class="text-right text-danger">-<fmt:formatNumber type = "number"
-                                                                   maxFractionDigits = "3" value = "${cvt}" /></td>
+                    <c:set var="cvt" value="${discount}"/>
+                    <td colspan="7" class="text-right font-weight-bold">Giảm Giá(VNĐ):</td>
+                    <td colspan="3" class="text-right text-danger">-<fmt:formatNumber type="number"
+                                                                                      maxFractionDigits="3"
+                                                                                      value="${cvt}"/></td>
                 </tr>
                 <tr>
-                    <c:set var = "cvt" value = "${bill.total}" />
-                    <td colspan="7" class="text-right font-weight-bold">Thành Tiền(VNĐ): </td>
-                    <td colspan="3" class="text-right"><fmt:formatNumber type = "number"
-                                                       maxFractionDigits = "3" value = "${cvt}" /></td>
+                    <c:set var="cvt" value="${bill.total}"/>
+                    <td colspan="7" class="text-right font-weight-bold">Thành Tiền(VNĐ):</td>
+                    <td colspan="3" class="text-right"><fmt:formatNumber type="number"
+                                                                         maxFractionDigits="3" value="${cvt}"/></td>
                 </tr>
                 </tbody>
             </table>
