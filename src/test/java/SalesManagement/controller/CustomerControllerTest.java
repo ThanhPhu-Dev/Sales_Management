@@ -37,7 +37,7 @@ public class CustomerControllerTest {
     public void getListCustomer_NonEmpty_UnitTest() {
         List<Customer> cusList = new ArrayList<Customer>();
         
-        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
 
         Mockito.when(customerDAO.findAllCustomerBy("")).thenReturn(cusList);
 
@@ -69,7 +69,7 @@ public class CustomerControllerTest {
     public void getListCustomer_MinLength_UnitTest() {
         List<Customer> cusList = new ArrayList<Customer>();
         
-        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
 
         Mockito.when(customerDAO.findAllCustomerBy("")).thenReturn(cusList);
 
@@ -85,25 +85,25 @@ public class CustomerControllerTest {
     public void getListCustomer_MaxLength_UnitTest() {
         List<Customer> cusList = new ArrayList<Customer>();
         
-        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
-        cusList.add(new Customer(2, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(2, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
-        cusList.add(new Customer(3, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(3, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
-        cusList.add(new Customer(4, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(4, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
-        cusList.add(new Customer(5, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(5, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
-        cusList.add(new Customer(6, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(6, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
-        cusList.add(new Customer(7, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(7, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
-        cusList.add(new Customer(8, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(8, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
-        cusList.add(new Customer(9, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(9, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
-        cusList.add(new Customer(10, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(10, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
 
         Mockito.when(customerDAO.findAllCustomerBy("")).thenReturn(cusList);
 
@@ -168,7 +168,7 @@ public class CustomerControllerTest {
     public void searchCustomer_PhoneValid_SearchSuccess() {
         List<Customer> cusList = new ArrayList<Customer>();
         
-        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
         Mockito.when(customerDAO.findAllCustomerBy("0978726817")).thenReturn(cusList);
 
@@ -186,7 +186,7 @@ public class CustomerControllerTest {
     public void searchCustomer_IdentityCardValid_SearchSuccess() {
         List<Customer> cusList = new ArrayList<Customer>();
         
-        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000));
+        cusList.add(new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null));
         
         Mockito.when(customerDAO.findAllCustomerBy("827166281728")).thenReturn(cusList);
 

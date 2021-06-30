@@ -1,10 +1,17 @@
 package SalesManagement.dto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     private Integer Id;
+    private String SKU;
     private String Name;
     private Integer Specification;
     private Integer HistoricalCost;
@@ -21,10 +28,16 @@ public class Product {
         return HistoricalCost - (HistoricalCost * (TradeDiscount/100) + sale);
     }
 
-    // Phương thức lấy số tiền được giảm
+    // Phương thức lấy số tiền được giảm từ chương trình khuyến mãi
     public Float promotionsToPrice() {
-        Float sale = Promotions != null ?  HistoricalCost * (Promotions.getPercentDiscount()/100) : 0;
-        return sale;
+        Float salePrice = 0f;
+        if(Promotions != null) {
+            if(Promotions.getStatus() == 1) {
+                salePrice = HistoricalCost * (Promotions.getPercentDiscount()/100);
+            }
+        }
+
+        return salePrice;
     }
 
     // Phương thức tính số tiền chiết khấu
@@ -33,5 +46,4 @@ public class Product {
         return discount;
     }
 
-    //tạo getter - setter ngầm rồi. bên ngoài gọi getter-setter như bình thường
 }

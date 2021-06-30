@@ -32,25 +32,11 @@ src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
 <script src="sweetalert2.all.min.js"></script>
 <script src="sweetalert2.min.js"></script>
 <link rel="stylesheet" href="sweetalert2.min.css">-->
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     $(document).on('ready', function () {
 
-        $('#example').DataTable({
-            "searching": false,
-            "lengthChange": false,
-            "pageLength": 7,
-            "language": {
-                "lengthMenu": "Số dòng  _MENU_ ",
-                "info": "Trang _PAGE_ / _PAGES_ ",
-                "search": "",
-                "paginate": {
-                    "previous": "Trước đó",
-                    "next": "Tiếp theo",
-                },
-                searchPlaceholder: "Tìm kiếm",
-            }
-        });
+
 
         // BUILDER TOGGLE INVOKER
         // =======================================================
@@ -139,48 +125,48 @@ src="https://cdn.datatables.net/1.10.25/js/dataTables.semanticui.js"></script>
 
         // INITIALIZATION OF DATATABLES
         // =======================================================
-        var datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {
-            select: {
-                style: 'multi',
-                selector: 'td:first-child input[type="checkbox"]',
-                classMap: {
-                    checkAll: '#datatableCheckAll',
-                    counter: '#datatableCounter',
-                    counterInfo: '#datatableCounterInfo'
-                }
-            },
-            language: {
-                zeroRecords: '<div class="text-center p-4">' +
-                        '<img class="mb-3" src="/admin/assets/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">' +
-                        '<p class="mb-0">No data to show</p>' +
-                        '</div>'
-            }
-        });
-
-        $('.js-datatable-filter').on('change', function () {
-            var $this = $(this),
-                    elVal = $this.val(),
-                    targetColumnIndex = $this.data('target-column-index');
-
-            datatable.column(targetColumnIndex).search(elVal).draw();
-        });
-
-        $('#datatableSearch').on('mouseup', function (e) {
-            var $input = $(this),
-                    oldValue = $input.val();
-
-            if (oldValue == "")
-                return;
-
-            setTimeout(function () {
-                var newValue = $input.val();
-
-                if (newValue == "") {
-                    // Gotcha
-                    datatable.search('').draw();
-                }
-            }, 1);
-        });
+        // var datatable = $.HSCore.components.HSDatatables.init($('#datatable'), {
+        //     select: {
+        //         style: 'multi',
+        //         selector: 'td:first-child input[type="checkbox"]',
+        //         classMap: {
+        //             checkAll: '#datatableCheckAll',
+        //             counter: '#datatableCounter',
+        //             counterInfo: '#datatableCounterInfo'
+        //         }
+        //     },
+        //     language: {
+        //         zeroRecords: '<div class="text-center p-4">' +
+        //                 '<img class="mb-3" src="/admin/assets/svg/illustrations/sorry.svg" alt="Image Description" style="width: 7rem;">' +
+        //                 '<p class="mb-0">No data to show</p>' +
+        //                 '</div>'
+        //     }
+        // });
+        //
+        // $('.js-datatable-filter').on('change', function () {
+        //     var $this = $(this),
+        //             elVal = $this.val(),
+        //             targetColumnIndex = $this.data('target-column-index');
+        //
+        //     datatable.column(targetColumnIndex).search(elVal).draw();
+        // });
+        //
+        // $('#datatableSearch').on('mouseup', function (e) {
+        //     var $input = $(this),
+        //             oldValue = $input.val();
+        //
+        //     if (oldValue == "")
+        //         return;
+        //
+        //     setTimeout(function () {
+        //         var newValue = $input.val();
+        //
+        //         if (newValue == "") {
+        //             // Gotcha
+        //             datatable.search('').draw();
+        //         }
+        //     }, 1);
+        // });
 
 
         // INITIALIZATION OF CLIPBOARD

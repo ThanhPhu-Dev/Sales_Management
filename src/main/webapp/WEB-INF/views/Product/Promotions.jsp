@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 
-<title>Sản phẩm</title>
+<title>Chương trình ưu đãi</title>
 <main id="content" role="main" class="main">
     <!-- Content -->
     <div class="content container-fluid">
@@ -9,11 +9,7 @@
         <div class="page-header">
             <div class="row align-items-center mb-3">
                 <div class="col-sm mb-2 mb-sm-0">
-                    <h1 class="page-header-title">Danh sách sản phẩm</h1>
-                </div>
-
-                <div class="col-sm-auto">
-                    <a class="btn btn-primary" href="/SalesManagement/product/add">Thêm sản phẩm</a>
+                    <h1 class="page-header-title">Danh sách chương trình ưu đãi</h1>
                 </div>
             </div>
             <!-- End Row -->
@@ -34,7 +30,7 @@
                                         <i class="fas fa-search"></i>
                                     </div>
                                 </div>
-                                <input id="datatableSearch" type="search" class="form-control" placeholder="Tìm kiếm sản phẩm" aria-label="Search users">
+                                <input id="datatableSearch" type="search" class="form-control" placeholder="Tìm kiếm ưu đãi" aria-label="Search users">
                             </div>
                             <!-- End Search -->
                         </form>
@@ -46,9 +42,9 @@
 
             <!-- Product Table -->
             <div class="table-responsive datatable-custom">
-                <table id="productTable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options="{
+                <table id="promotionsTable" class="table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options="{
                        &quot;columnDefs&quot;: [{
-                            &quot;targets&quot;: [0, 1, 2, 3, 4, 5, 6],
+                            &quot;targets&quot;: [0, 1, 2, 3, 4],
                             &quot;orderable&quot;: false
                        }],
                        &quot;order&quot;: [],
@@ -62,16 +58,13 @@
                        &quot;pagination&quot;: &quot;datatablePagination&quot;
                        }">
                     <thead class="thead-light">
-                        <tr>
-                            <th>STT</th>
-                            <th>SKU</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Quy cách (KG)</th>
-                            <th>Giá gốc</th>
-                            <th>Chiết khấu (%)</th>
-                            <th>Giá bán</th>
-                            <th>Thao tác</th>
-                        </tr>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên chương trình</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+                        <th>Ưu đãi (%)</th>
+                    </tr>
                     </thead>
                 </table>
             </div>
@@ -161,51 +154,34 @@
 <script>
 
     document.addEventListener('DOMContentLoaded', () => {
-        const datatable = $.HSCore.components.HSDatatables.init($('#productTable'), {
+        const datatable = $.HSCore.components.HSDatatables.init($('#promotionsTable'), {
             "pageLength": 8,
             "columnDefs": [{
-                "targets": [1, 2, 3, 4, 5, 6, 7],
+                "targets": [1, 2, 3, 4],
                 "orderable": false
             }],
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": "/SalesManagement/api/product",
+                "url": "/SalesManagement/api/promotionsProduct/table",
                 "async": false
             },
             "columns": [
                 { "data": "id" },
-                { "data": "sku" },
-                { "data": "name" },
-                { "data": "specification" },
                 {
-                    "data": "historicalCost",
-                    "render": function (data, type) {
-                        return data.toLocaleString("it-IT");
-                    }
-                },
-                { "data": "tradeDiscount" },
-                {
-                    "data": "productSalePrice",
+                    "data": "name",
                     "render": function (data, type, row, meta) {
-                        if(row.promotions) {
-                            if(row.promotions.status == 0){
-                                return "<span style='color: red;'>" + data.toLocaleString("it-IT") + "</span>";
-                            }
+                        if(row.status == 1){
+                            return data;
+                        } else {
+                            return "<span style='color: red;'>" + data + "</span>";
                         }
-                        return data.toLocaleString("it-IT");
                     }
                 },
-                {
-                    "data": "id",
-                    "render": function (data, type) {
-                        return "<div class='btn-group' role='group'>" +
-                            "<a class='btn btn-sm btn-success' href='/SalesManagement/product/update/" + data + "'>" +
-                            "<i class='fa fa-edit'></i> Cập nhật" +
-                            "</a>" +
-                            "</div>";
-                    }
-                }]
+                { "data": "startDate" },
+                { "data": "endDate" },
+                { "data": "percentDiscount" }
+            ]
         });
     });
 
