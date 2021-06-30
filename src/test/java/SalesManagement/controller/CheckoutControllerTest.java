@@ -5,8 +5,6 @@ import SalesManagement.dao.CustomerDAO;
 import SalesManagement.dao.ProductDAO;
 import SalesManagement.dto.Customer;
 import java.util.HashMap;
-import java.util.List;
-import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -16,7 +14,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 @RunWith(MockitoJUnitRunner.class)
