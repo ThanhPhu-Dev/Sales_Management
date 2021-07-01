@@ -189,7 +189,11 @@ public class CheckoutAPI {
                 detailBill.setQuantity(quantity);
                 detailBill.setProductId(id);
                 detailBill.setLastPrice(Math.round(product.getProductSalePrice()) * quantity);
-                detailBill.setPromotionProductId(product.getPromotionsId());
+                if (product.getPromotions() != null) {
+                    detailBill.setPromotionProductId(product.getPromotionsId());
+                } else {
+                    detailBill.setPromotionProductId(null);
+                }
 
                 detailBills.add(detailBill);
             }

@@ -160,7 +160,8 @@
                                                    name="accountBalance" value="<fmt:formatNumber type = "number"
                                                   currencyCode="" value = "${customer.getAccountBalance()}" /> VND"
                                             >
-                                            <p class="text-danger ${customer.debtor ? 'd-block' : 'd-none'}">* Công nợ của khách hàng đã vượt quá hạn mức!</p>
+                                            <p class="text-danger ${customer.debtor ? 'd-block' : 'd-none'}">* Công nợ
+                                                của khách hàng đã vượt quá hạn mức!</p>
                                         </div>
                                         <!-- End Form Group -->
                                     </div>
@@ -175,7 +176,7 @@
                                             <input type="text" class="js-masked-input form-control"
                                                    name="customerPromotions"
                                                    id="customerPromotions"
-                                                   value="${customer.getPromotion().getPercentDiscount()}"
+                                                   value="<c:if test="${not empty customer.getPromotion()}">${customer.getPromotion().getPercentDiscount()}</c:if><c:if test="${empty customer.getPromotion()}">0</c:if>"
                                                    readonly>
                                         </div>
                                         <!-- End Form Group -->
@@ -200,7 +201,8 @@
                                             <label class="input-label">Khách hàng</label>
                                             <!-- Custom Radio -->
                                             <div class="custom-control custom-radio">
-                                                <input style="pointer-events: none" type="radio" class="custom-control-input"
+                                                <input style="pointer-events: none" type="radio"
+                                                       class="custom-control-input"
                                                        name="accountType"
                                                        id="normalType"
                                                     ${!customer.debtor ? 'checked' : ''}
@@ -213,7 +215,8 @@
 
                                             <!-- Custom Radio -->
                                             <div class="custom-control custom-radio">
-                                                <input style="pointer-events: none" type="radio" class="custom-control-input"
+                                                <input style="pointer-events: none" type="radio"
+                                                       class="custom-control-input"
                                                        name="accountType"
                                                        id="debtorType"
                                                     ${customer.debtor ? 'checked' : ''}
@@ -251,14 +254,17 @@
                                                 <i class="fas fa-search"></i>
                                             </div>
                                         </div>
-                                        <input id="product-search" type="search" class="form-control" placeholder="Tìm kiếm theo sản phẩm">
-                                        <button type="button" id="btn-search" class="btn btn-outline-primary ml-4">Tìm kiếm</button>
+                                        <input id="product-search" type="search" class="form-control"
+                                               placeholder="Tìm kiếm theo sản phẩm">
+                                        <button type="button" id="btn-search" class="btn btn-outline-primary ml-4">Tìm
+                                            kiếm
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                             <%--END SEARCH--%>
 
-                                <table id="productsTable"
+                            <table id="productsTable"
                                    class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
                                 <tr>
@@ -351,7 +357,8 @@
     <!-- End Content -->
     <%--TOAST MESSAGE--%>
     <div class="position-fixed bottom-0 right-0 p-3" style="z-index: 101; right: 0; bottom: 0;">
-        <div id="checkout-toast" class="toast" role="alert hide" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div id="checkout-toast" class="toast" role="alert hide" aria-live="assertive" aria-atomic="true"
+             data-delay="2000">
             <div class="toast-header">
                 <strong class="mr-auto toast-title">Thành công</strong>
                 <small class="text-muted">just now</small>

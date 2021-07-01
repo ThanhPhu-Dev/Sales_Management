@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // regex cho ưu đãi thêm
     document.querySelector('#extraPromotions').addEventListener('change', (e) => {
-        let re = /^[0-1][0-9]*$/;
+        let re = /^([0-9]|[1-9][0-9]|100)$/;
         let value = e.target.value;
         if(!re.test(value)) {
             e.preventDefault();
@@ -91,6 +91,7 @@ const checkout = async () => {
         })
         if (response.status === 200) {
             const res = response.data;
+            console.log(res);
             handleCheckoutResult(res?.success, res?.id);
             document.querySelector('.checkout-success-total').innerHTML =
                 res?.total.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
