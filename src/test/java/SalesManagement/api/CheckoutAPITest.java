@@ -174,14 +174,14 @@ public class CheckoutAPITest {
         jsonObj.put("customerId", 1);
         jsonObj.put("extraPromotions", 0);
         String json = jsonObj.toString();    
-        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null);       
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, null, 1000, null);       
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         promotionsProduct = new PromotionsProduct();
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount(Float.parseFloat("10"));
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 200000, (float) 10 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -230,7 +230,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -287,7 +287,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -322,7 +322,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -357,7 +357,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -392,7 +392,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -427,9 +427,9 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);
-        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null);          
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, null, 1000, null);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 200000, (float) 0 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -462,9 +462,9 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);
-        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null);          
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, null, 1000, null);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 200000, (float) 10 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -493,23 +493,34 @@ public class CheckoutAPITest {
         jsonObj.put("extraPromotions", 10);
         String json = jsonObj.toString();    
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        
         promotionsProduct = new PromotionsProduct();
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);
-        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, null);          
+        
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, null, 1000, null);       
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
+        
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 200000, (float) 0 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
+        
         Map<String, String> lstResult = checkAPI.calcCartInfo(json); 
+        
         long originPrice = (long) (pro.getHistoricalCost());
+        
         long productSale = (long) (pro.getHistoricalCost() * ((float)promotionsProduct.getPercentDiscount()/100));
+        
         long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
+        
         long totalOfProducts = (originPrice - (productSale + discount));
+        
         long customerSale = (long) (((float)10 / 100) * totalOfProducts);
+        
         long totalOfBill = totalOfProducts - customerSale;
+        
         assertEquals(Long.toString(totalOfBill), lstResult.get("total"));
     }
     
@@ -532,7 +543,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -540,7 +551,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 200000, (float) 0 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -581,7 +592,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);
         Product pro = new Product(1, "SP01" , "SanPham01", 1000, 200000, (float) 10 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -614,7 +625,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -622,7 +633,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 200000, (float) 0 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -767,7 +778,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -775,7 +786,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 200000, (float) 10 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -808,7 +819,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("80"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -816,7 +827,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 0);
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 0 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -849,7 +860,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -857,7 +868,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 0);
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 0 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -890,7 +901,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -898,7 +909,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 0);
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 0 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -931,7 +942,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 1000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -939,7 +950,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 0);
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 0 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -973,7 +984,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));     
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 100000000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -982,7 +993,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);  
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -1039,7 +1050,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));     
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 100000000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -1099,7 +1110,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));     
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 100000000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -1159,7 +1170,7 @@ public class CheckoutAPITest {
         promotionCustomer.setId(1);
         promotionCustomer.setName("khach hang moi");        
         promotionCustomer.setStartDate((java.util.Date)formatter.parse("2021/06/20"));
-        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/10"));
+        promotionCustomer.setEndDate((java.util.Date)formatter.parse("2021/07/30"));
         promotionCustomer.setPercentDiscount(Float.parseFloat("10"));     
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, 1, 100000000, promotionCustomer);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
@@ -1168,7 +1179,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);  
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -1217,7 +1228,7 @@ public class CheckoutAPITest {
         productArr.put(productObj);
         jsonObj.put("products", productArr);
         jsonObj.put("customerId", 1);
-        jsonObj.put("extraPromotions", 10);
+        jsonObj.put("extraPromotions", (float)10);
         String json = jsonObj.toString();  
         
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, -1, 100000000, null);          
@@ -1227,7 +1238,7 @@ public class CheckoutAPITest {
         promotionsProduct.setId(1);
         promotionsProduct.setName("san pham moi");        
         promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
+        promotionsProduct.setEndDate(Date.valueOf("2021-07-30"));
         promotionsProduct.setPercentDiscount((float) 10);  
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , 1, promotionsProduct);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
@@ -1250,8 +1261,8 @@ public class CheckoutAPITest {
         long productSale = (long) (pro.getHistoricalCost() * ((float)promotionsProduct.getPercentDiscount()/100));
         long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
         long totalOfProducts = originPrice - (productSale + discount);
-        long customerSale = (long)((float)10 /100 * totalOfProducts);
-        long totalOfBill = totalOfProducts - customerSale;
+        float customerSale = (jsonObj.getFloat("extraPromotions") /100 * totalOfProducts);
+        float totalOfBill = totalOfProducts - customerSale;
         float newAccountBalance = cus.getAccountBalance() - totalOfBill;
         
         Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
@@ -1276,7 +1287,7 @@ public class CheckoutAPITest {
         productArr.put(productObj);
         jsonObj.put("products", productArr);
         jsonObj.put("customerId", 1);
-        jsonObj.put("extraPromotions", 10);
+        jsonObj.put("extraPromotions", (float)10);
         String json = jsonObj.toString();  
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         
@@ -1304,8 +1315,8 @@ public class CheckoutAPITest {
         long productSale = 0;
         long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
         long totalOfProducts = originPrice - (productSale + discount);
-        long customerSale = (long)((float) 10 / 100  * totalOfProducts);
-        long totalOfBill = totalOfProducts - customerSale;
+        float customerSale = (jsonObj.getFloat("extraPromotions") / 100  * totalOfProducts);
+        float totalOfBill = totalOfProducts - customerSale;
         float newAccountBalance = cus.getAccountBalance() - totalOfBill;
         
         Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
@@ -1330,42 +1341,37 @@ public class CheckoutAPITest {
         productArr.put(productObj);
         jsonObj.put("products", productArr);
         jsonObj.put("customerId", 1);
-        jsonObj.put("extraPromotions", 0);
+        jsonObj.put("extraPromotions", 0f);
         String json = jsonObj.toString();  
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         
         Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, -1, 100000000, null);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
            
-        promotionsProduct = new PromotionsProduct();
-        promotionsProduct.setId(1);
-        promotionsProduct.setName("san pham moi");        
-        promotionsProduct.setStartDate(Date.valueOf("2021-06-20"));
-        promotionsProduct.setEndDate(Date.valueOf("2021-07-10"));
-        promotionsProduct.setPercentDiscount((float) 10); 
-        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , 1, promotionsProduct);
+        Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , null, null);
         Mockito.when(productDAO.findProductById(1)).thenReturn(pro); 
         
         bill = new Bill();
         bill.setCustomerId(cus.getId());
-        bill.setDiscount((float) 0);
+        bill.setDiscount(jsonObj.getFloat("extraPromotions"));
         bill.setPromotionCustomerId(null);
+        
         int billId = 1;
         Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
         
         detailBill = new DetailBill();
         detailBill.setBillId(billId);
-        detailBill.setQuantity(1);
-        detailBill.setProductId(1);
+        detailBill.setQuantity(productObj.getInt("quantity"));
+        detailBill.setProductId(pro.getId());
         detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
-        detailBill.setPromotionProductId(pro.getPromotionsId());
+        detailBill.setPromotionProductId(null);
              
         long originPrice = (long) (pro.getHistoricalCost());
-        long productSale = (long) (pro.getHistoricalCost() * ((float)promotionsProduct.getPercentDiscount()/100));
+        long productSale = 0;
         long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
         long totalOfProducts = originPrice - (productSale + discount);
-        long customerSale = 0;
-        long totalOfBill = totalOfProducts - customerSale;
+        float customerSale = 0f;
+        float totalOfBill = totalOfProducts - customerSale;
         float newAccountBalance = cus.getAccountBalance() - totalOfBill;
         
         Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
@@ -1390,11 +1396,11 @@ public class CheckoutAPITest {
         productArr.put(productObj);
         jsonObj.put("products", productArr);
         jsonObj.put("customerId", 1);
-        jsonObj.put("extraPromotions", 0);
+        jsonObj.put("extraPromotions", 0f);
         String json = jsonObj.toString();  
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         
-        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000, -1, 100000000, null);          
+        Customer cus = new Customer(1, "phihung", "87261829182", "0978726817", "827166281728", 100000000, -1, 10000000, null);          
         Mockito.when(customerDAO.findCustomerById(1)).thenReturn(cus);
            
         Product pro = new Product(1, "SP01" ,"SanPham01", 1000, 100000, (float) 10 , null, null);
@@ -1402,27 +1408,29 @@ public class CheckoutAPITest {
         
         bill = new Bill();
         bill.setCustomerId(cus.getId());
-        bill.setDiscount((float) 0);
+        bill.setDiscount(jsonObj.getFloat("extraPromotions"));
         bill.setPromotionCustomerId(null);
+        
         int billId = 1;
         Mockito.when(billDAO.createBill(bill)).thenReturn(billId); 
         
         detailBill = new DetailBill();
         detailBill.setBillId(billId);
-        detailBill.setQuantity(1);
-        detailBill.setProductId(1);
+        detailBill.setQuantity(productObj.getInt("quantity"));
+        detailBill.setProductId(pro.getId());
         detailBill.setLastPrice(Math.round(pro.getProductSalePrice()));
-        detailBill.setPromotionProductId(pro.getPromotionsId());
+        detailBill.setPromotionProductId(null);
              
         long originPrice = (long) (pro.getHistoricalCost());
         long productSale = 0;
         long discount = (long) (pro.getHistoricalCost() * (pro.getTradeDiscount()/100));
         long totalOfProducts = originPrice - (productSale + discount);
-        long customerSale = 0;
-        long totalOfBill = totalOfProducts - customerSale;
-        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
+        float customerSale = 0f;
+        float totalOfBill = totalOfProducts - customerSale;    
         
         Mockito.when(billDAO.updateTotalBill(billId, Math.round(totalOfBill))).thenReturn(1);
+        
+        float newAccountBalance = cus.getAccountBalance() - totalOfBill;
         
         Mockito.when(customerDAO.updateAccountBalance(cus.getId(), newAccountBalance)).thenReturn(1);
         
