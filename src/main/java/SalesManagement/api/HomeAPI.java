@@ -27,9 +27,8 @@ public class HomeAPI {
             @RequestParam(value = "month", required = false, defaultValue = "6") Integer month,
             @RequestParam(value = "year", required = false, defaultValue = "2021") Integer year) {
         Map<String, Object> map = new HashMap<>();
-
+        
         List<Bill> bills = billDao.findbyDate(month, year);
-
         //map.put("draw", draw);
         map.put("data", bills);
         //return bills;
