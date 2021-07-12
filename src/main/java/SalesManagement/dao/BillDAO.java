@@ -52,8 +52,8 @@ public class BillDAO {
                 = new NamedParameterJdbcTemplate(template.getDataSource());
         String sql = "SELECT * FROM bills WHERE MONTH(bills.DateCreate) = :month AND YEAR(bills.DateCreate) = :year";
         SqlParameterSource namedParameters = new MapSqlParameterSource()
-                .addValue("month", "%" + month + "%")
-                .addValue("year", "%" + year + "%");
+                .addValue("month", month)
+                .addValue("year", year);
 
         return namedParameterJdbcTemplate.query(sql, namedParameters, new RowMapper<Bill>() {
             @Override

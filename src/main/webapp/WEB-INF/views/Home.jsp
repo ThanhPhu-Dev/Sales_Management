@@ -8,7 +8,7 @@
         <!-- Card -->
         <div class="card">
             <!-- Flatpickr -->
-            <form class="form-inline" method="get">
+            <form class="form-inline" id="formDate" method="get">
                 <div class="form-group mb-2">
                     <div class="card-header">
                         <h4 class="card-header-title">Lịch bán hàng</h4>
@@ -35,10 +35,9 @@
                         <option value="2019"> 2019 </option>
                         <option value="2020"> 2020 </option>
                         <option value="2021" selected> 2021 </option>
-
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Thống kê</button>
+                <button id="btnSubmit" type="submit" class="btn btn-primary mb-2">Thống kê</button>
             </form>
             <!-- End Flatpickr -->
             <!-- Table -->
@@ -70,26 +69,36 @@
 <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>--%>
 <%--<script src="<c:url value='/template/assets/js/home.js' />"></script>--%>
 <script>
-
+    var hometable;
     document.addEventListener('DOMContentLoaded', () => {
-        const datatable = $.HSCore.components.HSDatatables.init($('#homeTable'), {
+        hometable = $.HSCore.components.HSDatatables.init($('#homeTable'), {
             "pageLength": 8,
             "columnDefs": [{
-                "targets": [1, 2, 3],
-                "orderable": false
+                "targets": [1, 2],
+                "orderable": true
             }],
             "processing": true,
             "serverSide": true,
             "ajax": {
                 "url": "/SalesManagement/api/trang-chu",
-                "async": false
+                "type": "GET",
+                "async": false,
+                "data": function (d) {
+                    d.month = $('#month').val();
+                    d.year = $('#year').val();
+                }
             },
             "columns": [
-                { "data": "id" },
-                { "data": "total" },
-                { "data": "createdAt" }
+                { "data": "customer.name" },
+                { "data": "dateCreate" },
+                { "data": "total" }
                 ]
         });
+    });
+
+    $('#btnSubmit').on('click', async function (e) {
+        e.preventDefault();
+        await hometable.ajax.reload();
     });
 
 </script>
