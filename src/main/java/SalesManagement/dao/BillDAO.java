@@ -1,6 +1,7 @@
 package SalesManagement.dao;
 
 import SalesManagement.dto.Bill;
+import SalesManagement.dto.Product;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -8,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -30,6 +32,31 @@ public class BillDAO {
 
     public List<Bill> findAll(){
         return template.query("select * from bills", new RowMapper<Bill>() {
+            public Bill mapRow(ResultSet rs, int row) throws SQLException {
+                Bill b = new Bill();
+                b.setId(rs.getInt("Id"));
+                b.setCustomerId(rs.getInt("CustomerId"));
+                b.setTotal(rs.getInt("Total"));
+                b.setDiscount(rs.getFloat("Discount"));
+                b.setPromotionCustomerId(rs.getInt("PromotionCustomerId"));
+                b.setDateCreate(rs.getDate("DateCreate"));
+                b.setCustomer(customerDao.findCustomerById(b.getCustomerId()));
+                b.setPromotionCustomer(promotionsCustomerDAO.findPromotionById(b.getPromotionCustomerId()));
+                return b;
+            }
+        });
+    }
+
+    public List<Bill> findbyDate(int month, int year){
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate
+                = new NamedParameterJdbcTemplate(template.getDataSource());
+        String sql = "SELECT * FROM bills WHERE MONTH(bills.DateCreate) = :month AND YEAR(bills.DateCreate) = :year";
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("month", month)
+                .addValue("year", year);
+
+        return namedParameterJdbcTemplate.query(sql, namedParameters, new RowMapper<Bill>() {
+            @Override
             public Bill mapRow(ResultSet rs, int row) throws SQLException {
                 Bill b = new Bill();
                 b.setId(rs.getInt("Id"));
