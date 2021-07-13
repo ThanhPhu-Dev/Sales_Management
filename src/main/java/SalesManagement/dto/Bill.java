@@ -3,8 +3,12 @@ package SalesManagement.dto;
 import lombok.Data;
 
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Bill {
     private Integer Id;
     private Integer Total;
