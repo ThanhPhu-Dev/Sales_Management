@@ -128,7 +128,7 @@
                                             <input type="text" class="js-masked-input form-control"
                                                    readonly id="cmnd"
                                                    name="cmnd" value="${customer.getIdentityCard()}"
-                                            >
+                                                   >
                                         </div>
                                         <!-- End Form Group -->
                                     </div>
@@ -155,11 +155,11 @@
                                             <label for="accountBalance" class="input-label">Số dư tài
                                                 khoản</label>
                                             <input type="text" class="js-masked-input form-control${customer.debtor ?
-                                            ' border border-danger' : ''}"
+                                                                                                    ' border border-danger' : ''}"
                                                    readonly id="accountBalance"
                                                    name="accountBalance" value="<fmt:formatNumber type = "number"
-                                                  currencyCode="" value = "${customer.getAccountBalance()}" /> VND"
-                                            >
+                                                                     currencyCode="" value = "${customer.getAccountBalance()}" /> VND"
+                                                   >
                                             <p class="text-danger ${customer.debtor ? 'd-block' : 'd-none'}">* Công nợ
                                                 của khách hàng đã vượt quá hạn mức!</p>
                                         </div>
@@ -177,37 +177,37 @@
                                                    name="customerPromotions"
                                                    id="customerPromotions"
                                                    value="<c:if test="${not empty customer.getPromotion()}">${customer.getPromotion().getPercentDiscount()}</c:if><c:if test="${empty customer.getPromotion()}">0</c:if>"
-                                                   readonly>
+                                                       readonly>
+                                            </div>
+                                            <!-- End Form Group -->
                                         </div>
-                                        <!-- End Form Group -->
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <!-- Form Group -->
-                                        <div class="form-group">
-                                            <label for="customerPromotions">Ưu đãi thêm (%)</label>
-                                            <input type="text" class="js-masked-input form-control"
-                                                   name="extraPromotions"
-                                                   id="extraPromotions"
-                                                   value="0">
+                                        <div class="col-sm-6">
+                                            <!-- Form Group -->
+                                            <div class="form-group">
+                                                <label for="customerPromotions">Ưu đãi thêm (%)</label>
+                                                <input type="text" class="js-masked-input form-control"
+                                                       name="extraPromotions"
+                                                       id="extraPromotions"
+                                                       value="0">
+                                            </div>
+                                            <!-- End Form Group -->
                                         </div>
-                                        <!-- End Form Group -->
                                     </div>
-                                </div>
-                                <!-- End Row -->
-                                <!-- ROW -->
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label class="input-label">Khách hàng</label>
-                                            <!-- Custom Radio -->
-                                            <div class="custom-control custom-radio">
-                                                <input style="pointer-events: none" type="radio"
-                                                       class="custom-control-input"
-                                                       name="accountType"
-                                                       id="normalType"
+                                    <!-- End Row -->
+                                    <!-- ROW -->
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="input-label">Khách hàng</label>
+                                                <!-- Custom Radio -->
+                                                <div class="custom-control custom-radio">
+                                                    <input style="pointer-events: none" type="radio"
+                                                           class="custom-control-input"
+                                                           name="accountType"
+                                                           id="normalType"
                                                     ${!customer.debtor ? 'checked' : ''}
                                                     ${customer.debtor ? 'disabled' : ''}
-                                                       readonly>
+                                                    readonly>
                                                 <label class="custom-control-label"
                                                        for="normalType">Thường</label>
                                             </div>
@@ -219,8 +219,8 @@
                                                        class="custom-control-input"
                                                        name="accountType"
                                                        id="debtorType"
-                                                    ${customer.debtor ? 'checked' : ''}
-                                                    ${!customer.debtor ? 'disabled' : ''}
+                                                       ${customer.debtor ? 'checked' : ''}
+                                                       ${!customer.debtor ? 'disabled' : ''}
                                                        readonly>
                                                 <label class="custom-control-label"
                                                        for="debtorType">Công nợ</label>
@@ -267,16 +267,16 @@
                             <table id="productsTable"
                                    class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
-                                <tr>
-                                    <th>Mã</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Quy cách (kg)</th>
-                                    <th>Giá gốc</th>
-                                    <th>Ưu đãi (%)</th>
-                                    <th>Giá bán</th>
-                                    <th>Số lượng</th>
-                                    <th>Chức năng</th>
-                                </tr>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Quy cách (kg)</th>
+                                        <th>Giá gốc</th>
+                                        <th>Ưu đãi (%)</th>
+                                        <th>Giá bán</th>
+                                        <th>Số lượng</th>
+                                        <th>Chức năng</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -307,16 +307,16 @@
                             <table id="productsSelectedTable"
                                    class="table table-borderless table-thead-bordered table-align-middle card-table dataTable">
                                 <thead class="thead-light">
-                                <tr>
-                                    <th>Mã</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Quy cách (kg)</th>
-                                    <th>Giá gốc</th>
-                                    <th>Ưu đãi (%)</th>
-                                    <th>Giá bán</th>
-                                    <th>Số lượng</th>
-                                    <th>Chức năng</th>
-                                </tr>
+                                    <tr>
+                                        <th>Mã</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Quy cách (kg)</th>
+                                        <th>Giá gốc</th>
+                                        <th>Ưu đãi (%)</th>
+                                        <th>Giá bán</th>
+                                        <th>Số lượng</th>
+                                        <th>Chức năng</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
 
@@ -345,10 +345,10 @@
                     </p>
                 </div>
                 <a id="btn-to-detail" class="btn btn-secondary mx-2" href="/SalesManagement/Detailbill?id=">
-                    <i class="tio-shopping-basket-outlined mr-1"></i> Xem chi tiết
+                    Xem chi tiết
                 </a>
                 <a class="btn btn-primary mx-2" href="/SalesManagement/customer">
-                    <i class="tio-shopping-basket-outlined mr-1"></i> Tiếp tục
+                    Tiếp tục
                 </a>
             </div>
         </div>
