@@ -48,7 +48,7 @@
                         <th scope="col">Giảm Giá</th>
                         <th scope="col">Ưu Đãi</th>
                         <th scope="col">Ưu Đãi(%)</th>
-                        <th scope="col">Tổng Tiền</th>
+                        <th scope="col">Tổng Tiền(VNĐ)</th>
                         <th scope="col">Ngày Tạo</th>
                         <th scope="col">Chi tiết</th>
                     </tr>
