@@ -25,7 +25,7 @@
                         <option value="6" selected> 6 </option>
                         <option value="7"> 7 </option>
                         <option value="8"> 8 </option>
-                        <option value="8"> 8 </option>
+                        <option value="9"> 9 </option>
                         <option value="10"> 10 </option>
                         <option value="11"> 11 </option>
                         <option value="12"> 12 </option>
@@ -79,7 +79,7 @@
             "pageLength": 8,
             "columnDefs": [{
                 "targets": [1, 2],
-                "orderable": true
+                "orderable": false
             }],
             "processing": true,
             "serverSide": true,
@@ -102,6 +102,7 @@
                         let formatter = new Intl.NumberFormat('vi-VN', {
                             currency: 'VND',
                             style: 'currency',
+                            class: 'text-right',
                         });
                         return formatter.format(data);
                     }
