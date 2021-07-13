@@ -134,7 +134,11 @@
                 "async": false
             },
             "columns": [
-                { "data": "id" },
+                {
+                    "render": function (data, type, full, meta) {
+                        return meta.row + 1;
+                    }
+                },
                 { "data": "sku" },
                 { "data": "name" },
                 { "data": "specification" },

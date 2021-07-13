@@ -20,7 +20,7 @@
                     <!-- Overview -->
                     <li class="nav-item">
                         <a class="nav-link" href="/SalesManagement/trang-chu" title="Trang chủ">
-                            <i class="tio-home nav-icon left-menu-icon"></i>
+                            <i class="fas fa-home nav-icon"></i>
                             <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate left-menu-content">Trang chủ</span>
                         </a>
                         <!-- End Overview -->
