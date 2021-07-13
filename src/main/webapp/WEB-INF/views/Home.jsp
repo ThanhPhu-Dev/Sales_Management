@@ -69,6 +69,10 @@
 <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>--%>
 <%--<script src="<c:url value='/template/assets/js/home.js' />"></script>--%>
 <script>
+    let formatter = new Intl.NumberFormat('vi-VN', {
+        currency: 'VND',
+        style: 'currency',
+    });
     var hometable;
     document.addEventListener('DOMContentLoaded', () => {
         hometable = $.HSCore.components.HSDatatables.init($('#homeTable'), {
@@ -88,10 +92,20 @@
                     d.year = $('#year').val();
                 }
             },
+
             "columns": [
                 { "data": "customer.name" },
                 { "data": "dateCreate" },
-                { "data": "total" }
+                {
+                    "data": "total",
+                    "render": function (data, type) {
+                        let formatter = new Intl.NumberFormat('vi-VN', {
+                            currency: 'VND',
+                            style: 'currency',
+                        });
+                        return formatter.format(data);
+                    }
+                }
                 ]
         });
     });

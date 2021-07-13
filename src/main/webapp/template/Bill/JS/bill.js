@@ -1,6 +1,11 @@
 let table;
 async function initTableData() {
 
+    let formatter = new Intl.NumberFormat('vi-VN', {
+        currency: 'VND',
+        style: 'currency',
+    });
+
     let url = `/SalesManagement/api/bills`;
     axios.post(url)
         .then(function (response) {
@@ -13,7 +18,7 @@ async function initTableData() {
                     Discount: e.discount != null ? e.discount : '',
                     promotionName:  e.promotionCustomer?.name,
                     promotionpercent: e.promotionCustomer?.percentDiscount,
-                    total: e.total,
+                    total: formatter.format(e.total),
                     createdAt: e.dateCreate,
                     detail: "<a href='/SalesManagement/Detailbill?id="+e.id+"'><i class=\"fas fa-info-circle\"></i></a>",
                 }
