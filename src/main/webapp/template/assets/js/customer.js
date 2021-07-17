@@ -89,7 +89,7 @@ const pageNumberClicked = async (e) => {
         pagination.currentPage = +page;
         pagination.offset = (+page - 1) * pagination.limit;
 
-        await getCustomersAPI()();
+        await getCustomersAPI();
     }
 }
 

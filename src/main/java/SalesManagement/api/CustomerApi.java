@@ -122,6 +122,7 @@ public class CustomerApi {
             }
 
             //check numberCard
+            //ktr xem stk tren form va trong bd, nếu giống nhau thì ko cần ktr nữa
             if (!cusAtDB.getNumberCard().equals(cus.getNumberCard())) {
                 int checkNumCard = _customerDAO.findCustomerByNumCard(cus.getNumberCard());
                 boolean checkIsNum = cus.getNumberCard().matches("^[0-9]*$");
@@ -132,7 +133,7 @@ public class CustomerApi {
                 }
             }
             
-            boolean test = cusAtDB.getPhone().equals(cus.getPhone());
+//            boolean test = cusAtDB.getPhone().equals(cus.getPhone());
             //check phone
             if (!cusAtDB.getPhone().equals(cus.getPhone())) {
                 int checkPhone = _customerDAO.findCustomerByPhone(cus.getPhone());
@@ -164,10 +165,10 @@ public class CustomerApi {
         return arrError;
     }
 
-    //[GET] lấy danh sách khách hàng giới hạn là 5
+    //[GET] lấy danh sách khách hàng giới hạn là 
     @GetMapping("/api/customers")
     public Map<String, List<Customer>> getProducts(@RequestParam(defaultValue = "0") int offset,
-            @RequestParam(defaultValue = "10") int limit,
+            @RequestParam(defaultValue = "7") int limit,
             @RequestParam String searchValue) {
         HashMap<String, List<Customer>> map = new HashMap<>();
 

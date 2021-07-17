@@ -141,7 +141,7 @@
             errorName.style.display = "block";
             ipName.style.borderBottom = "1px solid #ccc";
         },
-        setError: function (cardError, phoneError, identityError, nameError) {
+        setError: function ({cardError, phoneError, identityError, nameError}) {
             if (cardError) {
                 errorCard.innerHTML = cardError;
                 errorCard.style.display = "block";
@@ -185,7 +185,7 @@
 
             //nếu tồn tại lỗi xuất UI thông báo
             if (cardError || phoneError || identityError || nameError) {
-                setDefault.setError(cardError, phoneError, identityError, nameError);
+                setDefault.setError(response.data);
             } else {
                 //xóa hết lỗi trc khi thông báo thành công 
                 setDefault.setRemoveError();
