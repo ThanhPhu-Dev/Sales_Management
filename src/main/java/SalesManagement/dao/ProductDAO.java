@@ -67,22 +67,22 @@ public class ProductDAO {
                 .addValue("limit", limit);
 
         return namedParameterJdbcTemplate.query(sql, namedParameters, new RowMapper<Product>() {
-                    @Override
-                    public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        Product product = new Product();
+            @Override
+            public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Product product = new Product();
 
-                        product.setId(rs.getInt("Id"));
-                        product.setSKU(rs.getString("SKU"));
-                        product.setName(rs.getString("Name"));
-                        product.setSpecification(rs.getInt("Specification"));
-                        product.setHistoricalCost(rs.getInt("HistoricalCost"));
-                        product.setTradeDiscount(rs.getFloat("TradeDiscount"));
-                        product.setPromotionsId(rs.getInt("PromotionId"));
-                        product.setPromotions(product.getPromotionsId() > 0
-                                ? promotionsProductDAO.findPromotionById(product.getPromotionsId()) : null);
-                        return product;
-                    }
-                }
+                product.setId(rs.getInt("Id"));
+                product.setSKU(rs.getString("SKU"));
+                product.setName(rs.getString("Name"));
+                product.setSpecification(rs.getInt("Specification"));
+                product.setHistoricalCost(rs.getInt("HistoricalCost"));
+                product.setTradeDiscount(rs.getFloat("TradeDiscount"));
+                product.setPromotionsId(rs.getInt("PromotionId"));
+                product.setPromotions(product.getPromotionsId() > 0
+                        ? promotionsProductDAO.findPromotionById(product.getPromotionsId()) : null);
+                return product;
+            }
+        }
         );
     }
 
@@ -116,8 +116,8 @@ public class ProductDAO {
 
     // Huy
     public Integer add(Product product) {
-        String sql = "INSERT INTO products (SKU, Name, Specification, HistoricalCost, TradeDiscount, PromotionId) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO products (SKU, Name, Specification, HistoricalCost, TradeDiscount, PromotionId) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
 
         return template.update(sql, product.getSKU(), product.getName(), product.getSpecification(),
                 product.getHistoricalCost(), product.getTradeDiscount(), product.getPromotionsId());
@@ -125,8 +125,8 @@ public class ProductDAO {
 
     // Huy
     public Integer update(Product product, Integer id) {
-        String sql = "UPDATE products SET SKU = ?, Name = ?, Specification = ?, HistoricalCost = ?, TradeDiscount = ?, PromotionId = ? " +
-                "WHERE Id = ?";
+        String sql = "UPDATE products SET SKU = ?, Name = ?, Specification = ?, HistoricalCost = ?, TradeDiscount = ?, PromotionId = ? "
+                + "WHERE Id = ?";
 
         return template.update(sql, product.getSKU(), product.getName(), product.getSpecification(),
                 product.getHistoricalCost(), product.getTradeDiscount(), product.getPromotionsId(), id);
@@ -151,7 +151,6 @@ public class ProductDAO {
             }
         });
     }
-
 
     public List<Product> getProducts() {
         String sql = "SELECT * FROM PRODUCTS";
@@ -182,7 +181,7 @@ public class ProductDAO {
         parameters.addValue("offset", offset);
         parameters.addValue("limit", limit);
 
-        if(excludeIds.size() > 0) {
+        if (excludeIds.size() > 0) {
             parameters.addValue("ids", excludeIds);
             sql = "SELECT * FROM PRODUCTS WHERE ID NOT IN(:ids) LIMIT :offset, :limit";
         }
@@ -214,15 +213,15 @@ public class ProductDAO {
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
 
-        if(excludeIds.size() > 0 && searchId != null & !searchId.isEmpty()) {
+        if (excludeIds.size() > 0 && searchId != null & !searchId.isEmpty()) {
             parameters.addValue("ids", excludeIds);
             parameters.addValue("id", "%" + searchId + "%");
 
             sql = "SELECT COUNT(*) FROM PRODUCTS WHERE ID NOT IN(:ids) AND ID LIKE :id";
-        } else if(excludeIds.size() > 0){
+        } else if (excludeIds.size() > 0) {
             parameters.addValue("ids", excludeIds);
             sql = "SELECT COUNT(*) FROM PRODUCTS WHERE ID NOT IN(:ids)";
-        }  else if(searchId != null && !searchId.isEmpty()) {
+        } else if (searchId != null && !searchId.isEmpty()) {
             parameters.addValue("id", "%" + searchId + "%");
             sql = "SELECT COUNT(*) FROM PRODUCTS WHERE ID LIKE :id";
         }
@@ -239,14 +238,14 @@ public class ProductDAO {
         parameters.addValue("offset", offset);
         parameters.addValue("limit", limit);
 
-        if(excludeIds.size() > 0 && searchId != null && !searchId.isEmpty()) {
+        if (excludeIds.size() > 0 && searchId != null && !searchId.isEmpty()) {
             parameters.addValue("ids", excludeIds);
             parameters.addValue("id", "%" + searchId + "%");
             sql = "SELECT * FROM PRODUCTS WHERE ID NOT IN(:ids) AND ID LIKE :id LIMIT :offset, :limit";
-        } else if(excludeIds.size() > 0) {
+        } else if (excludeIds.size() > 0) {
             parameters.addValue("ids", excludeIds);
             sql = "SELECT * FROM PRODUCTS WHERE ID NOT IN(:ids) LIMIT :offset, :limit";
-        } else if(searchId != null && !searchId.isEmpty()) {
+        } else if (searchId != null && !searchId.isEmpty()) {
             parameters.addValue("id", "%" + searchId + "%");
             sql = "SELECT * FROM PRODUCTS WHERE ID LIKE :id LIMIT :offset, :limit";
         }
@@ -254,19 +253,25 @@ public class ProductDAO {
         return namedParameterJdbcTemplate.query(sql,
                 parameters,
                 new RowMapper<Product>() {
-                    @Override
-                    public Product mapRow(ResultSet resultSet, int i) throws SQLException {
-                        Product product = new Product();
-                        product.setId(resultSet.getInt("Id"));
-                        product.setName(resultSet.getString("Name"));
-                        product.setSpecification(resultSet.getInt("Specification"));
-                        product.setHistoricalCost(resultSet.getInt("HistoricalCost"));
-                        product.setPromotionsId(resultSet.getInt("PromotionId"));
-                        product.setTradeDiscount(resultSet.getFloat("TradeDiscount"));
-                        product.setPromotions(product.getPromotionsId() > 0
-                                ? promotionsProductDAO.findPromotionById(product.getPromotionsId()) : null);
-                        return product;
-                    }
-                });
+            @Override
+            public Product mapRow(ResultSet resultSet, int i) throws SQLException {
+
+                Product product = new Product();
+                product.setId(resultSet.getInt("Id"));
+                product.setName(resultSet.getString("Name"));
+                product.setSpecification(resultSet.getInt("Specification"));
+                product.setHistoricalCost(resultSet.getInt("HistoricalCost"));
+                product.setPromotionsId(resultSet.getInt("PromotionId"));
+                product.setTradeDiscount(resultSet.getFloat("TradeDiscount"));
+                if (product.getPromotionsId() > 0) {
+                    product.setPromotions(promotionsProductDAO.findPromotionById(product.getPromotionsId()).getStatus() == 1
+                            ? promotionsProductDAO.findPromotionById(product.getPromotionsId()) : null);
+                } else {
+                    product.setPromotions(null);
+                }
+
+                return product;
+            }
+        });
     }
 }
