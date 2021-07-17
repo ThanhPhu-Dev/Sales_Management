@@ -145,8 +145,12 @@ public class ProductDAO {
                 product.setHistoricalCost(resultSet.getInt("HistoricalCost"));
                 product.setPromotionsId(resultSet.getInt("PromotionId"));
                 product.setTradeDiscount(resultSet.getFloat("TradeDiscount"));
-                product.setPromotions(product.getPromotionsId() > 0
-                        ? promotionsProductDAO.findPromotionById(product.getPromotionsId()) : null);
+                if (product.getPromotionsId() > 0) {
+                    product.setPromotions(promotionsProductDAO.findPromotionById(product.getPromotionsId()).getStatus() == 1
+                            ? promotionsProductDAO.findPromotionById(product.getPromotionsId()) : null);
+                } else {
+                    product.setPromotions(null);
+                }
                 return product;
             }
         });
